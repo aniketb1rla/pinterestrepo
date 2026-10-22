@@ -1,0 +1,11 @@
+a computer screen with the words five tools, one system on it and an image of a. $340 a month. $18,000 a year.
+
+That is what a Beirut clothing distributor was paying for 5 SaaS tools that mostly talked past each other.
+
+Pipedrive for sales. Sheets for inventory. WhatsApp for orders. Trello for ops. A separate invoicing tool nobody trusted.
+
+5 logins. 4 data copies. 1 owner reconciling on Sunday nights.
+
+We replaced the stack with one custom system. Sales sees inventory live. Operations gets an order the second it lands. Invoices fire from the order page.
+
+Sunday nights ar

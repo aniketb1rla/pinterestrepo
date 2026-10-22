@@ -1,0 +1,46 @@
+{
+  "total_pins": 476,
+  "updated_at": "2026-10-22T06:28:50+00:00",
+  "by_industry": {
+    "fintech-finance": 79,
+    "food-beverage": 78,
+    "beauty-cosmetics": 50,
+    "tech-saas": 45,
+    "jewelry-luxury": 40,
+    "real-estate": 40,
+    "healthcare-medical": 40,
+    "fitness-sports": 40,
+    "construction-trades": 38,
+    "uncategorized": 11,
+    "ecommerce-retail": 8,
+    "marketing-agency": 2,
+    "travel-hospitality": 2,
+    "health-wellness": 2,
+    "fashion-apparel": 1
+  },
+  "by_format": {
+    "instagram-post": 249,
+    "poster-flyer": 88,
+    "unknown": 78,
+    "email": 38,
+    "landing-page": 11,
+    "logo-branding": 8,
+    "story-reel": 2,
+    "carousel": 1,
+    "packaging": 1
+  },
+  "queries": {
+    "fintech instagram post design": 40,
+    "trading app social media ad": 40,
+    "saas product launch post": 40,
+    "coffee shop instagram post": 40,
+    "burger ad poster design": 40,
+    "skincare social media post": 40,
+    "jewelry ad design": 40,
+    "real estate instagram post": 40,
+    "physiotherapy clinic instagram post": 40,
+    "gym fitness poster design": 40,
+    "roofing company social media post": 38,
+    "email newsletter design inspiration": 38
+  }
+}
