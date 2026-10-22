@@ -1,6 +1,6 @@
 {
-  "total_pins": 663,
-  "updated_at": "2026-10-22T06:57:03+00:00",
+  "total_pins": 673,
+  "updated_at": "2026-10-22T07:02:03+00:00",
   "by_industry": {
     "beauty-cosmetics": 237,
     "fintech-finance": 79,
@@ -12,16 +12,16 @@
     "fitness-sports": 40,
     "construction-trades": 38,
     "uncategorized": 11,
+    "fashion-apparel": 11,
     "ecommerce-retail": 8,
     "marketing-agency": 2,
     "travel-hospitality": 2,
-    "health-wellness": 2,
-    "fashion-apparel": 1
+    "health-wellness": 2
   },
   "by_format": {
     "instagram-post": 289,
+    "poster-flyer": 137,
     "unknown": 132,
-    "poster-flyer": 127,
     "logo-branding": 50,
     "email": 39,
     "landing-page": 15,
@@ -46,6 +46,7 @@
     "email newsletter design inspiration": 38,
     "rhode skincare instagram post design": 38,
     "the ordinary skincare branding post": 36,
-    "glossier social media ad design": 33
+    "glossier social media ad design": 33,
+    "streetwear clothing brand poster design": 10
   }
 }
