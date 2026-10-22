@@ -783,10 +783,12 @@
         </select>
 
         <select id="sortFilter" class="select-dropdown" onchange="handleFilterChange()">
-          <option value="latest">Latest Saved</option>
+          <option value="latest">Latest Saved (Newest)</option>
           <option value="oldest">Oldest Saved</option>
-          <option value="created_at">Pin Date</option>
-          <option value="title">Title (A-Z)</option>
+          <option value="created_at_desc">Pin Date (Newest first)</option>
+          <option value="created_at_asc">Pin Date (Oldest first)</option>
+          <option value="title_asc">Title (A to Z)</option>
+          <option value="title_desc">Title (Z to A)</option>
         </select>
 
         <!-- Collect Action Button -->
@@ -1333,14 +1335,38 @@
         });
       }
 
+      function getPinCreatedTimestamp(p) {
+        if (!p || !p.created_at) return 0;
+        const ts = Date.parse(p.created_at);
+        return isNaN(ts) ? 0 : ts;
+      }
+
+      function getPinCollectedTimestamp(p) {
+        if (!p || !p.collected_at) return 0;
+        const ts = Date.parse(p.collected_at);
+        return isNaN(ts) ? 0 : ts;
+      }
+
+      function getPinDisplayTitle(p) {
+        if (!p) return "";
+        const t = (p.title || p.query || p.alt_text || "").trim();
+        return t.toLowerCase();
+      }
+
       if (state.activeSort === "latest") {
-        filtered = [...filtered].reverse();
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(b) - getPinCollectedTimestamp(a));
       } else if (state.activeSort === "oldest") {
-        filtered = [...filtered];
-      } else if (state.activeSort === "title") {
-        filtered = [...filtered].sort((a, b) => (a.title || "").localeCompare(b.title || ""));
-      } else if (state.activeSort === "created_at") {
-        filtered = [...filtered].sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(a) - getPinCollectedTimestamp(b));
+      } else if (state.activeSort === "created_at_desc" || state.activeSort === "created_at") {
+        filtered = [...filtered].sort((a, b) => getPinCreatedTimestamp(b) - getPinCreatedTimestamp(a));
+      } else if (state.activeSort === "created_at_asc") {
+        filtered = [...filtered].sort((a, b) => getPinCreatedTimestamp(a) - getPinCreatedTimestamp(b));
+      } else if (state.activeSort === "title_asc" || state.activeSort === "title") {
+        filtered = [...filtered].sort((a, b) => getPinDisplayTitle(a).localeCompare(getPinDisplayTitle(b)));
+      } else if (state.activeSort === "title_desc") {
+        filtered = [...filtered].sort((a, b) => getPinDisplayTitle(b).localeCompare(getPinDisplayTitle(a)));
+      } else {
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(b) - getPinCollectedTimestamp(a));
       }
 
       const total = filtered.length;
