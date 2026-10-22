@@ -3,13 +3,13 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**700 pins** · last updated 2026-10-22
+**729 pins** · last updated 2026-10-22
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 253 |
-| `food-beverage` | Food & Beverage | 84 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 260 |
+| `food-beverage` | Food & Beverage | 87 |
 | `fintech-finance` | FinTech & Finance | 80 |
 | `jewelry-luxury` | Jewelry & Luxury | 41 |
 | `real-estate` | Real Estate | 41 |
@@ -17,11 +17,11 @@ sorted by industry, for training / prompting AI design models.
 | `healthcare-medical` | Healthcare & Medical | 40 |
 | `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
-| `uncategorized` | uncategorized | 18 |
+| `uncategorized` | uncategorized | 30 |
 | `fashion-apparel` | Fashion & Apparel | 12 |
-| `health-wellness` | Health & Wellness | 6 |
+| `health-wellness` | Health & Wellness | 11 |
+| `ecommerce-retail` | E-commerce & Retail | 4 |
 | `marketing-agency` | Marketing & Agencies | 3 |
-| `ecommerce-retail` | E-commerce & Retail | 2 |
 | `travel-hospitality` | Travel & Hospitality | 1 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 
@@ -29,7 +29,7 @@ sorted by industry, for training / prompting AI design models.
 | Format | Pins |
 |---|---|
 | instagram-post | 285 |
-| ad-creative | 194 |
+| ad-creative | 223 |
 | poster-flyer | 98 |
 | logo-branding | 39 |
 | email | 38 |
