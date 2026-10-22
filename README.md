@@ -3,32 +3,33 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**673 pins** · last updated 2026-10-22
+**700 pins** · last updated 2026-10-22
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 239 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 253 |
 | `food-beverage` | Food & Beverage | 84 |
 | `fintech-finance` | FinTech & Finance | 80 |
+| `jewelry-luxury` | Jewelry & Luxury | 41 |
+| `real-estate` | Real Estate | 41 |
 | `tech-saas` | Tech, SaaS & Apps | 40 |
-| `jewelry-luxury` | Jewelry & Luxury | 40 |
-| `real-estate` | Real Estate | 40 |
 | `healthcare-medical` | Healthcare & Medical | 40 |
 | `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
-| `uncategorized` | uncategorized | 13 |
-| `fashion-apparel` | Fashion & Apparel | 11 |
-| `health-wellness` | Health & Wellness | 3 |
-| `marketing-agency` | Marketing & Agencies | 2 |
+| `uncategorized` | uncategorized | 18 |
+| `fashion-apparel` | Fashion & Apparel | 12 |
+| `health-wellness` | Health & Wellness | 6 |
+| `marketing-agency` | Marketing & Agencies | 3 |
 | `ecommerce-retail` | E-commerce & Retail | 2 |
 | `travel-hospitality` | Travel & Hospitality | 1 |
+| `home-interiors` | Home, Interiors & Furniture | 1 |
 
 ## By format
 | Format | Pins |
 |---|---|
 | instagram-post | 285 |
-| ad-creative | 167 |
+| ad-creative | 194 |
 | poster-flyer | 98 |
 | logo-branding | 39 |
 | email | 38 |
