@@ -1,6 +1,6 @@
 {
   "total_pins": 673,
-  "updated_at": "2026-10-22T07:16:50+00:00",
+  "updated_at": "2026-10-22T09:55:27+00:00",
   "by_industry": {
     "beauty-cosmetics": 239,
     "food-beverage": 84,
@@ -17,6 +17,30 @@
     "marketing-agency": 2,
     "ecommerce-retail": 2,
     "travel-hospitality": 1
+  },
+  "industry_labels": {
+    "fintech-finance": "FinTech & Finance",
+    "tech-saas": "Tech, SaaS & Apps",
+    "marketing-agency": "Marketing & Agencies",
+    "ecommerce-retail": "E-commerce & Retail",
+    "food-beverage": "Food & Beverage",
+    "beauty-cosmetics": "Beauty & Cosmetics",
+    "fashion-apparel": "Fashion & Apparel",
+    "jewelry-luxury": "Jewelry & Luxury",
+    "health-wellness": "Health & Wellness",
+    "healthcare-medical": "Healthcare & Medical",
+    "fitness-sports": "Fitness & Sports",
+    "real-estate": "Real Estate",
+    "home-interiors": "Home, Interiors & Furniture",
+    "construction-trades": "Construction & Home Services",
+    "automotive": "Automotive",
+    "travel-hospitality": "Travel & Hospitality",
+    "education": "Education & Courses",
+    "legal-professional": "Legal & Professional Services",
+    "events-entertainment": "Events, Music & Entertainment",
+    "gaming-esports": "Gaming & Esports",
+    "nonprofit-cause": "Non-profit & Causes",
+    "pets": "Pets"
   },
   "by_format": {
     "instagram-post": 285,

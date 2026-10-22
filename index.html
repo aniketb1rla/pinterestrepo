@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Pinterest Reference Gallery</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23e60023%22/><path fill=%22white%22 d=%22M50 20c-16.6 0-30 13.4-30 30 0 12.8 7.9 23.7 19.2 28-.3-2.4-.5-6.1.1-8.7.6-2.5 4.1-17.5 4.1-17.5s-1-2-1-5c0-4.7 2.7-8.2 6.1-8.2 2.9 0 4.3 2.2 4.3 4.8 0 2.9-1.8 7.3-2.8 11.3-.8 3.4 1.7 6.1 5 6.1 6 0 10.6-6.4 10.6-15.6 0-8.2-5.9-13.9-14.3-13.9-9.7 0-15.4 7.3-15.4 14.8 0 2.9 1.1 6.1 2.5 7.8.3.3.3.6.2 1l-1 4.1c-.2.6-.5.8-1.2.5-4.4-2.1-7.1-8.5-7.1-13.7 0-11.2 8.1-21.4 23.4-21.4 12.3 0 21.8 8.8 21.8 20.4 0 12.2-7.7 22-18.4 22-3.6 0-7-1.9-8.1-4.1l-2.2 8.5c-.8 3.1-3 7-4.5 9.4 3.7 1.1 7.7 1.8 11.8 1.8 16.6 0 30-13.4 30-30 0-16.6-13.4-30-30-30z%22/></svg>">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-card: #161b22;
+      --bg-card-hover: #1f242c;
+      --bg-secondary: #21262d;
+      --border: #30363d;
+      --border-focus: #58a6ff;
+      --text: #f0f6fc;
+      --text-muted: #8b949e;
+      --primary: #e60023;
+      --primary-hover: #ad081b;
+      --accent-badge: #1f6feb;
+      --accent-green: #238636;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #f6f8fa;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f3f4f6;
+      --bg-secondary: #eaeef2;
+      --border: #d0d7de;
+      --border-focus: #0969da;
+      --text: #1f2328;
+      --text-muted: #656d76;
+      --primary: #e60023;
+      --primary-hover: #ad081b;
+      --accent-badge: #0969da;
+      --accent-green: #1a7f37;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      transition: background-color 0.2s;
+    }
+    [data-theme="light"] header {
+      background: rgba(246, 248, 250, 0.9);
+    }
+
+    .header-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(35, 134, 54, 0.2);
+      color: #3fb950;
+      border: 1px solid rgba(63, 185, 80, 0.3);
+    }
+    [data-theme="light"] .live-badge {
+      background: rgba(26, 127, 55, 0.1);
+      color: var(--accent-green);
+      border-color: rgba(26, 127, 55, 0.2);
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3fb950;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Controls Bar */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 260px;
+      max-width: 380px;
+      flex: 1;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 34px 8px 34px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 4px;
+      display: none;
+    }
+    .search-clear:hover { color: var(--text); }
+
+    .select-dropdown {
+      padding: 8px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .select-dropdown:focus {
+      border-color: var(--border-focus);
+    }
+
+    .icon-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .icon-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--text-muted);
+    }
+
+    /* Stats */
+    .stats-container {
+      max-width: 1600px;
+      margin: 16px auto 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .stat-card .value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stat-card .meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Masonry Gallery */
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 24px 40px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .gallery-masonry {
+      column-count: 5;
+      column-gap: 20px;
+    }
+
+    @media (max-width: 1400px) { .gallery-masonry { column-count: 4; } }
+    @media (max-width: 1100px) { .gallery-masonry { column-count: 3; } }
+    @media (max-width: 768px) { .gallery-masonry { column-count: 2; column-gap: 12px; } }
+    @media (max-width: 480px) { .gallery-masonry { column-count: 1; } }
+
+    /* Card */
+    .pin-card {
+      break-inside: avoid;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pin-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--border-focus);
+    }
+
+    .pin-image-wrapper {
+      position: relative;
+      width: 100%;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+
+    .pin-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .pin-card:hover .pin-image {
+      transform: scale(1.02);
+    }
+
+    .pin-badges {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      white-space: nowrap;
+    }
+
+    .badge-industry { background: rgba(31, 111, 235, 0.85); }
+    .badge-format { background: rgba(142, 68, 173, 0.85); }
+    .badge-ratio { margin-left: auto; background: rgba(0, 0, 0, 0.7); }
+
+    .pin-info {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pin-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.35;
+    }
+
+    .pin-query {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .palette-strip {
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .palette-cell { flex: 1; height: 100%; }
+
+    .pin-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding-top: 4px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    /* Modal / Lightbox */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active { display: flex; opacity: 1; }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1100px;
+      max-height: 92vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    @media (max-width: 860px) {
+      .modal-card {
+        grid-template-columns: 1fr;
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 0.2s;
+    }
+    .modal-close-btn:hover { background: var(--primary); }
+
+    .modal-media-pane {
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+
+    .modal-media-pane img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+
+    .modal-details-pane {
+      padding: 28px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .modal-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .meta-section-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .caption-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 160px;
+      overflow-y: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .palette-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .palette-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: monospace;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .palette-item:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card-hover);
+    }
+
+    .palette-color-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-weight: 500;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--text-muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      background: #238636;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .toast.show { display: block; }
+
+    /* Load more */
+    .load-more-section {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state h3 {
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+    .nav-arrow:hover { background: var(--primary); }
+    .nav-prev { left: 16px; }
+    .nav-next { right: 16px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="header-content">
+      <a href="#" class="brand" onclick="resetFilters(); return false;">
+        <div class="brand-logo">P</div>
+        <div class="brand-title">
+          <span>Reference Gallery</span>
+          <span class="live-badge">
+            <span class="live-dot"></span>
+            <span id="pinCountBadge">Loading...</span>
+          </span>
+        </div>
+      </a>
+
+      <div class="controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search keywords, titles, tags... (Press / to focus)"
+            autocomplete="off"
+          />
+          <button id="searchClear" class="search-clear" onclick="clearSearch()">✕</button>
+        </div>
+
+        <select id="industryFilter" class="select-dropdown" onchange="handleFilterChange()">
+          <option value="all">All Industries</option>
+        </select>
+
+        <select id="formatFilter" class="select-dropdown" onchange="handleFilterChange()">
+          <option value="all">All Formats</option>
+        </select>
+
+        <select id="sortFilter" class="select-dropdown" onchange="handleFilterChange()">
+          <option value="latest">Latest Saved</option>
+          <option value="oldest">Oldest Saved</option>
+          <option value="created_at">Pin Date</option>
+          <option value="title">Title (A-Z)</option>
+        </select>
+
+        <button class="icon-btn" onclick="fetchPins(true)" title="Refresh references">
+          <span id="refreshIcon">🔄</span> Refresh
+        </button>
+
+        <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          🌙
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick KPI Stats Bar -->
+  <div class="stats-container">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <span class="label">Total References</span>
+        <span class="value" id="statTotalPins">-</span>
+        <span class="meta" id="statLastUpdate">Ready for AI prompting</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Active Industries</span>
+        <span class="value" id="statTotalIndustries">-</span>
+        <span class="meta">Categorized folders</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Top Category</span>
+        <span class="value" id="statTopCategory">-</span>
+        <span class="meta" id="statTopCategoryCount">- references</span>
+      </div>
+      <div class="stat-card">
+        <span class="label">Formats Detected</span>
+        <span class="value" id="statTotalFormats">-</span>
+        <span class="meta">Posts, ads, posters & more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Masonry Gallery -->
+  <main>
+    <div id="galleryContainer" class="gallery-masonry"></div>
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <h3>No References Found</h3>
+      <p>Try clearing your search query or choosing a different industry filter.</p>
+      <button class="btn-outline" style="margin-top: 14px;" onclick="resetFilters()">Reset All Filters</button>
+    </div>
+
+    <div class="load-more-section">
+      <button id="loadMoreBtn" class="btn-outline" onclick="loadMore()" style="display: none;">
+        Load More References
+      </button>
+      <div id="loadingIndicator" style="display: none; color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
+        Loading pins...
+      </div>
+      <p id="progressText" style="color: var(--text-muted); font-size: 0.8rem; margin-top: 12px;"></p>
+    </div>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="pinModal" class="modal-overlay" onclick="handleModalBackdropClick(event)">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <button class="nav-arrow nav-prev" onclick="prevPin(event)">‹</button>
+    <button class="nav-arrow nav-next" onclick="nextPin(event)">›</button>
+
+    <div class="modal-card">
+      <div class="modal-media-pane">
+        <img id="modalImage" src="" alt="Reference Image" />
+      </div>
+
+      <div class="modal-details-pane">
+        <div class="modal-header-meta">
+          <span id="modalIndustryBadge" class="badge badge-industry"></span>
+          <span id="modalFormatBadge" class="badge badge-format"></span>
+          <span id="modalDimensionsBadge" class="badge" style="background: rgba(0,0,0,0.4);"></span>
+        </div>
+
+        <h2 id="modalTitle" class="modal-title"></h2>
+
+        <div>
+          <div class="meta-section-title">Search Query</div>
+          <p id="modalQuery" style="font-size: 0.88rem; color: var(--text-muted);"></p>
+        </div>
+
+        <div>
+          <div class="meta-section-title">Color Palette</div>
+          <div id="modalPaletteList" class="palette-list"></div>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div class="meta-section-title" style="margin-bottom: 0;">Training Caption (.txt)</div>
+            <button class="icon-btn" style="padding: 2px 8px; font-size: 0.75rem;" onclick="copyCaption()">
+              📋 Copy Caption
+            </button>
+          </div>
+          <div id="modalCaptionBox" class="caption-box"></div>
+        </div>
+
+        <div>
+          <div class="meta-section-title">Dataset File Path</div>
+          <code id="modalPath" style="font-size: 0.78rem; color: var(--text-muted); word-break: break-all;"></code>
+        </div>
+
+        <div class="modal-actions">
+          <a id="modalPinterestLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Open on Pinterest ↗
+          </a>
+          <a id="modalDownloadBtn" href="#" download class="btn-outline">
+            Save Image
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard!</div>
+
+  <script>
+    const DEFAULT_LABELS = {
+      "fintech-finance": "FinTech & Finance",
+      "tech-saas": "Tech, SaaS & Apps",
+      "marketing-agency": "Marketing & Agencies",
+      "ecommerce-retail": "E-commerce & Retail",
+      "food-beverage": "Food & Beverage",
+      "beauty-cosmetics": "Beauty & Cosmetics",
+      "fashion-apparel": "Fashion & Apparel",
+      "jewelry-luxury": "Jewelry & Luxury",
+      "health-wellness": "Health & Wellness",
+      "healthcare-medical": "Healthcare & Medical",
+      "fitness-sports": "Fitness & Sports",
+      "real-estate": "Real Estate",
+      "home-interiors": "Home & Interiors",
+      "construction-trades": "Construction & Trades",
+      "automotive": "Automotive",
+      "travel-hospitality": "Travel & Hospitality",
+      "education": "Education & Courses",
+      "legal-professional": "Legal & Professional",
+      "events-entertainment": "Events & Entertainment",
+      "gaming-esports": "Gaming & Esports",
+      "nonprofit-cause": "Non-profit & Causes",
+      "pets": "Pets",
+      "uncategorized": "Uncategorized"
+    };
+
+    let state = {
+      mode: "detecting", // 'api' or 'static'
+      allPins: [],       // loaded in static mode
+      pins: [],          // currently displayed
+      stats: null,
+      page: 1,
+      limit: 40,
+      total: 0,
+      hasMore: false,
+      isLoading: false,
+      currentModalIndex: -1,
+      activeQuery: "",
+      activeIndustry: "all",
+      activeFormat: "all",
+      activeSort: "latest",
+      searchDebounceTimer: null
+    };
+
+    const galleryContainer = document.getElementById("galleryContainer");
+    const emptyState = document.getElementById("emptyState");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const progressText = document.getElementById("progressText");
+    const searchInput = document.getElementById("searchInput");
+    const searchClear = document.getElementById("searchClear");
+    const industryFilter = document.getElementById("industryFilter");
+    const formatFilter = document.getElementById("formatFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const pinCountBadge = document.getElementById("pinCountBadge");
+    const toast = document.getElementById("toast");
+
+    async function init() {
+      setupTheme();
+      setupKeyboardShortcuts();
+      await detectModeAndFetch();
+      await fetchPins(true);
+      setupInfiniteScroll();
+    }
+
+    async function detectModeAndFetch() {
+      try {
+        const res = await fetch("/api/stats");
+        if (res.ok) {
+          const stats = await res.json();
+          state.mode = "api";
+          applyStats(stats);
+          return;
+        }
+      } catch (err) {
+        // Fall back to static mode
+      }
+
+      // Static mode (Vercel / GitHub Pages / Static hosting)
+      state.mode = "static";
+      await loadStaticData();
+    }
+
+    async function loadStaticData() {
+      try {
+        // 1. Load stats
+        try {
+          const sRes = await fetch("/index/stats.json");
+          if (sRes.ok) {
+            const stats = await sRes.json();
+            applyStats(stats);
+          }
+        } catch (e) {}
+
+        // 2. Load all pins from index/pins.jsonl
+        const pRes = await fetch("/index/pins.jsonl");
+        if (pRes.ok) {
+          const text = await pRes.text();
+          const lines = text.trim().split("\n");
+          const parsed = [];
+          for (const line of lines) {
+            if (line.trim()) {
+              try { parsed.push(JSON.parse(line)); } catch (e) {}
+            }
+          }
+          state.allPins = parsed;
+          if (!state.stats) {
+            synthesizeStats(parsed);
+          }
+        }
+      } catch (err) {
+        console.error("Static data load error:", err);
+      }
+    }
+
+    function synthesizeStats(all) {
+      const byInd = {};
+      const byFmt = {};
+      for (const p of all) {
+        const ind = p.industry || "uncategorized";
+        const fmt = p.format || "unknown";
+        byInd[ind] = (byInd[ind] || 0) + 1;
+        byFmt[fmt] = (byFmt[fmt] || 0) + 1;
+      }
+      applyStats({
+        total_pins: all.length,
+        by_industry: byInd,
+        by_format: byFmt,
+        industry_labels: DEFAULT_LABELS
+      });
+    }
+
+    function applyStats(stats) {
+      state.stats = stats;
+      const labels = Object.assign({}, DEFAULT_LABELS, stats.industry_labels || {});
+
+      pinCountBadge.textContent = `${stats.total_pins || 0} Pins`;
+      document.getElementById("statTotalPins").textContent = (stats.total_pins || 0).toLocaleString();
+
+      const industries = Object.keys(stats.by_industry || {});
+      document.getElementById("statTotalIndustries").textContent = industries.length;
+
+      if (industries.length > 0) {
+        const topSlug = industries[0];
+        const topLabel = labels[topSlug] || topSlug;
+        document.getElementById("statTopCategory").textContent = topLabel;
+        document.getElementById("statTopCategoryCount").textContent = `${stats.by_industry[topSlug]} references`;
+      }
+
+      const formats = Object.keys(stats.by_format || {});
+      document.getElementById("statTotalFormats").textContent = formats.length;
+
+      // Populate Industry Dropdown
+      const currentInd = industryFilter.value;
+      industryFilter.innerHTML = `<option value="all">All Industries (${stats.total_pins || 0})</option>`;
+      for (const [slug, count] of Object.entries(stats.by_industry || {})) {
+        const label = labels[slug] || slug;
+        const opt = document.createElement("option");
+        opt.value = slug;
+        opt.textContent = `${label} (${count})`;
+        if (slug === currentInd) opt.selected = true;
+        industryFilter.appendChild(opt);
+      }
+
+      // Populate Format Dropdown
+      const currentFmt = formatFilter.value;
+      formatFilter.innerHTML = `<option value="all">All Formats</option>`;
+      for (const [fmt, count] of Object.entries(stats.by_format || {})) {
+        const opt = document.createElement("option");
+        opt.value = fmt;
+        opt.textContent = `${fmt} (${count})`;
+        if (fmt === currentFmt) opt.selected = true;
+        formatFilter.appendChild(opt);
+      }
+    }
+
+    // Fetch Pins (Dual mode: API or Static)
+    async function fetchPins(reset = false) {
+      if (state.isLoading) return;
+      state.isLoading = true;
+
+      const refreshIcon = document.getElementById("refreshIcon");
+      if (refreshIcon) refreshIcon.style.transform = "rotate(360deg)";
+      loadingIndicator.style.display = "block";
+
+      if (reset) {
+        state.page = 1;
+        state.pins = [];
+        galleryContainer.innerHTML = "";
+      }
+
+      try {
+        let result = null;
+
+        if (state.mode === "api") {
+          const params = new URLSearchParams({
+            page: state.page,
+            limit: state.limit,
+            sort: state.activeSort,
+          });
+          if (state.activeIndustry !== "all") params.append("industry", state.activeIndustry);
+          if (state.activeFormat !== "all") params.append("format", state.activeFormat);
+          if (state.activeQuery) params.append("q", state.activeQuery);
+
+          const res = await fetch(`/api/pins?${params.toString()}`);
+          result = await res.json();
+        } else {
+          // Static Mode
+          result = filterPinsClientSide();
+        }
+
+        state.total = result.total;
+        state.hasMore = result.has_more;
+        const startIndex = state.pins.length;
+
+        if (reset) {
+          state.pins = result.pins;
+        } else {
+          state.pins = state.pins.concat(result.pins);
+        }
+
+        renderPins(result.pins, startIndex);
+
+        emptyState.style.display = state.pins.length === 0 ? "block" : "none";
+        loadMoreBtn.style.display = state.hasMore ? "inline-block" : "none";
+        progressText.textContent = state.total > 0
+          ? `Showing ${state.pins.length} of ${state.total} references`
+          : "";
+
+      } catch (err) {
+        console.error("Failed to load pins:", err);
+      } finally {
+        state.isLoading = false;
+        loadingIndicator.style.display = "none";
+        if (refreshIcon) {
+          setTimeout(() => { refreshIcon.style.transform = "none"; }, 300);
+        }
+      }
+    }
+
+    function filterPinsClientSide() {
+      let filtered = state.allPins;
+
+      if (state.activeIndustry !== "all") {
+        filtered = filtered.filter(p => p.industry === state.activeIndustry);
+      }
+      if (state.activeFormat !== "all") {
+        filtered = filtered.filter(p => p.format === state.activeFormat);
+      }
+      if (state.activeQuery) {
+        const tokens = state.activeQuery.toLowerCase().split(/\s+/).filter(Boolean);
+        filtered = filtered.filter(p => {
+          const s = [
+            p.title || "",
+            p.caption || "",
+            p.description || "",
+            p.alt_text || "",
+            p.query || "",
+            p.pinner || "",
+            p.board || "",
+            p.industry || "",
+            p.format || "",
+            (p.style_tags || []).join(" ")
+          ].join(" ").toLowerCase();
+          return tokens.every(t => s.includes(t));
+        });
+      }
+
+      // Sort
+      if (state.activeSort === "latest") {
+        filtered = [...filtered].reverse();
+      } else if (state.activeSort === "oldest") {
+        filtered = [...filtered];
+      } else if (state.activeSort === "title") {
+        filtered = [...filtered].sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+      } else if (state.activeSort === "created_at") {
+        filtered = [...filtered].sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
+      }
+
+      const total = filtered.length;
+      const start = (state.page - 1) * state.limit;
+      const end = start + state.limit;
+      const paged = filtered.slice(start, end);
+
+      return {
+        pins: paged,
+        total: total,
+        has_more: end < total
+      };
+    }
+
+    function loadMore() {
+      if (state.hasMore && !state.isLoading) {
+        state.page += 1;
+        fetchPins(false);
+      }
+    }
+
+    function setupInfiniteScroll() {
+      window.addEventListener("scroll", () => {
+        if (state.isLoading || !state.hasMore) return;
+        const scrollPos = window.innerHeight + window.scrollY;
+        const triggerPos = document.documentElement.scrollHeight - 600;
+        if (scrollPos >= triggerPos) {
+          loadMore();
+        }
+      });
+    }
+
+    function renderPins(newPins, startIndex) {
+      newPins.forEach((pin, offset) => {
+        const index = startIndex + offset;
+        const card = document.createElement("div");
+        card.className = "pin-card";
+        card.onclick = () => openModal(index);
+
+        const industry = pin.industry || "uncategorized";
+        const format = pin.format || "unknown";
+        const title = pin.title || pin.query || "Design Reference";
+        const aspectRatio = pin.aspect_ratio ? pin.aspect_ratio.toFixed(2) : "0.8";
+
+        // Try local dataset path, auto-fallback to Pinterest CDN if not found
+        const localImgSrc = pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`;
+        const fallbackImgSrc = pin.image_url;
+
+        let paletteHtml = "";
+        if (pin.palette && pin.palette.length > 0) {
+          paletteHtml = `<div class="palette-strip">` +
+            pin.palette.map(c => `<div class="palette-cell" style="background-color: ${c}"></div>`).join("") +
+            `</div>`;
+        }
+
+        const timeStr = pin.collected_at ? formatTimeAgo(pin.collected_at) : "";
+
+        card.innerHTML = `
+          <div class="pin-image-wrapper">
+            <div class="pin-badges">
+              <span class="badge badge-industry">${escapeHtml(industry)}</span>
+              ${format !== "unknown" ? `<span class="badge badge-format">${escapeHtml(format)}</span>` : ""}
+              <span class="badge badge-ratio">${aspectRatio}</span>
+            </div>
+            <img
+              class="pin-image"
+              src="${localImgSrc}"
+              loading="lazy"
+              alt="${escapeHtml(title)}"
+              onerror="if (this.src !== '${fallbackImgSrc}') { this.onerror=null; this.src='${fallbackImgSrc}'; }"
+            />
+          </div>
+          <div class="pin-info">
+            <h4 class="pin-title">${escapeHtml(title)}</h4>
+            <div class="pin-query">🔍 ${escapeHtml(pin.query || "reference")}</div>
+            ${paletteHtml}
+            <div class="pin-footer">
+              <span>${timeStr ? `Saved ${timeStr}` : ""}</span>
+              <span style="font-size: 0.8rem;">Click for details</span>
+            </div>
+          </div>
+        `;
+
+        galleryContainer.appendChild(card);
+      });
+    }
+
+    function openModal(index) {
+      if (index < 0 || index >= state.pins.length) return;
+      state.currentModalIndex = index;
+      const pin = state.pins[index];
+
+      const modal = document.getElementById("pinModal");
+      const img = document.getElementById("modalImage");
+      const title = document.getElementById("modalTitle");
+      const query = document.getElementById("modalQuery");
+      const caption = document.getElementById("modalCaptionBox");
+      const pathEl = document.getElementById("modalPath");
+      const link = document.getElementById("modalPinterestLink");
+      const dlBtn = document.getElementById("modalDownloadBtn");
+      const indBadge = document.getElementById("modalIndustryBadge");
+      const fmtBadge = document.getElementById("modalFormatBadge");
+      const dimBadge = document.getElementById("modalDimensionsBadge");
+      const paletteList = document.getElementById("modalPaletteList");
+
+      const localImgSrc = pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`;
+      img.src = localImgSrc;
+      img.onerror = () => { img.onerror = null; img.src = pin.image_url; };
+
+      title.textContent = pin.title || pin.query || "Reference Pin";
+      query.textContent = pin.query || "Direct collection";
+      caption.textContent = pin.caption || pin.alt_text || "No caption available.";
+      pathEl.textContent = `pinterestrepo/${pin.image_path}`;
+
+      link.href = pin.pin_url || `https://www.pinterest.com/pin/${pin.pin_id}/`;
+      dlBtn.href = localImgSrc;
+      dlBtn.download = `${pin.pin_id}.jpg`;
+
+      indBadge.textContent = pin.industry || "uncategorized";
+      fmtBadge.textContent = pin.format || "unknown";
+      dimBadge.textContent = `${pin.saved_width || pin.width || "?"} × ${pin.saved_height || pin.height || "?"}px`;
+
+      paletteList.innerHTML = "";
+      if (pin.palette && pin.palette.length > 0) {
+        pin.palette.forEach(hex => {
+          const item = document.createElement("div");
+          item.className = "palette-item";
+          item.title = `Click to copy ${hex}`;
+          item.onclick = () => copyText(hex, `Copied color ${hex}`);
+          item.innerHTML = `
+            <span class="palette-color-dot" style="background-color: ${hex}"></span>
+            <span>${hex}</span>
+          `;
+          paletteList.appendChild(item);
+        });
+      }
+
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("pinModal");
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+      state.currentModalIndex = -1;
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target.id === "pinModal") closeModal();
+    }
+
+    function prevPin(e) {
+      if (e) e.stopPropagation();
+      if (state.currentModalIndex > 0) {
+        openModal(state.currentModalIndex - 1);
+      }
+    }
+
+    function nextPin(e) {
+      if (e) e.stopPropagation();
+      if (state.currentModalIndex < state.pins.length - 1) {
+        openModal(state.currentModalIndex + 1);
+      } else if (state.hasMore) {
+        loadMore();
+      }
+    }
+
+    function copyCaption() {
+      if (state.currentModalIndex >= 0) {
+        const pin = state.pins[state.currentModalIndex];
+        const text = pin.caption || pin.alt_text || "";
+        copyText(text, "Training caption copied to clipboard!");
+      }
+    }
+
+    function copyText(str, msg) {
+      navigator.clipboard.writeText(str).then(() => {
+        showToast(msg);
+      });
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 2400);
+    }
+
+    function setupTheme() {
+      const saved = localStorage.getItem("ref_gallery_theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(saved || (prefersDark ? "dark" : "light"));
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("ref_gallery_theme", theme);
+      const btn = document.getElementById("themeToggleBtn");
+      if (btn) btn.textContent = theme === "dark" ? "🌙" : "☀️";
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        } else if (e.key === "Escape") {
+          closeModal();
+        } else if (document.getElementById("pinModal").classList.contains("active")) {
+          if (e.key === "ArrowLeft") prevPin(e);
+          if (e.key === "ArrowRight") nextPin(e);
+        }
+      });
+
+      searchInput.addEventListener("input", (e) => {
+        searchClear.style.display = e.target.value ? "block" : "none";
+        clearTimeout(state.searchDebounceTimer);
+        state.searchDebounceTimer = setTimeout(() => {
+          state.activeQuery = e.target.value.trim();
+          fetchPins(true);
+        }, 300);
+      });
+    }
+
+    function clearSearch() {
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      state.activeQuery = "";
+      fetchPins(true);
+      searchInput.focus();
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      industryFilter.value = "all";
+      formatFilter.value = "all";
+      sortFilter.value = "latest";
+      state.activeQuery = "";
+      state.activeIndustry = "all";
+      state.activeFormat = "all";
+      state.activeSort = "latest";
+      fetchPins(true);
+    }
+
+    function handleFilterChange() {
+      state.activeIndustry = industryFilter.value;
+      state.activeFormat = formatFilter.value;
+      state.activeSort = sortFilter.value;
+      fetchPins(true);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatTimeAgo(isoString) {
+      try {
+        const d = new Date(isoString);
+        const diffSecs = Math.floor((Date.now() - d.getTime()) / 1000);
+        if (diffSecs < 60) return "just now";
+        const diffMins = Math.floor(diffSecs / 60);
+        if (diffMins < 60) return `${diffMins}m ago`;
+        const diffHours = Math.floor(diffMins / 60);
+        if (diffHours < 24) return `${diffHours}h ago`;
+        return `${Math.floor(diffHours / 24)}d ago`;
+      } catch (e) {
+        return "";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
