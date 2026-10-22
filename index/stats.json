@@ -1,23 +1,25 @@
 {
-  "total_pins": 729,
-  "updated_at": "2026-10-22T17:18:45+00:00",
+  "total_pins": 783,
+  "updated_at": "2026-10-22T17:30:28+00:00",
   "by_industry": {
-    "beauty-cosmetics": 260,
-    "food-beverage": 87,
+    "beauty-cosmetics": 268,
+    "food-beverage": 90,
     "fintech-finance": 80,
+    "uncategorized": 60,
     "jewelry-luxury": 41,
     "real-estate": 41,
+    "healthcare-medical": 41,
     "tech-saas": 40,
-    "healthcare-medical": 40,
     "fitness-sports": 40,
     "construction-trades": 38,
-    "uncategorized": 30,
-    "fashion-apparel": 12,
-    "health-wellness": 11,
+    "health-wellness": 17,
+    "fashion-apparel": 14,
+    "marketing-agency": 5,
     "ecommerce-retail": 4,
-    "marketing-agency": 3,
     "travel-hospitality": 1,
-    "home-interiors": 1
+    "home-interiors": 1,
+    "nonprofit-cause": 1,
+    "pets": 1
   },
   "industry_labels": {
     "fintech-finance": "FinTech & Finance",
@@ -45,7 +47,7 @@
   },
   "by_format": {
     "instagram-post": 285,
-    "ad-creative": 223,
+    "ad-creative": 277,
     "poster-flyer": 98,
     "logo-branding": 39,
     "email": 38,
@@ -55,6 +57,7 @@
     "packaging": 1
   },
   "queries": {
+    "meta ads": 54,
     "fintech instagram post design": 40,
     "trading app social media ad": 40,
     "saas product launch post": 40,
