@@ -20,6 +20,7 @@
       --primary-hover: #ad081b;
       --accent-badge: #1f6feb;
       --accent-green: #238636;
+      --accent-amber: #d29922;
       --radius: 12px;
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -38,6 +39,7 @@
       --primary-hover: #ad081b;
       --accent-badge: #0969da;
       --accent-green: #1a7f37;
+      --accent-amber: #9a6700;
       --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
 
@@ -58,7 +60,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13, 17, 23, 0.85);
+      background: rgba(13, 17, 23, 0.88);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
@@ -66,7 +68,7 @@
       transition: background-color 0.2s;
     }
     [data-theme="light"] header {
-      background: rgba(246, 248, 250, 0.9);
+      background: rgba(246, 248, 250, 0.92);
     }
 
     .header-content {
@@ -228,6 +230,59 @@
     .icon-btn:hover {
       background: var(--bg-card-hover);
       border-color: var(--text-muted);
+    }
+
+    .btn-collect-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-collect-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Live Progress Banner */
+    .collector-banner {
+      background: rgba(31, 111, 235, 0.15);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      animation: fadeIn 0.25s ease;
+    }
+    .collector-banner.active { display: flex; }
+    .collector-banner.success {
+      background: rgba(35, 134, 54, 0.15);
+      border-color: rgba(63, 185, 80, 0.35);
+    }
+    .collector-banner.error {
+      background: rgba(230, 0, 35, 0.15);
+      border-color: rgba(230, 0, 35, 0.35);
+    }
+
+    .collector-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(88, 166, 255, 0.3);
+      border-top-color: #58a6ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* Stats */
@@ -612,6 +667,21 @@
       border-color: var(--text-muted);
     }
 
+    /* Small Collect Dialog Modal */
+    .dialog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 520px;
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     /* Toast */
     .toast {
       position: fixed;
@@ -691,13 +761,14 @@
       </a>
 
       <div class="controls">
+        <!-- Search Input with Enter to Collect -->
         <div class="search-box">
           <span class="search-icon">🔍</span>
           <input
             type="text"
             id="searchInput"
             class="search-input"
-            placeholder="Search keywords, titles, tags... (Press / to focus)"
+            placeholder="Search keywords... (Press Enter to scrape new)"
             autocomplete="off"
           />
           <button id="searchClear" class="search-clear" onclick="clearSearch()">✕</button>
@@ -718,8 +789,13 @@
           <option value="title">Title (A-Z)</option>
         </select>
 
+        <!-- Collect Action Button -->
+        <button class="btn-collect-primary" onclick="openCollectModal()" title="Scrape & save new Pinterest references">
+          ⚡ Collect New
+        </button>
+
         <button class="icon-btn" onclick="fetchPins(true)" title="Refresh references">
-          <span id="refreshIcon">🔄</span> Refresh
+          <span id="refreshIcon">🔄</span>
         </button>
 
         <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
@@ -728,6 +804,29 @@
       </div>
     </div>
   </header>
+
+  <!-- Live Collector Progress Banner -->
+  <div class="stats-container" style="margin-top: 14px;">
+    <div id="collectorBanner" class="collector-banner">
+      <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;">
+        <div id="collectorSpinner" class="collector-spinner"></div>
+        <div style="min-width: 0;">
+          <div id="collectorStatusTitle" style="font-size: 0.88rem; font-weight: 600; color: var(--text);">
+            Scraping Pinterest...
+          </div>
+          <div id="collectorStatusSubtitle" style="font-size: 0.75rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            Initializing browser session...
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span id="collectorPinCounter" class="badge" style="background: rgba(31, 111, 235, 0.4);">0 pins</span>
+        <button id="collectorCancelBtn" class="icon-btn" style="padding: 4px 10px; font-size: 0.75rem;" onclick="cancelCollection()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Quick KPI Stats Bar -->
   <div class="stats-container">
@@ -759,10 +858,16 @@
   <main>
     <div id="galleryContainer" class="gallery-masonry"></div>
 
+    <!-- Empty State with One-Click Collect -->
     <div id="emptyState" class="empty-state" style="display: none;">
-      <h3>No References Found</h3>
-      <p>Try clearing your search query or choosing a different industry filter.</p>
-      <button class="btn-outline" style="margin-top: 14px;" onclick="resetFilters()">Reset All Filters</button>
+      <h3 id="emptyStateTitle">No References Found</h3>
+      <p id="emptyStateDesc">No references found in existing dataset.</p>
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap;">
+        <button id="emptyStateCollectBtn" class="btn-collect-primary" onclick="triggerCollectFromSearch()">
+          ⚡ Collect from Pinterest
+        </button>
+        <button class="btn-outline" onclick="resetFilters()">Reset Filters</button>
+      </div>
     </div>
 
     <div class="load-more-section">
@@ -776,7 +881,85 @@
     </div>
   </main>
 
-  <!-- Lightbox Modal -->
+  <!-- Collect Dialog Modal -->
+  <div id="collectModal" class="modal-overlay" onclick="handleCollectBackdropClick(event)">
+    <div class="dialog-card">
+      <button class="modal-close-btn" onclick="closeCollectModal()">✕</button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="brand-logo" style="width: 28px; height: 28px; font-size: 16px;">⚡</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text);">Collect Pinterest References</h3>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">
+        Searches Pinterest using your session, downloads full-res images, creates training captions, and saves them to your dataset.
+      </p>
+
+      <div>
+        <label class="meta-section-title" style="display: block;">Search Keyword / Phrase</label>
+        <input
+          type="text"
+          id="collectQueryInput"
+          class="search-input"
+          placeholder="e.g. coffee shop poster design, fintech landing page..."
+          style="width: 100%; padding-left: 12px; font-size: 0.92rem;"
+        />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div>
+          <label class="meta-section-title" style="display: block;">Number of Pins</label>
+          <input
+            type="number"
+            id="collectLimitInput"
+            class="select-dropdown"
+            style="width: 100%;"
+            value="30"
+            min="5"
+            max="120"
+          />
+        </div>
+        <div>
+          <label class="meta-section-title" style="display: block;">Target Folder / Industry</label>
+          <select id="collectIndustryInput" class="select-dropdown" style="width: 100%;">
+            <option value="all">Auto-classify (Recommended)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px;">
+        <button class="btn-outline" onclick="closeCollectModal()">Cancel</button>
+        <button id="startCollectBtn" class="btn-collect-primary" onclick="submitCollection()">
+          Start Scraping
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fallback CLI Dialog (for remote Vercel instances without local daemon) -->
+  <div id="cliModal" class="modal-overlay" onclick="handleCliBackdropClick(event)">
+    <div class="dialog-card">
+      <button class="modal-close-btn" onclick="closeCliModal()">✕</button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.4rem;">💻</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text);">Run Scraper on Your Computer</h3>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">
+        To scrape Pinterest with your logged-in browser session, run this command in your project terminal:
+      </p>
+
+      <div class="caption-box" id="cliCommandBox" style="font-size: 0.88rem; background: #000; color: #58a6ff;"></div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+        <span style="font-size: 0.75rem; color: var(--text-muted);">
+          Tip: Run <code>ui.bat</code> to enable 1-click scraping in the browser.
+        </span>
+        <button class="btn-collect-primary" onclick="copyCliCommand()">
+          📋 Copy Command
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Lightbox Modal -->
   <div id="pinModal" class="modal-overlay" onclick="handleModalBackdropClick(event)">
     <button class="modal-close-btn" onclick="closeModal()">✕</button>
     <button class="nav-arrow nav-prev" onclick="prevPin(event)">‹</button>
@@ -864,8 +1047,8 @@
 
     let state = {
       mode: "detecting", // 'api' or 'static'
-      allPins: [],       // loaded in static mode
-      pins: [],          // currently displayed
+      allPins: [],
+      pins: [],
       stats: null,
       page: 1,
       limit: 40,
@@ -877,11 +1060,17 @@
       activeIndustry: "all",
       activeFormat: "all",
       activeSort: "latest",
-      searchDebounceTimer: null
+      searchDebounceTimer: null,
+      collectorPollTimer: null,
+      activeCollectorJob: null,
+      localApiEndpoint: ""
     };
 
     const galleryContainer = document.getElementById("galleryContainer");
     const emptyState = document.getElementById("emptyState");
+    const emptyStateTitle = document.getElementById("emptyStateTitle");
+    const emptyStateDesc = document.getElementById("emptyStateDesc");
+    const emptyStateCollectBtn = document.getElementById("emptyStateCollectBtn");
     const loadMoreBtn = document.getElementById("loadMoreBtn");
     const loadingIndicator = document.getElementById("loadingIndicator");
     const progressText = document.getElementById("progressText");
@@ -893,35 +1082,53 @@
     const pinCountBadge = document.getElementById("pinCountBadge");
     const toast = document.getElementById("toast");
 
+    // Collector Banner Elements
+    const collectorBanner = document.getElementById("collectorBanner");
+    const collectorSpinner = document.getElementById("collectorSpinner");
+    const collectorStatusTitle = document.getElementById("collectorStatusTitle");
+    const collectorStatusSubtitle = document.getElementById("collectorStatusSubtitle");
+    const collectorPinCounter = document.getElementById("collectorPinCounter");
+    const collectorCancelBtn = document.getElementById("collectorCancelBtn");
+
     async function init() {
       setupTheme();
       setupKeyboardShortcuts();
       await detectModeAndFetch();
       await fetchPins(true);
       setupInfiniteScroll();
+      checkActiveCollectorStatus();
     }
 
     async function detectModeAndFetch() {
+      // 1. Try relative /api/stats (when hosted locally via src.server)
       try {
         const res = await fetch("/api/stats");
         if (res.ok) {
           const stats = await res.json();
           state.mode = "api";
+          state.localApiEndpoint = "";
           applyStats(stats);
           return;
         }
-      } catch (err) {
-        // Fall back to static mode
+      } catch (err) {}
+
+      // 2. Try localhost fallback ports if on Vercel
+      for (const port of [8001, 8000]) {
+        try {
+          const testRes = await fetch(`http://127.0.0.1:${port}/api/collect/status`, { method: "GET" });
+          if (testRes.ok) {
+            state.localApiEndpoint = `http://127.0.0.1:${port}`;
+            break;
+          }
+        } catch (e) {}
       }
 
-      // Static mode (Vercel / GitHub Pages / Static hosting)
       state.mode = "static";
       await loadStaticData();
     }
 
     async function loadStaticData() {
       try {
-        // 1. Load stats
         try {
           const sRes = await fetch("/index/stats.json");
           if (sRes.ok) {
@@ -930,7 +1137,6 @@
           }
         } catch (e) {}
 
-        // 2. Load all pins from index/pins.jsonl
         const pRes = await fetch("/index/pins.jsonl");
         if (pRes.ok) {
           const text = await pRes.text();
@@ -988,9 +1194,12 @@
       const formats = Object.keys(stats.by_format || {});
       document.getElementById("statTotalFormats").textContent = formats.length;
 
-      // Populate Industry Dropdown
+      // Populate Industry Dropdowns
       const currentInd = industryFilter.value;
       industryFilter.innerHTML = `<option value="all">All Industries (${stats.total_pins || 0})</option>`;
+      const collectIndSelect = document.getElementById("collectIndustryInput");
+      collectIndSelect.innerHTML = `<option value="all">Auto-classify (Recommended)</option>`;
+
       for (const [slug, count] of Object.entries(stats.by_industry || {})) {
         const label = labels[slug] || slug;
         const opt = document.createElement("option");
@@ -998,6 +1207,11 @@
         opt.textContent = `${label} (${count})`;
         if (slug === currentInd) opt.selected = true;
         industryFilter.appendChild(opt);
+
+        const cOpt = document.createElement("option");
+        cOpt.value = slug;
+        cOpt.textContent = label;
+        collectIndSelect.appendChild(cOpt);
       }
 
       // Populate Format Dropdown
@@ -1012,7 +1226,6 @@
       }
     }
 
-    // Fetch Pins (Dual mode: API or Static)
     async function fetchPins(reset = false) {
       if (state.isLoading) return;
       state.isLoading = true;
@@ -1043,7 +1256,6 @@
           const res = await fetch(`/api/pins?${params.toString()}`);
           result = await res.json();
         } else {
-          // Static Mode
           result = filterPinsClientSide();
         }
 
@@ -1059,7 +1271,24 @@
 
         renderPins(result.pins, startIndex);
 
-        emptyState.style.display = state.pins.length === 0 ? "block" : "none";
+        // Update Empty State
+        if (state.pins.length === 0) {
+          emptyState.style.display = "block";
+          if (state.activeQuery) {
+            emptyStateTitle.textContent = `No References Found for "${state.activeQuery}"`;
+            emptyStateDesc.textContent = `Would you like to search Pinterest and collect design references for "${state.activeQuery}"?`;
+            emptyStateCollectBtn.style.display = "inline-flex";
+            emptyStateCollectBtn.textContent = `⚡ Collect references for "${state.activeQuery}"`;
+          } else {
+            emptyStateTitle.textContent = "No References Found";
+            emptyStateDesc.textContent = "Try adjusting your filters or click Collect to scrape new keywords.";
+            emptyStateCollectBtn.style.display = "inline-flex";
+            emptyStateCollectBtn.textContent = "⚡ Collect New References";
+          }
+        } else {
+          emptyState.style.display = "none";
+        }
+
         loadMoreBtn.style.display = state.hasMore ? "inline-block" : "none";
         progressText.textContent = state.total > 0
           ? `Showing ${state.pins.length} of ${state.total} references`
@@ -1104,7 +1333,6 @@
         });
       }
 
-      // Sort
       if (state.activeSort === "latest") {
         filtered = [...filtered].reverse();
       } else if (state.activeSort === "oldest") {
@@ -1157,7 +1385,6 @@
         const title = pin.title || pin.query || "Design Reference";
         const aspectRatio = pin.aspect_ratio ? pin.aspect_ratio.toFixed(2) : "0.8";
 
-        // Try local dataset path, auto-fallback to Pinterest CDN if not found
         const localImgSrc = pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`;
         const fallbackImgSrc = pin.image_url;
 
@@ -1200,6 +1427,7 @@
       });
     }
 
+    // Modal Lightbox
     function openModal(index) {
       if (index < 0 || index >= state.pins.length) return;
       state.currentModalIndex = index;
@@ -1289,6 +1517,189 @@
       }
     }
 
+    // ==========================================
+    // Dynamic Scraper Trigger & Management
+    // ==========================================
+
+    function triggerCollectFromSearch() {
+      const q = state.activeQuery || searchInput.value.trim();
+      openCollectModal(q);
+    }
+
+    function openCollectModal(initialQuery = "") {
+      const modal = document.getElementById("collectModal");
+      const input = document.getElementById("collectQueryInput");
+      input.value = initialQuery || state.activeQuery || searchInput.value.trim();
+      modal.classList.add("active");
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeCollectModal() {
+      document.getElementById("collectModal").classList.remove("active");
+    }
+
+    function handleCollectBackdropClick(e) {
+      if (e.target.id === "collectModal") closeCollectModal();
+    }
+
+    async function submitCollection() {
+      const query = document.getElementById("collectQueryInput").value.trim();
+      if (!query) {
+        showToast("Please enter a search keyword");
+        return;
+      }
+      const limit = parseInt(document.getElementById("collectLimitInput").value, 10) || 30;
+      const industry = document.getElementById("collectIndustryInput").value;
+
+      closeCollectModal();
+      await startCollectionJob(query, limit, industry);
+    }
+
+    async function startCollectionJob(query, limit, industry) {
+      // Determine base URL: local server if running, or direct
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+
+      if (baseUrl === null) {
+        // We are on Vercel and cannot reach local server -> show CLI command
+        showCliModal(query, limit, industry);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${baseUrl}/api/collect`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, limit, industry: industry !== "all" ? industry : null })
+        });
+
+        const data = await res.json();
+        if (res.status === 202) {
+          showToast(`Started scraping for "${query}"!`);
+          updateCollectorBanner({
+            status: "running",
+            query: query,
+            saved_count: 0,
+            last_line: `Searching Pinterest for "${query}"...`
+          });
+          startCollectorPolling();
+        } else if (res.status === 409) {
+          showToast(data.error || "A collection job is already running.");
+          startCollectorPolling();
+        } else {
+          showToast(data.error || "Failed to start collection");
+        }
+      } catch (err) {
+        // Fallback to CLI command if local server isn't reachable
+        showCliModal(query, limit, industry);
+      }
+    }
+
+    function updateCollectorBanner(job) {
+      if (!job || job.status === "cancelled") {
+        collectorBanner.className = "collector-banner";
+        collectorBanner.style.display = "none";
+        return;
+      }
+
+      collectorBanner.style.display = "flex";
+      collectorStatusTitle.textContent = `Collecting: "${job.query}"`;
+      collectorStatusSubtitle.textContent = job.last_line || "In progress...";
+      collectorPinCounter.textContent = `${job.saved_count || 0} pins`;
+
+      if (job.status === "running") {
+        collectorBanner.className = "collector-banner active";
+        collectorSpinner.style.display = "block";
+        collectorCancelBtn.style.display = "inline-flex";
+      } else if (job.status === "done") {
+        collectorBanner.className = "collector-banner success";
+        collectorSpinner.style.display = "none";
+        collectorCancelBtn.style.display = "none";
+        collectorStatusTitle.textContent = `✓ Collected ${job.saved_count} pins for "${job.query}"!`;
+        collectorStatusSubtitle.textContent = "Saved to dataset. Pins will appear in gallery.";
+        setTimeout(() => {
+          collectorBanner.style.display = "none";
+        }, 8000);
+      } else if (job.status === "error") {
+        collectorBanner.className = "collector-banner error";
+        collectorSpinner.style.display = "none";
+        collectorCancelBtn.style.display = "none";
+        collectorStatusTitle.textContent = `Collection Error for "${job.query}"`;
+        collectorStatusSubtitle.textContent = job.error || "Failed to collect";
+        setTimeout(() => {
+          collectorBanner.style.display = "none";
+        }, 10000);
+      }
+    }
+
+    function startCollectorPolling() {
+      clearInterval(state.collectorPollTimer);
+      state.collectorPollTimer = setInterval(checkActiveCollectorStatus, 1500);
+    }
+
+    async function checkActiveCollectorStatus() {
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+      if (baseUrl === null) return;
+
+      try {
+        const res = await fetch(`${baseUrl}/api/collect/status`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const job = data.job;
+
+        if (job) {
+          updateCollectorBanner(job);
+          if (job.status === "done") {
+            clearInterval(state.collectorPollTimer);
+            showToast(`✓ Completed collection: ${job.saved_count} new pins added!`);
+            // Refresh stats and gallery
+            await detectModeAndFetch();
+            await fetchPins(true);
+          } else if (job.status === "error" || job.status === "cancelled") {
+            clearInterval(state.collectorPollTimer);
+          }
+        } else {
+          collectorBanner.style.display = "none";
+          clearInterval(state.collectorPollTimer);
+        }
+      } catch (e) {
+        clearInterval(state.collectorPollTimer);
+      }
+    }
+
+    async function cancelCollection() {
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+      if (baseUrl === null) return;
+
+      try {
+        await fetch(`${baseUrl}/api/collect/cancel`, { method: "POST" });
+        showToast("Collection cancelled");
+        updateCollectorBanner(null);
+        clearInterval(state.collectorPollTimer);
+      } catch (e) {}
+    }
+
+    function showCliModal(query, limit, industry) {
+      let cmd = `python -m src.collect "${query}" --limit ${limit}`;
+      if (industry && industry !== "all") {
+        cmd += ` --industry ${industry}`;
+      }
+      document.getElementById("cliCommandBox").textContent = cmd;
+      document.getElementById("cliModal").classList.add("active");
+    }
+
+    function closeCliModal() {
+      document.getElementById("cliModal").classList.remove("active");
+    }
+
+    function handleCliBackdropClick(e) {
+      if (e.target.id === "cliModal") closeCliModal();
+    }
+
+    function copyCliCommand() {
+      const cmd = document.getElementById("cliCommandBox").textContent;
+      copyText(cmd, "Command copied! Paste in terminal to run.");
+    }
+
     function copyText(str, msg) {
       navigator.clipboard.writeText(str).then(() => {
         showToast(msg);
@@ -1326,9 +1737,21 @@
           searchInput.focus();
         } else if (e.key === "Escape") {
           closeModal();
+          closeCollectModal();
+          closeCliModal();
         } else if (document.getElementById("pinModal").classList.contains("active")) {
           if (e.key === "ArrowLeft") prevPin(e);
           if (e.key === "ArrowRight") nextPin(e);
+        }
+      });
+
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const val = searchInput.value.trim();
+          if (val) {
+            // If enter is pressed in search, open collect dialog for this keyword
+            openCollectModal(val);
+          }
         }
       });
 
