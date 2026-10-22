@@ -8,33 +8,33 @@ sorted by industry, for training / prompting AI design models.
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 237 |
-| `fintech-finance` | FinTech & Finance | 79 |
-| `food-beverage` | Food & Beverage | 78 |
-| `tech-saas` | Tech, SaaS & Apps | 45 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 239 |
+| `food-beverage` | Food & Beverage | 84 |
+| `fintech-finance` | FinTech & Finance | 80 |
+| `tech-saas` | Tech, SaaS & Apps | 40 |
 | `jewelry-luxury` | Jewelry & Luxury | 40 |
 | `real-estate` | Real Estate | 40 |
 | `healthcare-medical` | Healthcare & Medical | 40 |
 | `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
-| `uncategorized` | uncategorized | 11 |
+| `uncategorized` | uncategorized | 13 |
 | `fashion-apparel` | Fashion & Apparel | 11 |
-| `ecommerce-retail` | E-commerce & Retail | 8 |
+| `health-wellness` | Health & Wellness | 3 |
 | `marketing-agency` | Marketing & Agencies | 2 |
-| `travel-hospitality` | Travel & Hospitality | 2 |
-| `health-wellness` | Health & Wellness | 2 |
+| `ecommerce-retail` | E-commerce & Retail | 2 |
+| `travel-hospitality` | Travel & Hospitality | 1 |
 
 ## By format
 | Format | Pins |
 |---|---|
-| instagram-post | 289 |
-| poster-flyer | 137 |
-| unknown | 132 |
-| logo-branding | 50 |
-| email | 39 |
-| landing-page | 15 |
-| story-reel | 7 |
-| carousel | 3 |
+| instagram-post | 285 |
+| ad-creative | 167 |
+| poster-flyer | 98 |
+| logo-branding | 39 |
+| email | 38 |
+| unknown | 31 |
+| landing-page | 12 |
+| story-reel | 2 |
 | packaging | 1 |
 
 ## Layout
