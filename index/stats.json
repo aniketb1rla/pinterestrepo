@@ -1,10 +1,10 @@
 {
-  "total_pins": 476,
-  "updated_at": "2026-10-22T06:28:50+00:00",
+  "total_pins": 663,
+  "updated_at": "2026-10-22T06:57:03+00:00",
   "by_industry": {
+    "beauty-cosmetics": 237,
     "fintech-finance": 79,
     "food-beverage": 78,
-    "beauty-cosmetics": 50,
     "tech-saas": 45,
     "jewelry-luxury": 40,
     "real-estate": 40,
@@ -19,14 +19,14 @@
     "fashion-apparel": 1
   },
   "by_format": {
-    "instagram-post": 249,
-    "poster-flyer": 88,
-    "unknown": 78,
-    "email": 38,
-    "landing-page": 11,
-    "logo-branding": 8,
-    "story-reel": 2,
-    "carousel": 1,
+    "instagram-post": 289,
+    "unknown": 132,
+    "poster-flyer": 127,
+    "logo-branding": 50,
+    "email": 39,
+    "landing-page": 15,
+    "story-reel": 7,
+    "carousel": 3,
     "packaging": 1
   },
   "queries": {
@@ -40,7 +40,12 @@
     "real estate instagram post": 40,
     "physiotherapy clinic instagram post": 40,
     "gym fitness poster design": 40,
+    "drunk elephant social media poster": 40,
+    "aesop skincare design inspiration": 40,
     "roofing company social media post": 38,
-    "email newsletter design inspiration": 38
+    "email newsletter design inspiration": 38,
+    "rhode skincare instagram post design": 38,
+    "the ordinary skincare branding post": 36,
+    "glossier social media ad design": 33
   }
 }
