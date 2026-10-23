@@ -1326,7 +1326,7 @@
       <div id="studioLoadingIndicator" class="studio-loader" style="display: none;">
         <div class="collector-spinner" style="width: 34px; height: 34px; border-width: 3px;"></div>
         <div style="font-weight: 600; font-size: 0.95rem; color: var(--text);">Deconstructing layout, typography, colors, fonts & design...</div>
-        <div style="font-size: 0.8rem; color: var(--text-muted);">Analyzing visual hierarchy and assembling prompts for Midjourney, FLUX & Ad Creative</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Analyzing visual hierarchy and generating 4K prompts for Nano Banana 2.1</div>
       </div>
 
       <!-- Studio Content Body -->
@@ -1416,8 +1416,6 @@
           <div class="studio-tab-bar">
             <button id="tabBtnNanoBanana" class="studio-tab active" onclick="switchPromptTab('nanoBanana')">🍌 Nano Banana 2.1</button>
             <button id="tabBtnCreative" class="studio-tab" onclick="switchPromptTab('creative')">🚀 Ad Creative (Variables)</button>
-            <button id="tabBtnMidjourney" class="studio-tab" onclick="switchPromptTab('midjourney')">🎨 Midjourney v6.1</button>
-            <button id="tabBtnFlux" class="studio-tab" onclick="switchPromptTab('flux')">⚡ FLUX.1 / SDXL</button>
             <button id="tabBtnFigma" class="studio-tab" onclick="switchPromptTab('figma')">🛠️ Figma & CSS Tokens</button>
             <button id="tabBtnMarkdown" class="studio-tab" onclick="switchPromptTab('markdown')">📄 Full Spec</button>
           </div>
@@ -1479,28 +1477,6 @@
                 <button class="icon-btn" onclick="copyPrompt('creative')">📋 Copy Creative Brief</button>
               </div>
               <pre id="codeBoxCreative" class="prompt-code-block"></pre>
-            </div>
-          </div>
-
-          <!-- Tab 2: Midjourney -->
-          <div id="tabPaneMidjourney" class="tab-pane">
-            <div class="code-box-wrapper">
-              <div class="code-box-header">
-                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">MIDJOURNEY v6.1 ART DIRECTION PROMPT</span>
-                <button class="icon-btn" onclick="copyPrompt('midjourney')">📋 Copy Midjourney Prompt</button>
-              </div>
-              <pre id="codeBoxMidjourney" class="prompt-code-block"></pre>
-            </div>
-          </div>
-
-          <!-- Tab 3: Flux / SDXL -->
-          <div id="tabPaneFlux" class="tab-pane">
-            <div class="code-box-wrapper">
-              <div class="code-box-header">
-                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">FLUX.1 / STABLE DIFFUSION XL PROMPT</span>
-                <button class="icon-btn" onclick="copyPrompt('flux')">📋 Copy FLUX Prompt</button>
-              </div>
-              <pre id="codeBoxFlux" class="prompt-code-block"></pre>
             </div>
           </div>
 
@@ -2614,15 +2590,11 @@
       const bgDesc = `a solid background (${bg})`;
       const subheadClause = subhead ? ` Below it, subtle supporting text reads "${subhead}".` : "";
 
-      const nanoBananaPrompt = `A commercial advertising poster in ${ratio} portrait aspect ratio for ${DEFAULT_LABELS[ind] || ind}. Set against a smooth background (${bg}) with generous negative space. Composition is centered with a clear 3-tier vertical hierarchy. At the top, bold crisp ${typoDesc} lettering reads: "${headline.toUpperCase()}".${subhead ? ` Directly beneath, in smaller clean legible typography, the text reads: "${subhead}".` : ''} In the center, ${subject}, rendered with sharp photorealistic textures and centered with balanced margins. At the bottom, a clean minimal pill-shaped call-to-action button reads: "${cta.toUpperCase()}". Color palette is anchored in ${bg} with accents of ${primary}. ${lighting}, high-end commercial graphic design finish, 4K resolution.`;
+      const nanoBananaPrompt = `A master-quality commercial advertising poster designed for ${DEFAULT_LABELS[ind] || ind}, in ${ratio} portrait aspect ratio (${ratio === "9:16" ? "Story 9:16" : ratio === "1:1" ? "Square 1:1" : "Portrait Feed 4:5"}). Rendered in crystal-clear 4K resolution, studio retoucher finish, shot on Hasselblad H6D-100c with an 80mm f/2.8 lens for corner-to-corner tack-sharp clarity. Canvas & Environment: ${bgDesc}. The composition is built on a rigorous 3-tier vertical hierarchy with generous commercial negative space: Top 25% header zone, center 55% dedicated hero visual container, and bottom 20% call-to-action anchor zone. Hero Visual: Centered horizontally and vertically is ${subject}. Rendered with hyper-realistic material textures, natural surface highlights, authentic depth of field, and grounded by a gentle, soft contact shadow resting onto the surface. Typography System: At the top center, bold high-impact headline lettering in ${typoDesc} (recommended typefaces: ${recFonts.join(", ")}) reads verbatim: "${headline.toUpperCase()}".${subhead ? ` Directly beneath the headline, clean legible supporting text reads: "${subhead}".` : ''} Call-To-Action: Anchored at the bottom center of the frame is a sleek, modern pill-shaped button with a primary accent fill (${primary}) featuring crisp, high-contrast typography reading: "${cta.toUpperCase()}". Palette & Lighting: Cohesive color grading anchored in ${bg} with accents of ${primary}. ${lighting}, with subtle rim highlights defining the subject's edges against the background. Pristine commercial advertising aesthetic, ${movement}, award-winning graphic design layout, 4K resolution.`;
 
-      const nanoBananaEditPrompt = `Edit using the provided design reference image: Preserve the exact ${ratio} aspect ratio, centered spatial composition, and background tone (${bg}). Preserve the top typography placement: render the bold text "${headline.toUpperCase()}" across the top. Replace the central visual asset with [INSERT_YOUR_PRODUCT_OR_MODEL_HERE] (currently ${subject}). Preserve the bottom call-to-action button reading "${cta.toUpperCase()}". Match the ${lighting} and high-end graphic design commercial quality, 4K resolution.`;
+      const nanoBananaEditPrompt = `Edit and style transfer using the provided design reference image: 1. CANVAS & RATIO: Lock and preserve the exact ${ratio} aspect ratio, centered 3-tier vertical grid, and solid background canvas tone (${bg}) with its original negative space margins. 2. TYPOGRAPHY: Preserve the exact top header placement, scale, and font styling: render the bold display text "${headline.toUpperCase()}" in ${typoDesc} across the top.${subhead ? ` Preserve the supporting subtext layout reading: "${subhead}".` : ''} 3. HERO ASSET REPLACEMENT: Replace the central hero subject (currently ${subject}) with [INSERT_YOUR_PRODUCT_OR_HERO_ASSET_HERE]. Seamlessly composite the replacement asset into the exact center, matching the original 45-degree angle, scale, soft contact shadow, and ambient reflections on the surface. 4. CALL TO ACTION: Preserve the bottom pill-shaped button container (${primary}) with crisp text reading: "${cta.toUpperCase()}". 5. ATMOSPHERE & QUALITY: Maintain the ${lighting}, cohesive color grading, and pristine commercial advertising finish, 4K resolution.`;
 
-      const mjPrompt = `A commercial advertising poster in ${ratio} portrait ratio. Featuring ${subject}, positioned in the center against ${bgDesc}. At the top, the bold headline text reads "${headline.toUpperCase()}" in ${typoDesc}.${subheadClause} ${lighting}, clean negative space, ${movement}, commercial photography, shot on Hasselblad 80mm lens, award-winning Behance graphic design, 8k resolution --ar ${ratio} --style raw --v 6.1`;
-
-      const fluxPrompt = `A high-end commercial graphic design advertising poster. The canvas has ${bgDesc}. Top section: The headline text "${headline.toUpperCase()}" is displayed prominently in ${typoDesc}.${subhead ? ` Directly below, smaller text reads "${subhead}".` : ''} Center section: ${subject}, rendered in sharp photorealistic detail and centered with balanced margins. Bottom section: A clean minimal call to action button reading "${cta.toUpperCase()}". Color accents include ${primary}. Clean commercial graphic design, razor-sharp typography, ${lighting}, high resolution.`;
-
-      const creativeAd = `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture & Flow\n- Target Ratio: ${ratio}\n- Visual Hierarchy: Top Hook (30%) -> Hero Centerpiece (50%) -> Action CTA & Trust (20%)\n- Design Movement: ${movement}\n\n## 2. Dynamic Slots & Copy\n- [Brand Identifier]: {{BRAND_NAME}}\n- [Hero Product / Focus]: {{PRODUCT_NAME}} (Reference: ${subject})\n- [Primary Hook Headline]: "${headline}"\n  - Font Category: ${typoDesc}\n  - Recommended Web Fonts: ${recFonts.join(", ")}\n- [Supporting Subtext]: "${subhead}"\n- [Call to Action Button]: "${cta}"\n\n## 3. Chromatic Palette & Styling Tokens\n- Canvas Background: \`${bg}\`\n- Primary Accent: \`${primary}\`\n- Lighting: ${lighting}\n\n## 4. Execution Prompt for Image Generator\n"A commercial advertising poster for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}.\nAt the top, bold headline text reads '{{HEADLINE_HOOK}}' in ${typoDesc}.\nIn the center, {{PRODUCT_NAME}} is positioned against ${bgDesc}.\nAt the bottom, a clean call-to-action button reads '{{CTA_BUTTON}}'.\n${lighting}, high-end commercial finish, 8k resolution."`;
+      const creativeAd = `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture & Flow\n- Target Ratio: ${ratio}\n- Visual Hierarchy: Top Hook (30%) -> Hero Centerpiece (50%) -> Action CTA & Trust (20%)\n- Design Movement: ${movement}\n\n## 2. Dynamic Slots & Copy\n- [Brand Identifier]: {{BRAND_NAME}}\n- [Hero Product / Focus]: {{PRODUCT_NAME}} (Reference: ${subject})\n- [Primary Hook Headline]: "${headline}"\n  - Font Category: ${typoDesc}\n  - Recommended Web Fonts: ${recFonts.join(", ")}\n- [Supporting Subtext]: "${subhead}"\n- [Call to Action Button]: "${cta}"\n\n## 3. Chromatic Palette & Styling Tokens\n- Canvas Background: \`${bg}\`\n- Primary Accent: \`${primary}\`\n- Lighting: ${lighting}\n\n## 4. Execution Prompt for Image Generator\n"A commercial advertising poster for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}.\nAt the top, bold headline text reads '{{HEADLINE_HOOK}}' in ${typoDesc}.\nIn the center, {{PRODUCT_NAME}} is positioned against ${bgDesc}.\nAt the bottom, a clean call-to-action button reads '{{CTA_BUTTON}}'.\n${lighting}, high-end commercial finish, 4K resolution."`;
 
       const figmaSpecs = `/* === Design System Tokens for ${DEFAULT_LABELS[ind] || ind} === */\n:root {\n  --canvas-bg: ${bg};\n  --brand-primary: ${primary};\n  --brand-secondary: ${secondary};\n  --aspect-ratio: ${ratio.replace(":", "/")};\n  --font-headline: '${recFonts[0]}', -apple-system, sans-serif;\n  --font-body: 'Inter', -apple-system, sans-serif;\n  --font-headline-weight: 700;\n  --grid-padding: 32px;\n}`;
 
@@ -2667,8 +2639,6 @@
         prompt_templates: {
           nano_banana: nanoBananaPrompt,
           nano_banana_edit: nanoBananaEditPrompt,
-          midjourney: mjPrompt,
-          flux: fluxPrompt,
           creative_ad: creativeAd,
           figma_specs: figmaSpecs,
         }
@@ -2731,8 +2701,6 @@
       // Render code boxes
       document.getElementById("codeBoxNanoBanana").textContent = (a.prompt_templates && a.prompt_templates.nano_banana) || "";
       document.getElementById("codeBoxNanoBananaEdit").textContent = (a.prompt_templates && a.prompt_templates.nano_banana_edit) || "";
-      document.getElementById("codeBoxMidjourney").textContent = (a.prompt_templates && a.prompt_templates.midjourney) || "";
-      document.getElementById("codeBoxFlux").textContent = (a.prompt_templates && a.prompt_templates.flux) || "";
       document.getElementById("codeBoxFigma").textContent = (a.prompt_templates && a.prompt_templates.figma_specs) || "";
 
       // Markdown spec
@@ -2773,16 +2741,6 @@ ${(a.prompt_templates && a.prompt_templates.nano_banana) || ''}
 \`\`\`text
 ${(a.prompt_templates && a.prompt_templates.nano_banana_edit) || ''}
 \`\`\`
-
-## Midjourney v6.1 Prompt
-\`\`\`text
-${(a.prompt_templates && a.prompt_templates.midjourney) || ''}
-\`\`\`
-
-## FLUX.1 / SDXL Prompt
-\`\`\`text
-${(a.prompt_templates && a.prompt_templates.flux) || ''}
-\`\`\`
 `;
       document.getElementById("codeBoxMarkdown").textContent = mdSpec;
 
@@ -2791,7 +2749,7 @@ ${(a.prompt_templates && a.prompt_templates.flux) || ''}
 
     function switchPromptTab(tabName) {
       state.activePromptTab = tabName;
-      const tabs = ["nanoBanana", "creative", "midjourney", "flux", "figma", "markdown"];
+      const tabs = ["nanoBanana", "creative", "figma", "markdown"];
       tabs.forEach(t => {
         const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
         const pane = document.getElementById(`tabPane${t.charAt(0).toUpperCase() + t.slice(1)}`);
@@ -2822,8 +2780,6 @@ ${(a.prompt_templates && a.prompt_templates.flux) || ''}
       if (fmt === "nano_banana") text = document.getElementById("codeBoxNanoBanana").textContent;
       else if (fmt === "nano_banana_edit") text = document.getElementById("codeBoxNanoBananaEdit").textContent;
       else if (fmt === "creative") text = document.getElementById("codeBoxCreative").textContent;
-      else if (fmt === "midjourney") text = document.getElementById("codeBoxMidjourney").textContent;
-      else if (fmt === "flux") text = document.getElementById("codeBoxFlux").textContent;
       else if (fmt === "figma") text = document.getElementById("codeBoxFigma").textContent;
       else if (fmt === "markdown") text = document.getElementById("codeBoxMarkdown").textContent;
 
@@ -2963,17 +2919,14 @@ ${(a.prompt_templates && a.prompt_templates.flux) || ''}
               </div>
             </div>
             <div style="display: flex; gap: 6px; align-items: center;">
-              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem; border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;" onclick="copyTemplatePrompt('${t.id}', 'nano_banana')">
-                🍌 Nano Banana
+              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem; border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;" onclick="copyTemplatePrompt('${t.id}', 'nano_banana')" title="Copy 4K Generation Prompt">
+                🍌 Nano Banana (4K)
               </button>
-              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'midjourney')">
-                🎨 Midjourney
+              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem; border-color: rgba(88, 166, 255, 0.4); color: #58a6ff;" onclick="copyTemplatePrompt('${t.id}', 'nano_banana_edit')" title="Copy Reference-Image Edit Prompt">
+                🖼️ Edit Prompt
               </button>
               <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'creative')">
                 🚀 Ad Creative
-              </button>
-              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'flux')">
-                ⚡ FLUX
               </button>
               <button class="icon-btn" style="padding: 4px 8px; font-size: 0.76rem; color: var(--primary);" onclick="deleteTemplate('${t.id}')" title="Delete template">
                 🗑️
