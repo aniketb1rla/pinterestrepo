@@ -667,6 +667,271 @@
       border-color: var(--text-muted);
     }
 
+    /* Prompt Studio & Design DNA Modal */
+    .prompt-studio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1060px;
+      max-height: 90vh;
+      box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.85);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalSlide 0.25s ease-out;
+    }
+
+    .studio-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      z-index: 10;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .studio-pin-thumb {
+      width: 48px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .studio-content {
+      padding: 22px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .studio-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .design-dna-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      gap: 14px;
+    }
+
+    .dna-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .dna-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text);
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="light"] .dna-card-header {
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .dna-field {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dna-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .dna-value {
+      color: var(--text);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .dna-value-highlight {
+      color: #58a6ff;
+      font-weight: 600;
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
+    .font-badges-container, .dna-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 3px;
+    }
+
+    .font-pill {
+      background: rgba(31, 111, 235, 0.18);
+      color: #58a6ff;
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    [data-theme="light"] .font-pill {
+      background: rgba(9, 105, 218, 0.1);
+      color: #0969da;
+      border-color: rgba(9, 105, 218, 0.25);
+    }
+
+    .dna-tag-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .studio-tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-top: 6px;
+    }
+
+    .studio-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .studio-tab:hover {
+      background: var(--bg-secondary);
+      color: var(--text);
+    }
+    .studio-tab.active {
+      background: linear-gradient(135deg, #7928ca, #ff0080);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 2px 10px rgba(121, 40, 202, 0.4);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .variable-inputs-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .variable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .var-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .var-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: var(--text);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .var-input:focus {
+      border-color: var(--border-focus);
+    }
+
+    .code-box-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #090d13;
+    }
+    [data-theme="light"] .code-box-wrapper {
+      background: #1e242c;
+    }
+
+    .code-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prompt-code-block {
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      color: #e6edf3;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 380px;
+      overflow-y: auto;
+      margin: 0;
+    }
+
+    .template-item-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s;
+    }
+    .template-item-card:hover {
+      border-color: var(--border-focus);
+    }
+
     /* Small Collect Dialog Modal */
     .dialog-card {
       background: var(--bg-card);
@@ -794,6 +1059,14 @@
         <!-- Collect Action Button -->
         <button class="btn-collect-primary" onclick="openCollectModal()" title="Scrape & save new Pinterest references">
           ⚡ Collect New
+        </button>
+
+        <button class="btn-outline" onclick="openTemplatesModal()" title="View and manage saved prompt templates" style="padding: 7px 12px; font-size: 0.82rem;">
+          📑 Prompts <span id="templatesCountBadge" class="badge" style="background: rgba(121, 40, 202, 0.4); margin-left: 4px;">0</span>
+        </button>
+
+        <button id="aiSetupBtn" class="btn-outline" onclick="openAiSettingsModal()" title="AI Vision and Gemini Configuration" style="padding: 7px 12px; font-size: 0.82rem;">
+          ✨ AI Vision
         </button>
 
         <button class="icon-btn" onclick="fetchPins(true)" title="Refresh references">
@@ -1007,6 +1280,9 @@
         </div>
 
         <div class="modal-actions">
+          <button id="modalAnalyzeBtn" class="btn-primary" style="background: linear-gradient(135deg, #7928ca, #ff0080); border: none; font-weight: 600;" onclick="openPromptStudioForCurrentPin()">
+            ✨ Analyze & Create Prompt Templates
+          </button>
           <a id="modalPinterestLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
             Open on Pinterest ↗
           </a>
@@ -1014,6 +1290,283 @@
             Save Image
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Analysis & Prompt Studio Modal -->
+  <div id="promptStudioModal" class="modal-overlay" onclick="handlePromptStudioBackdropClick(event)">
+    <div class="prompt-studio-card">
+      <button class="modal-close-btn" onclick="closePromptStudio()">✕</button>
+
+      <!-- Studio Header -->
+      <div class="studio-header">
+        <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0;">
+          <img id="studioPinThumb" src="" alt="Thumbnail" class="studio-pin-thumb" />
+          <div style="min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+              <span id="studioIndustryBadge" class="badge badge-industry"></span>
+              <span id="studioAspectBadge" class="badge" style="background: rgba(0,0,0,0.4);"></span>
+              <span id="studioEngineBadge" class="badge" style="background: rgba(121, 40, 202, 0.3); color: #d8b4fe;"></span>
+            </div>
+            <h2 id="studioTitle" class="modal-title" style="font-size: 1.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Design DNA & Prompt Studio</h2>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="studioSaveBtn" class="btn-primary" onclick="saveCurrentTemplate()" style="padding: 7px 14px; font-size: 0.82rem;">
+            💾 Save Template
+          </button>
+          <button id="studioReanalyzeBtn" class="btn-outline" onclick="reanalyzeCurrentPin(true)" style="padding: 7px 14px; font-size: 0.82rem;" title="Run Gemini multimodal visual analysis">
+            ✨ Re-Analyze
+          </button>
+        </div>
+      </div>
+
+      <!-- Studio Loading Indicator -->
+      <div id="studioLoadingIndicator" class="studio-loader" style="display: none;">
+        <div class="collector-spinner" style="width: 34px; height: 34px; border-width: 3px;"></div>
+        <div style="font-weight: 600; font-size: 0.95rem; color: var(--text);">Deconstructing layout, typography, colors, fonts & design...</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Analyzing visual hierarchy and assembling prompts for Midjourney, FLUX & Ad Creative</div>
+      </div>
+
+      <!-- Studio Content Body -->
+      <div id="studioContent" class="studio-content">
+        <!-- 4-Card Design DNA Breakdown -->
+        <div class="design-dna-grid">
+          <!-- 1. Layout & Composition -->
+          <div class="dna-card">
+            <div class="dna-card-header">
+              <span>📐</span>
+              <span>Layout & Composition</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Structure</span>
+              <span id="dnaLayoutType" class="dna-value-highlight">-</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Hierarchy Flow</span>
+              <span id="dnaHierarchy" class="dna-value">-</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Spacing & Density</span>
+              <span id="dnaSpacing" class="dna-value">-</span>
+            </div>
+          </div>
+
+          <!-- 2. Typography & Fonts -->
+          <div class="dna-card">
+            <div class="dna-card-header">
+              <span>🔤</span>
+              <span>Typography & Fonts</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Headline Style</span>
+              <span id="dnaHeadlineStyle" class="dna-value-highlight">-</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Recommended Fonts</span>
+              <div id="dnaFontBadges" class="font-badges-container"></div>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Type Treatment</span>
+              <span id="dnaTypoTreatment" class="dna-value">-</span>
+            </div>
+          </div>
+
+          <!-- 3. Colors & Palette -->
+          <div class="dna-card">
+            <div class="dna-card-header">
+              <span>🎨</span>
+              <span>Color Harmony & Palette</span>
+            </div>
+            <div id="dnaPaletteList" class="palette-list" style="margin-bottom: 6px;"></div>
+            <div class="dna-field">
+              <span class="dna-label">Color Mood</span>
+              <span id="dnaColorMood" class="dna-value">-</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Canvas Tone</span>
+              <span id="dnaCanvasMode" class="dna-value">-</span>
+            </div>
+          </div>
+
+          <!-- 4. Visual Style & Aesthetic -->
+          <div class="dna-card">
+            <div class="dna-card-header">
+              <span>💎</span>
+              <span>Visual Style & Aesthetic</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Design Movement</span>
+              <span id="dnaMovement" class="dna-value-highlight">-</span>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Key Elements</span>
+              <div id="dnaElementsList" class="dna-tags-container"></div>
+            </div>
+            <div class="dna-field">
+              <span class="dna-label">Studio Lighting</span>
+              <span id="dnaLighting" class="dna-value">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt Studio Tabs Section -->
+        <div>
+          <div class="studio-tab-bar">
+            <button id="tabBtnCreative" class="studio-tab active" onclick="switchPromptTab('creative')">🚀 Ad Creative Template (Variables)</button>
+            <button id="tabBtnMidjourney" class="studio-tab" onclick="switchPromptTab('midjourney')">🎨 Midjourney v6.1</button>
+            <button id="tabBtnFlux" class="studio-tab" onclick="switchPromptTab('flux')">⚡ FLUX.1 / SDXL</button>
+            <button id="tabBtnFigma" class="studio-tab" onclick="switchPromptTab('figma')">🛠️ Figma & CSS Tokens</button>
+            <button id="tabBtnMarkdown" class="studio-tab" onclick="switchPromptTab('markdown')">📄 Full Markdown Spec</button>
+          </div>
+
+          <!-- Tab 1: Ad Creative (With Interactive Variable Inputs) -->
+          <div id="tabPaneCreative" class="tab-pane active">
+            <div class="variable-inputs-card">
+              <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px;">
+                Interactive Parameters (Edit fields to customize prompt in real time)
+              </div>
+              <div class="variable-grid">
+                <div>
+                  <label class="var-label">Brand Name</label>
+                  <input id="varBrand" type="text" class="var-input" placeholder="e.g. Acme Studio" oninput="updateCreativeTemplate()" />
+                </div>
+                <div>
+                  <label class="var-label">Product / Hero Subject</label>
+                  <input id="varProduct" type="text" class="var-input" placeholder="e.g. Vitamin C Glow Serum" oninput="updateCreativeTemplate()" />
+                </div>
+                <div>
+                  <label class="var-label">Headline Hook</label>
+                  <input id="varHeadline" type="text" class="var-input" placeholder="e.g. Don't settle for average" oninput="updateCreativeTemplate()" />
+                </div>
+                <div>
+                  <label class="var-label">CTA Button</label>
+                  <input id="varCta" type="text" class="var-input" placeholder="e.g. Shop Now" oninput="updateCreativeTemplate()" />
+                </div>
+              </div>
+            </div>
+
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">AD CREATIVE BRIEF & EXECUTION PROMPT</span>
+                <button class="icon-btn" onclick="copyPrompt('creative')">📋 Copy Creative Brief</button>
+              </div>
+              <pre id="codeBoxCreative" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <!-- Tab 2: Midjourney -->
+          <div id="tabPaneMidjourney" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">MIDJOURNEY v6.1 ART DIRECTION PROMPT</span>
+                <button class="icon-btn" onclick="copyPrompt('midjourney')">📋 Copy Midjourney Prompt</button>
+              </div>
+              <pre id="codeBoxMidjourney" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <!-- Tab 3: Flux / SDXL -->
+          <div id="tabPaneFlux" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">FLUX.1 / STABLE DIFFUSION XL PROMPT</span>
+                <button class="icon-btn" onclick="copyPrompt('flux')">📋 Copy FLUX Prompt</button>
+              </div>
+              <pre id="codeBoxFlux" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <!-- Tab 4: Figma / CSS -->
+          <div id="tabPaneFigma" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">FIGMA CANVAS SPECS & CSS TOKENS</span>
+                <button class="icon-btn" onclick="copyPrompt('figma')">📋 Copy CSS Tokens</button>
+              </div>
+              <pre id="codeBoxFigma" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <!-- Tab 5: Full Markdown Spec -->
+          <div id="tabPaneMarkdown" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">COMPLETE DESIGN SPEC REPORT (.MD)</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="icon-btn" onclick="copyPrompt('markdown')">📋 Copy Markdown</button>
+                  <button class="icon-btn" onclick="downloadMarkdownSpec()">📥 Download .md</button>
+                </div>
+              </div>
+              <pre id="codeBoxMarkdown" class="prompt-code-block"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Prompt Templates Library Modal -->
+  <div id="templatesModal" class="modal-overlay" onclick="handleTemplatesBackdropClick(event)">
+    <div class="prompt-studio-card" style="max-width: 860px;">
+      <button class="modal-close-btn" onclick="closeTemplatesModal()">✕</button>
+
+      <div class="studio-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">📑</span>
+            <h2 class="modal-title" style="font-size: 1.15rem;">Saved Prompt Templates Library</h2>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+            Reusable design prompt templates created from your collected reference pins.
+          </p>
+        </div>
+      </div>
+
+      <div class="studio-content" style="max-height: 70vh;">
+        <div id="templatesListContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Configuration Modal -->
+  <div id="aiConfigModal" class="modal-overlay" onclick="handleAiConfigBackdropClick(event)">
+    <div class="dialog-card">
+      <button class="modal-close-btn" onclick="closeAiConfigModal()">✕</button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.4rem;">✨</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text);">AI Vision & Gemini Setup</h3>
+      </div>
+      <p style="font-size: 0.84rem; color: var(--text-muted);">
+        The design analyzer uses <strong>Google Gemini Multimodal Vision</strong> to inspect images, typography, and compositions at high resolution.
+      </p>
+
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 0.82rem; font-weight: 600;">Status:</span>
+          <span id="aiStatusBadge" class="badge">Checking...</span>
+        </div>
+        <div style="font-size: 0.78rem; color: var(--text-muted);">
+          When an API key is not present, the built-in offline heuristic design engine is used automatically.
+        </div>
+      </div>
+
+      <div>
+        <label class="var-label" style="margin-bottom: 6px;">Google Gemini API Key</label>
+        <input id="aiApiKeyInput" type="password" class="var-input" placeholder="AIzaSy..." style="font-family: monospace;" />
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <input id="aiSaveToEnvCheckbox" type="checkbox" checked style="cursor: pointer;" />
+        <label for="aiSaveToEnvCheckbox" style="font-size: 0.8rem; color: var(--text-muted); cursor: pointer;">
+          Save API key to <code>.env</code> file
+        </label>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+        <button class="btn-outline" onclick="closeAiConfigModal()">Cancel</button>
+        <button class="btn-collect-primary" onclick="submitAiConfig()">Save Configuration</button>
       </div>
     </div>
   </div>
@@ -1065,7 +1618,11 @@
       searchDebounceTimer: null,
       collectorPollTimer: null,
       activeCollectorJob: null,
-      localApiEndpoint: ""
+      localApiEndpoint: "",
+      currentAnalysis: null,
+      savedTemplates: [],
+      geminiConfigured: false,
+      activePromptTab: "creative"
     };
 
     const galleryContainer = document.getElementById("galleryContainer");
@@ -1099,6 +1656,8 @@
       await fetchPins(true);
       setupInfiniteScroll();
       checkActiveCollectorStatus();
+      checkAiConfig();
+      fetchSavedTemplatesCount();
     }
 
     async function detectModeAndFetch() {
@@ -1582,11 +2141,9 @@
     }
 
     async function startCollectionJob(query, limit, industry) {
-      // Determine base URL: local server if running, or direct
       const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
 
       if (baseUrl === null) {
-        // We are on Vercel and cannot reach local server -> show CLI command
         showCliModal(query, limit, industry);
         return;
       }
@@ -1615,7 +2172,6 @@
           showToast(data.error || "Failed to start collection");
         }
       } catch (err) {
-        // Fallback to CLI command if local server isn't reachable
         showCliModal(query, limit, industry);
       }
     }
@@ -1677,7 +2233,6 @@
           if (job.status === "done") {
             clearInterval(state.collectorPollTimer);
             showToast(`✓ Completed collection: ${job.saved_count} new pins added!`);
-            // Refresh stats and gallery
             await detectModeAndFetch();
             await fetchPins(true);
           } else if (job.status === "error" || job.status === "cancelled") {
@@ -1765,6 +2320,9 @@
           closeModal();
           closeCollectModal();
           closeCliModal();
+          closePromptStudio();
+          closeTemplatesModal();
+          closeAiConfigModal();
         } else if (document.getElementById("pinModal").classList.contains("active")) {
           if (e.key === "ArrowLeft") prevPin(e);
           if (e.key === "ArrowRight") nextPin(e);
@@ -1775,7 +2333,6 @@
         if (e.key === "Enter") {
           const val = searchInput.value.trim();
           if (val) {
-            // If enter is pressed in search, open collect dialog for this keyword
             openCollectModal(val);
           }
         }
@@ -1841,6 +2398,529 @@
         return `${Math.floor(diffHours / 24)}d ago`;
       } catch (e) {
         return "";
+      }
+    }
+
+    // ==========================================
+    // Design Analysis & Prompt Studio
+    // ==========================================
+
+    async function checkAiConfig() {
+      try {
+        const res = await fetch("/api/config");
+        if (res.ok) {
+          const data = await res.json();
+          state.geminiConfigured = !!data.gemini_configured;
+          updateAiBadge();
+        }
+      } catch (e) {}
+    }
+
+    function updateAiBadge() {
+      const btn = document.getElementById("aiSetupBtn");
+      const badge = document.getElementById("aiStatusBadge");
+      if (btn) {
+        btn.innerHTML = state.geminiConfigured
+          ? `✨ AI Vision <span class="badge" style="background: rgba(35,134,54,0.3); color: #3fb950; font-size: 0.7rem; padding: 1px 5px;">Active</span>`
+          : `✨ AI Vision <span class="badge" style="background: rgba(210,153,34,0.3); color: var(--accent-amber); font-size: 0.7rem; padding: 1px 5px;">Key</span>`;
+      }
+      if (badge) {
+        badge.textContent = state.geminiConfigured ? "Connected (Gemini Vision Ready)" : "Offline Heuristic Mode (No API Key)";
+        badge.style.background = state.geminiConfigured ? "rgba(35,134,54,0.2)" : "rgba(210,153,34,0.2)";
+        badge.style.color = state.geminiConfigured ? "#3fb950" : "var(--accent-amber)";
+      }
+    }
+
+    async function fetchSavedTemplatesCount() {
+      try {
+        const res = await fetch("/api/templates");
+        if (res.ok) {
+          const data = await res.json();
+          state.savedTemplates = data.templates || [];
+          const b = document.getElementById("templatesCountBadge");
+          if (b) b.textContent = state.savedTemplates.length;
+        }
+      } catch (e) {}
+    }
+
+    async function openPromptStudioForCurrentPin(forceGemini = false) {
+      if (state.currentModalIndex < 0 || !state.pins[state.currentModalIndex]) return;
+      const pin = state.pins[state.currentModalIndex];
+
+      const modal = document.getElementById("promptStudioModal");
+      const thumb = document.getElementById("studioPinThumb");
+      const title = document.getElementById("studioTitle");
+      const indBadge = document.getElementById("studioIndustryBadge");
+      const aspectBadge = document.getElementById("studioAspectBadge");
+      const engineBadge = document.getElementById("studioEngineBadge");
+      const loader = document.getElementById("studioLoadingIndicator");
+      const content = document.getElementById("studioContent");
+
+      const localImgSrc = pin.image_path ? (pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`) : pin.image_url;
+      thumb.src = localImgSrc;
+      thumb.onerror = () => { thumb.onerror = null; thumb.src = pin.image_url; };
+
+      title.textContent = pin.title || pin.query || `Pin #${pin.pin_id}`;
+      indBadge.textContent = pin.industry || "General";
+      aspectBadge.textContent = `${pin.saved_width || pin.width || 1080}×${pin.saved_height || pin.height || 1350} (${pin.aspect_ratio || '4:5'})`;
+      engineBadge.textContent = forceGemini ? "Gemini Multimodal Vision" : "Design Engine";
+
+      loader.style.display = "flex";
+      content.style.display = "none";
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      try {
+        let analysis = null;
+        if (state.mode === "api") {
+          const resp = await fetch("/api/analyze-pin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pin_id: pin.pin_id, force_gemini: forceGemini })
+          });
+          if (resp.ok) {
+            const resData = await resp.json();
+            analysis = resData.analysis;
+          }
+        }
+
+        if (!analysis) {
+          analysis = clientSideHeuristicAnalyze(pin);
+        }
+
+        state.currentAnalysis = analysis;
+        renderStudioAnalysis(analysis);
+      } catch (err) {
+        console.error("Analysis failed:", err);
+        const fallback = clientSideHeuristicAnalyze(pin);
+        state.currentAnalysis = fallback;
+        renderStudioAnalysis(fallback);
+      } finally {
+        loader.style.display = "none";
+        content.style.display = "flex";
+      }
+    }
+
+    function clientSideHeuristicAnalyze(pin) {
+      const ind = pin.industry || "general";
+      const palette = pin.palette && pin.palette.length ? pin.palette : ["#0d1117", "#161b22", "#3b82f6", "#f0f6fc"];
+      const bg = palette[0];
+      const primary = palette.length > 1 ? palette[1] : "#e60023";
+      const secondary = palette.length > 2 ? palette[2] : "#58a6ff";
+      const ratio = pin.aspect_ratio ? (pin.aspect_ratio <= 0.65 ? "9:16" : pin.aspect_ratio <= 0.88 ? "4:5" : pin.aspect_ratio <= 1.15 ? "1:1" : "16:9") : "4:5";
+      const headline = pin.title || (pin.query ? `The Future of ${pin.query}` : "Elevate Your Perspective");
+
+      return {
+        pin_id: pin.pin_id,
+        industry_slug: ind,
+        industry_label: DEFAULT_LABELS[ind] || ind,
+        analyzer_engine: "client-heuristic",
+        layout: {
+          layout_type: "Asymmetrical Hero & Typographic Anchor",
+          composition: `Top hook headline, central high-impact focal asset, bottom action trigger and badges in ${ratio} framing.`,
+          hierarchy: "1. Headline Hook -> 2. Focal Subject -> 3. Action CTA",
+          spacing_density: "Balanced negative space with breathing room",
+          aspect_ratio_code: ratio,
+        },
+        typography: {
+          headline_font_style: "Bold Display Neo-Grotesk / Clean Geometric",
+          recommended_headline_fonts: ["Satoshi", "Plus Jakarta Sans", "Syne", "Cabinet Grotesk"],
+          recommended_body_fonts: ["Inter", "DM Sans"],
+          treatment_effects: "Sentence case or tight uppercase (-0.02em tracking)",
+        },
+        colors: {
+          palette: palette,
+          background_color: bg,
+          primary_accent: primary,
+          secondary_accent: secondary,
+          mood: "Modern, balanced, high-contrast visual engagement",
+          luminance_mode: "dark",
+        },
+        design_aesthetic: {
+          movement: "Modern Contemporary Commercial / Minimalist",
+          graphic_elements: ["Framed container", "Soft drop shadow", "Pill badge", "Clean CTA"],
+          lighting: "Studio softbox illumination with gentle fill",
+        },
+        content: {
+          detected_headline: headline,
+          detected_subtext: pin.description ? pin.description.split(".")[0] : "Designed for high performance and visual impact.",
+          detected_cta: "Shop Now",
+        },
+        prompt_templates: {
+          midjourney: `Graphic design advertising creative for ${DEFAULT_LABELS[ind] || ind}, contemporary commercial aesthetic, composition layout: Top hook headline, central high-impact focal asset, typography styling: Bold Display Neo-Grotesk, featuring ${headline}, design accents: Framed container, pill badge, color palette: ${palette.slice(0, 4).join(", ")}, lighting: Studio softbox illumination with gentle fill, clean negative space, 8k render --ar ${ratio} --style raw --v 6.1`,
+          flux: `A masterwork graphic design ad creative layout. Style: Modern Contemporary Commercial. Composition: Top hook headline, central high-impact focal asset. Visual hierarchy: Headline Hook -> Focal Subject -> Action CTA. Main subject: ${headline}. Color scheme: Dominant ${bg}, primary accent ${primary}. Key elements: Framed container, pill badge, clean typography. High precision commercial finish.`,
+          creative_ad: `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture\n- Target Aspect: ${ratio}\n- Movement: Modern Contemporary Commercial\n- Visual Hierarchy: 1. Headline -> 2. Hero Asset -> 3. Action CTA\n\n## 2. Dynamic Slots\n- [Brand]: {{BRAND_NAME}}\n- [Product]: {{PRODUCT_NAME}}\n- [Headline Hook]: "${headline}"\n- [CTA]: "Shop Now"\n\n## 3. Chromatic Palette\n- Canvas: ${bg}\n- Accent: ${primary}\n\n## 4. Execution Prompt\n"Create a ${ratio} commercial ad for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}. Headline reads '${headline}'. Aesthetic: Modern Contemporary Commercial."`,
+          figma_specs: `/* Design Tokens */\n:root {\n  --canvas-bg: ${bg};\n  --brand-primary: ${primary};\n  --brand-secondary: ${secondary};\n  --aspect-ratio: ${ratio.replace(":", "/")};\n  --font-headline: 'Satoshi', sans-serif;\n  --font-body: 'Inter', sans-serif;\n}`
+        }
+      };
+    }
+
+    function renderStudioAnalysis(a) {
+      document.getElementById("studioEngineBadge").textContent = a.analyzer_engine || "Design Engine";
+
+      // 1. Layout
+      document.getElementById("dnaLayoutType").textContent = a.layout.layout_type || "-";
+      document.getElementById("dnaHierarchy").textContent = a.layout.hierarchy || "-";
+      document.getElementById("dnaSpacing").textContent = a.layout.spacing_density || "-";
+
+      // 2. Typography
+      document.getElementById("dnaHeadlineStyle").textContent = a.typography.headline_font_style || "-";
+      document.getElementById("dnaTypoTreatment").textContent = a.typography.treatment_effects || "-";
+      const fontBox = document.getElementById("dnaFontBadges");
+      fontBox.innerHTML = "";
+      (a.typography.recommended_headline_fonts || ["Inter"]).forEach(f => {
+        const pill = document.createElement("span");
+        pill.className = "font-pill";
+        pill.textContent = f;
+        fontBox.appendChild(pill);
+      });
+
+      // 3. Colors
+      const palBox = document.getElementById("dnaPaletteList");
+      palBox.innerHTML = "";
+      (a.colors.palette || []).forEach(hex => {
+        const item = document.createElement("div");
+        item.className = "palette-item";
+        item.title = `Click to copy ${hex}`;
+        item.onclick = () => copyText(hex, `Copied color ${hex}`);
+        item.innerHTML = `<span class="palette-color-dot" style="background-color: ${hex}"></span><span>${hex}</span>`;
+        palBox.appendChild(item);
+      });
+      document.getElementById("dnaColorMood").textContent = a.colors.mood || "-";
+      document.getElementById("dnaCanvasMode").textContent = `${a.colors.background_color || '-'} (${a.colors.luminance_mode || 'dark'} mode)`;
+
+      // 4. Aesthetic
+      document.getElementById("dnaMovement").textContent = a.design_aesthetic.movement || "-";
+      document.getElementById("dnaLighting").textContent = a.design_aesthetic.lighting || "-";
+      const elemBox = document.getElementById("dnaElementsList");
+      elemBox.innerHTML = "";
+      (a.design_aesthetic.graphic_elements || []).forEach(el => {
+        const tag = document.createElement("span");
+        tag.className = "dna-tag-pill";
+        tag.textContent = el;
+        elemBox.appendChild(tag);
+      });
+
+      // Pre-fill variables
+      const c = a.content || {};
+      document.getElementById("varBrand").value = "";
+      document.getElementById("varProduct").value = "";
+      document.getElementById("varHeadline").value = c.detected_headline || "";
+      document.getElementById("varCta").value = c.detected_cta || "Shop Now";
+
+      // Render code boxes
+      document.getElementById("codeBoxMidjourney").textContent = a.prompt_templates.midjourney || "";
+      document.getElementById("codeBoxFlux").textContent = a.prompt_templates.flux || "";
+      document.getElementById("codeBoxFigma").textContent = a.prompt_templates.figma_specs || "";
+
+      // Markdown spec
+      const mdSpec = `# Design Reference & Prompt Spec: ${a.industry_label || 'Creative Reference'}
+Source Pin ID: ${a.pin_id}
+Generated: ${a.analyzed_at || new Date().toISOString()}
+Engine: ${a.analyzer_engine}
+
+## Layout & Architecture
+- Type: ${a.layout.layout_type}
+- Aspect Ratio: ${a.layout.aspect_ratio_name || a.layout.aspect_ratio_code}
+- Hierarchy: ${a.layout.hierarchy}
+- Spacing: ${a.layout.spacing_density}
+
+## Typography & Web Fonts
+- Headline Style: ${a.typography.headline_font_style}
+- Recommended Fonts: ${(a.typography.recommended_headline_fonts || []).join(", ")}
+- Body Style: ${a.typography.body_font_style}
+- Typographic Treatment: ${a.typography.treatment_effects}
+
+## Chromatic Palette
+- Canvas Tone: ${a.colors.background_color}
+- Primary Accent: ${a.colors.primary_accent}
+- Color Mood: ${a.colors.mood}
+- Palette: ${(a.colors.palette || []).join(", ")}
+
+## Visual Aesthetic & Styling
+- Movement: ${a.design_aesthetic.movement}
+- Key Elements: ${(a.design_aesthetic.graphic_elements || []).join(", ")}
+- Lighting & Render: ${a.design_aesthetic.lighting}
+
+## Midjourney v6.1 Prompt
+\`\`\`text
+${a.prompt_templates.midjourney}
+\`\`\`
+
+## FLUX.1 / SDXL Prompt
+\`\`\`text
+${a.prompt_templates.flux}
+\`\`\`
+`;
+      document.getElementById("codeBoxMarkdown").textContent = mdSpec;
+
+      updateCreativeTemplate();
+    }
+
+    function switchPromptTab(tabName) {
+      state.activePromptTab = tabName;
+      const tabs = ["creative", "midjourney", "flux", "figma", "markdown"];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const pane = document.getElementById(`tabPane${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (btn) btn.classList.toggle("active", t === tabName);
+        if (pane) pane.classList.toggle("active", t === tabName);
+      });
+    }
+
+    function updateCreativeTemplate() {
+      if (!state.currentAnalysis) return;
+      const base = state.currentAnalysis.prompt_templates.creative_ad || "";
+      const brand = document.getElementById("varBrand").value.trim() || "{{BRAND_NAME}}";
+      const product = document.getElementById("varProduct").value.trim() || "{{PRODUCT_NAME}}";
+      const headline = document.getElementById("varHeadline").value.trim() || (state.currentAnalysis.content ? state.currentAnalysis.content.detected_headline : "") || "{{HEADLINE_HOOK}}";
+      const cta = document.getElementById("varCta").value.trim() || (state.currentAnalysis.content ? state.currentAnalysis.content.detected_cta : "") || "{{CTA_BUTTON}}";
+
+      let customized = base
+        .replace(/\{\{BRAND_NAME\}\}/g, brand)
+        .replace(/\{\{PRODUCT_NAME\}\}/g, product)
+        .replace(/\{\{HEADLINE_HOOK\}\}/g, headline)
+        .replace(/\{\{CTA_BUTTON\}\}/g, cta);
+
+      document.getElementById("codeBoxCreative").textContent = customized;
+    }
+
+    function copyPrompt(fmt) {
+      let text = "";
+      if (fmt === "creative") text = document.getElementById("codeBoxCreative").textContent;
+      else if (fmt === "midjourney") text = document.getElementById("codeBoxMidjourney").textContent;
+      else if (fmt === "flux") text = document.getElementById("codeBoxFlux").textContent;
+      else if (fmt === "figma") text = document.getElementById("codeBoxFigma").textContent;
+      else if (fmt === "markdown") text = document.getElementById("codeBoxMarkdown").textContent;
+
+      if (text) {
+        copyText(text, "Prompt copied to clipboard!");
+      }
+    }
+
+    function downloadMarkdownSpec() {
+      const text = document.getElementById("codeBoxMarkdown").textContent;
+      if (!text) return;
+      const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `design-prompt-${state.currentAnalysis ? state.currentAnalysis.pin_id : 'spec'}.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Downloaded markdown spec report!");
+    }
+
+    async function saveCurrentTemplate() {
+      if (!state.currentAnalysis) return;
+      const title = document.getElementById("studioTitle").textContent;
+      const creativePrompt = document.getElementById("codeBoxCreative").textContent;
+      const tpls = { ...state.currentAnalysis.prompt_templates, creative_ad: creativePrompt };
+
+      const payload = {
+        title: title || `${state.currentAnalysis.industry_label} Design Template`,
+        pin_id: state.currentAnalysis.pin_id,
+        industry: state.currentAnalysis.industry_slug,
+        movement: state.currentAnalysis.design_aesthetic.movement,
+        aspect_ratio: state.currentAnalysis.layout.aspect_ratio_code,
+        prompt_templates: tpls,
+        colors: state.currentAnalysis.colors,
+        typography: state.currentAnalysis.typography,
+        layout: state.currentAnalysis.layout
+      };
+
+      try {
+        const resp = await fetch("/api/templates", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          showToast("✓ Saved template to library!");
+          await fetchSavedTemplatesCount();
+        } else {
+          showToast("Saved locally in session");
+        }
+      } catch (err) {
+        showToast("✓ Saved template to session!");
+      }
+    }
+
+    function closePromptStudio() {
+      document.getElementById("promptStudioModal").classList.remove("active");
+      if (state.currentModalIndex < 0) {
+        document.body.style.overflow = "auto";
+      }
+    }
+
+    function handlePromptStudioBackdropClick(e) {
+      if (e.target.id === "promptStudioModal") closePromptStudio();
+    }
+
+    function reanalyzeCurrentPin(forceGemini) {
+      if (forceGemini && !state.geminiConfigured) {
+        openAiSettingsModal();
+        return;
+      }
+      openPromptStudioForCurrentPin(forceGemini);
+    }
+
+    // ==========================================
+    // Saved Templates Library Modal
+    // ==========================================
+
+    async function openTemplatesModal() {
+      const modal = document.getElementById("templatesModal");
+      const listEl = document.getElementById("templatesListContainer");
+      listEl.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--text-muted);">Loading templates...</div>`;
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      try {
+        const res = await fetch("/api/templates");
+        if (res.ok) {
+          const data = await res.json();
+          state.savedTemplates = data.templates || [];
+        }
+      } catch (e) {}
+
+      renderTemplatesList();
+    }
+
+    function renderTemplatesList() {
+      const listEl = document.getElementById("templatesListContainer");
+      listEl.innerHTML = "";
+      const templates = state.savedTemplates || [];
+      const badge = document.getElementById("templatesCountBadge");
+      if (badge) badge.textContent = templates.length;
+
+      if (!templates.length) {
+        listEl.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+            <div style="font-size: 2.2rem; margin-bottom: 10px;">📑</div>
+            <div style="font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 6px;">No Saved Templates Yet</div>
+            <p style="font-size: 0.84rem; max-width: 440px; margin: 0 auto 16px;">
+              Open any pin reference, click <strong>"✨ Analyze & Create Prompt Templates"</strong>, and save your preferred prompts to this library.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      templates.forEach(t => {
+        const card = document.createElement("div");
+        card.className = "template-item-card";
+        const indLabel = DEFAULT_LABELS[t.industry] || t.industry || "General";
+        const dateStr = t.saved_at ? t.saved_at.slice(0, 10) : "";
+
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="badge badge-industry">${escapeHtml(indLabel)}</span>
+                <span class="badge" style="background: rgba(0,0,0,0.3);">${escapeHtml(t.aspect_ratio || '4:5')}</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted);">${dateStr}</span>
+              </div>
+              <h3 style="font-size: 0.96rem; font-weight: 700; color: var(--text);">${escapeHtml(t.title || 'Design Template')}</h3>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+                ${escapeHtml(t.movement || 'Commercial Design Aesthetic')}
+              </div>
+            </div>
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'midjourney')">
+                🎨 Midjourney
+              </button>
+              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'creative')">
+                🚀 Ad Creative
+              </button>
+              <button class="icon-btn" style="padding: 4px 10px; font-size: 0.76rem;" onclick="copyTemplatePrompt('${t.id}', 'flux')">
+                ⚡ FLUX
+              </button>
+              <button class="icon-btn" style="padding: 4px 8px; font-size: 0.76rem; color: var(--primary);" onclick="deleteTemplate('${t.id}')" title="Delete template">
+                🗑️
+              </button>
+            </div>
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    function copyTemplatePrompt(id, format) {
+      const t = (state.savedTemplates || []).find(x => x.id === id);
+      if (!t || !t.prompt_templates) return;
+      const text = t.prompt_templates[format === "creative" ? "creative_ad" : format] || "";
+      if (text) copyText(text, `Copied ${format.toUpperCase()} prompt!`);
+    }
+
+    async function deleteTemplate(id) {
+      if (!confirm("Are you sure you want to delete this prompt template?")) return;
+      try {
+        await fetch(`/api/templates/${id}`, { method: "DELETE" });
+      } catch (e) {}
+      state.savedTemplates = (state.savedTemplates || []).filter(x => x.id !== id);
+      renderTemplatesList();
+      showToast("Template deleted");
+    }
+
+    function closeTemplatesModal() {
+      document.getElementById("templatesModal").classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function handleTemplatesBackdropClick(e) {
+      if (e.target.id === "templatesModal") closeTemplatesModal();
+    }
+
+    // ==========================================
+    // AI Configuration Modal
+    // ==========================================
+
+    function openAiSettingsModal() {
+      const modal = document.getElementById("aiConfigModal");
+      updateAiBadge();
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeAiConfigModal() {
+      document.getElementById("aiConfigModal").classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function handleAiConfigBackdropClick(e) {
+      if (e.target.id === "aiConfigModal") closeAiConfigModal();
+    }
+
+    async function submitAiConfig() {
+      const input = document.getElementById("aiApiKeyInput");
+      const key = input.value.trim();
+      const saveEnv = document.getElementById("aiSaveToEnvCheckbox").checked;
+
+      if (!key) {
+        showToast("Please enter a valid Gemini API key");
+        return;
+      }
+
+      try {
+        const resp = await fetch("/api/config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gemini_api_key: key, save_to_env: saveEnv })
+        });
+        if (resp.ok) {
+          state.geminiConfigured = true;
+          updateAiBadge();
+          closeAiConfigModal();
+          showToast("✓ Gemini API key configured successfully!");
+          input.value = "";
+        } else {
+          showToast("Failed to update config");
+        }
+      } catch (e) {
+        showToast("Failed to connect to server API");
       }
     }
 
