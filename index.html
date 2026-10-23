@@ -2508,49 +2508,137 @@
       const primary = palette.length > 1 ? palette[1] : "#e60023";
       const secondary = palette.length > 2 ? palette[2] : "#58a6ff";
       const ratio = pin.aspect_ratio ? (pin.aspect_ratio <= 0.65 ? "9:16" : pin.aspect_ratio <= 0.88 ? "4:5" : pin.aspect_ratio <= 1.15 ? "1:1" : "16:9") : "4:5";
-      const headline = pin.title || (pin.query ? `The Future of ${pin.query}` : "Elevate Your Perspective");
+
+      const alt = pin.alt_text || "";
+      const title = pin.title || "";
+      const desc = pin.description || "";
+      const query = pin.query || "";
+
+      let headline = "";
+      let subhead = "";
+
+      const m = alt.match(/with the (?:caption|words),?\s*(?:the\s+)?['"]?([^.\n]+)/i) ||
+                alt.match(/the cover of\s+['"]?([^.\n]+?)\s+is shown/i);
+      if (m) {
+        const raw = m[1].replace(/['"]/g, "").trim();
+        if (raw.toLowerCase().includes(" unless ")) {
+          const parts = raw.split(/\s+unless\s+/i);
+          headline = parts[0].trim();
+          subhead = "Unless " + parts[1].trim();
+        } else {
+          headline = raw;
+        }
+      }
+
+      if (!headline || headline.length < 4) {
+        if (title) headline = title.split(" - ")[0].split(" | ")[0].split(" by ")[0].strip ? title.split(" - ")[0].split(" | ")[0].split(" by ")[0].trim() : title.trim();
+        else if (desc) headline = desc.split("\n")[0].split(".")[0].trim();
+      }
+      if (!headline) headline = query ? query.charAt(0).toUpperCase() + query.slice(1) : "New Arrival";
+
+      if (!subhead && desc) {
+        const sents = desc.split(".").map(s => s.trim()).filter(s => s.length > 8 && s.toLowerCase() !== headline.toLowerCase());
+        for (const s of sents) {
+          if (!s.toLowerCase().includes("visuals") && !s.toLowerCase().includes("flyer")) {
+            subhead = s;
+            break;
+          }
+        }
+      }
+
+      let subject = "";
+      const mShown = alt.match(/is shown with\s+(.+?)(?:\s+in front of it|\s+on it)?$/i);
+      if (mShown) {
+        subject = `${mShown[1].trim()} in front of ${headline}`;
+      } else {
+        let clean = alt.replace(/^(?:an? (?:advertisement|ad|image|photo|cover) (?:for|of) |the cover of )/i, "");
+        clean = clean.replace(/with the (?:caption|words).*$/i, "").trim();
+        if (clean.toLowerCase().includes("some kind of skin care product")) clean = "a luxury skincare serum bottle with minimalist branding";
+        else if (clean.toLowerCase().includes("cheeseburger") || clean.toLowerCase().includes("burger")) clean = "a hand holding a juicy triple cheeseburger with melted cheddar and toasted sesame seed bun";
+        else if (clean.toLowerCase().includes("cell phone") || clean.toLowerCase().includes("smart phone")) clean = "a hand holding a sleek modern smartphone displaying a clean mobile app interface";
+        subject = clean || title || query || "hero product";
+      }
+
+      let cta = "Shop Now";
+      if (ind === "food-beverage") cta = "Order Now";
+      else if (ind.includes("fintech") || ind.includes("tech")) cta = "Get Started";
+
+      let typoDesc = "bold contemporary display typography";
+      let lighting = "clean studio lighting with soft balanced fill";
+      let movement = "Modern Commercial Advertising Design";
+      let recFonts = ["Satoshi", "Plus Jakarta Sans", "Inter"];
+
+      if (["beauty-cosmetics", "jewelry-luxury", "fashion-apparel"].includes(ind)) {
+        typoDesc = "elegant high-contrast editorial serif typography in bold dark lettering";
+        lighting = "soft diffused natural morning sunlight casting gentle organic shadows";
+        movement = "Minimalist Luxury Editorial Art Direction";
+        recFonts = ["Playfair Display", "Cormorant Garamond", "Canela"];
+      } else if (["food-beverage", "fitness-sports"].includes(ind)) {
+        typoDesc = "bold punchy condensed display typography with high impact";
+        lighting = "vibrant commercial studio lighting with mouthwatering rich contrast";
+        movement = "Bold Commercial Poster Art Direction";
+        recFonts = ["Cabinet Grotesk", "Clash Display", "Recoleta"];
+      } else if (["fintech-finance", "tech-saas"].includes(ind)) {
+        typoDesc = "modern bold geometric sans-serif typography with high contrast";
+        lighting = "sleek studio illumination with subtle colored edge rim lighting";
+        movement = "Contemporary High-Tech Commercial Graphic Design";
+        recFonts = ["Satoshi", "Plus Jakarta Sans", "PP Neue Montreal"];
+      }
+
+      const bgDesc = `a solid background (${bg})`;
+      const subheadClause = subhead ? ` Below it, subtle supporting text reads "${subhead}".` : "";
+
+      const mjPrompt = `A commercial advertising poster in ${ratio} portrait ratio. Featuring ${subject}, positioned in the center against ${bgDesc}. At the top, the bold headline text reads "${headline.toUpperCase()}" in ${typoDesc}.${subheadClause} ${lighting}, clean negative space, ${movement}, commercial photography, shot on Hasselblad 80mm lens, award-winning Behance graphic design, 8k resolution --ar ${ratio} --style raw --v 6.1`;
+
+      const fluxPrompt = `A high-end commercial graphic design advertising poster. The canvas has ${bgDesc}. Top section: The headline text "${headline.toUpperCase()}" is displayed prominently in ${typoDesc}.${subhead ? ` Directly below, smaller text reads "${subhead}".` : ''} Center section: ${subject}, rendered in sharp photorealistic detail and centered with balanced margins. Bottom section: A clean minimal call to action button reading "${cta.toUpperCase()}". Color accents include ${primary}. Clean commercial graphic design, razor-sharp typography, ${lighting}, high resolution.`;
+
+      const creativeAd = `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture & Flow\n- Target Ratio: ${ratio}\n- Visual Hierarchy: Top Hook (30%) -> Hero Centerpiece (50%) -> Action CTA & Trust (20%)\n- Design Movement: ${movement}\n\n## 2. Dynamic Slots & Copy\n- [Brand Identifier]: {{BRAND_NAME}}\n- [Hero Product / Focus]: {{PRODUCT_NAME}} (Reference: ${subject})\n- [Primary Hook Headline]: "${headline}"\n  - Font Category: ${typoDesc}\n  - Recommended Web Fonts: ${recFonts.join(", ")}\n- [Supporting Subtext]: "${subhead}"\n- [Call to Action Button]: "${cta}"\n\n## 3. Chromatic Palette & Styling Tokens\n- Canvas Background: \`${bg}\`\n- Primary Accent: \`${primary}\`\n- Lighting: ${lighting}\n\n## 4. Execution Prompt for Image Generator\n"A commercial advertising poster for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}.\nAt the top, bold headline text reads '{{HEADLINE_HOOK}}' in ${typoDesc}.\nIn the center, {{PRODUCT_NAME}} is positioned against ${bgDesc}.\nAt the bottom, a clean call-to-action button reads '{{CTA_BUTTON}}'.\n${lighting}, high-end commercial finish, 8k resolution."`;
+
+      const figmaSpecs = `/* === Design System Tokens for ${DEFAULT_LABELS[ind] || ind} === */\n:root {\n  --canvas-bg: ${bg};\n  --brand-primary: ${primary};\n  --brand-secondary: ${secondary};\n  --aspect-ratio: ${ratio.replace(":", "/")};\n  --font-headline: '${recFonts[0]}', -apple-system, sans-serif;\n  --font-body: 'Inter', -apple-system, sans-serif;\n  --font-headline-weight: 700;\n  --grid-padding: 32px;\n}`;
 
       return {
         pin_id: pin.pin_id,
         industry_slug: ind,
         industry_label: DEFAULT_LABELS[ind] || ind,
-        analyzer_engine: "client-heuristic",
+        analyzer_engine: "ground-truth-heuristic",
         layout: {
-          layout_type: "Asymmetrical Hero & Typographic Anchor",
-          composition: `Top hook headline, central high-impact focal asset, bottom action trigger and badges in ${ratio} framing.`,
-          hierarchy: "1. Headline Hook -> 2. Focal Subject -> 3. Action CTA",
-          spacing_density: "Balanced negative space with breathing room",
+          layout_type: `Centered Hero with Top-Weighted Headline (${ratio})`,
+          composition: `Top bold headline reading '${headline}', central hero visual of ${subject} against ${bgDesc}, bottom call to action '${cta}'.`,
+          hierarchy: `1. Hook Headline ('${headline}') -> 2. Hero Asset (${subject}) -> 3. Action CTA ('${cta}')`,
           aspect_ratio_code: ratio,
+          aspect_ratio_name: ratio === "9:16" ? "Story (9:16)" : (ratio === "1:1" ? "Square (1:1)" : "Portrait Feed (4:5)"),
+          spacing_density: "Balanced commercial negative space with centered visual anchor",
         },
         typography: {
-          headline_font_style: "Bold Display Neo-Grotesk / Clean Geometric",
-          recommended_headline_fonts: ["Satoshi", "Plus Jakarta Sans", "Syne", "Cabinet Grotesk"],
+          headline_font_style: typoDesc,
+          body_font_style: "Clean Geometric Sans-Serif",
+          recommended_headline_fonts: recFonts,
           recommended_body_fonts: ["Inter", "DM Sans"],
-          treatment_effects: "Sentence case or tight uppercase (-0.02em tracking)",
+          treatment_effects: "High-contrast bold display styling with balanced tracking",
         },
         colors: {
           palette: palette,
           background_color: bg,
           primary_accent: primary,
           secondary_accent: secondary,
-          mood: "Modern, balanced, high-contrast visual engagement",
+          mood: `High-contrast commercial palette anchored in ${bg}`,
           luminance_mode: "dark",
         },
         design_aesthetic: {
-          movement: "Modern Contemporary Commercial / Minimalist",
-          graphic_elements: ["Framed container", "Soft drop shadow", "Pill badge", "Clean CTA"],
-          lighting: "Studio softbox illumination with gentle fill",
+          movement: movement,
+          graphic_elements: [subject, "Framed product container", `Solid canvas`, `'${cta}' pill button`],
+          lighting: lighting,
         },
         content: {
           detected_headline: headline,
-          detected_subtext: pin.description ? pin.description.split(".")[0] : "Designed for high performance and visual impact.",
-          detected_cta: "Shop Now",
+          detected_subtext: subhead,
+          detected_cta: cta,
         },
         prompt_templates: {
-          midjourney: `Graphic design advertising creative for ${DEFAULT_LABELS[ind] || ind}, contemporary commercial aesthetic, composition layout: Top hook headline, central high-impact focal asset, typography styling: Bold Display Neo-Grotesk, featuring ${headline}, design accents: Framed container, pill badge, color palette: ${palette.slice(0, 4).join(", ")}, lighting: Studio softbox illumination with gentle fill, clean negative space, 8k render --ar ${ratio} --style raw --v 6.1`,
-          flux: `A masterwork graphic design ad creative layout. Style: Modern Contemporary Commercial. Composition: Top hook headline, central high-impact focal asset. Visual hierarchy: Headline Hook -> Focal Subject -> Action CTA. Main subject: ${headline}. Color scheme: Dominant ${bg}, primary accent ${primary}. Key elements: Framed container, pill badge, clean typography. High precision commercial finish.`,
-          creative_ad: `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture\n- Target Aspect: ${ratio}\n- Movement: Modern Contemporary Commercial\n- Visual Hierarchy: 1. Headline -> 2. Hero Asset -> 3. Action CTA\n\n## 2. Dynamic Slots\n- [Brand]: {{BRAND_NAME}}\n- [Product]: {{PRODUCT_NAME}}\n- [Headline Hook]: "${headline}"\n- [CTA]: "Shop Now"\n\n## 3. Chromatic Palette\n- Canvas: ${bg}\n- Accent: ${primary}\n\n## 4. Execution Prompt\n"Create a ${ratio} commercial ad for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}. Headline reads '${headline}'. Aesthetic: Modern Contemporary Commercial."`,
-          figma_specs: `/* Design Tokens */\n:root {\n  --canvas-bg: ${bg};\n  --brand-primary: ${primary};\n  --brand-secondary: ${secondary};\n  --aspect-ratio: ${ratio.replace(":", "/")};\n  --font-headline: 'Satoshi', sans-serif;\n  --font-body: 'Inter', sans-serif;\n}`
+          midjourney: mjPrompt,
+          flux: fluxPrompt,
+          creative_ad: creativeAd,
+          figma_specs: figmaSpecs,
         }
       };
     }
