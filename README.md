@@ -3,14 +3,14 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**807 pins** · last updated 2026-10-23
+**948 pins** · last updated 2026-10-23
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
 | `beauty-cosmetics` | Beauty & Cosmetics | 292 |
+| `fintech-finance` | FinTech & Finance | 221 |
 | `food-beverage` | Food & Beverage | 90 |
-| `fintech-finance` | FinTech & Finance | 80 |
 | `uncategorized` | uncategorized | 60 |
 | `jewelry-luxury` | Jewelry & Luxury | 41 |
 | `real-estate` | Real Estate | 41 |
@@ -30,14 +30,14 @@ sorted by industry, for training / prompting AI design models.
 ## By format
 | Format | Pins |
 |---|---|
-| instagram-post | 285 |
-| ad-creative | 277 |
-| poster-flyer | 98 |
-| logo-branding | 39 |
+| instagram-post | 286 |
+| ad-creative | 286 |
+| unknown | 111 |
+| poster-flyer | 106 |
+| logo-branding | 61 |
 | email | 38 |
-| unknown | 31 |
-| carousel | 24 |
-| landing-page | 12 |
+| landing-page | 32 |
+| carousel | 25 |
 | story-reel | 2 |
 | packaging | 1 |
 

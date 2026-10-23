@@ -1,10 +1,10 @@
 {
-  "total_pins": 807,
-  "updated_at": "2026-10-23T06:40:49+00:00",
+  "total_pins": 948,
+  "updated_at": "2026-10-23T10:19:36+00:00",
   "by_industry": {
     "beauty-cosmetics": 292,
+    "fintech-finance": 221,
     "food-beverage": 90,
-    "fintech-finance": 80,
     "uncategorized": 60,
     "jewelry-luxury": 41,
     "real-estate": 41,
@@ -46,18 +46,19 @@
     "pets": "Pets"
   },
   "by_format": {
-    "instagram-post": 285,
-    "ad-creative": 277,
-    "poster-flyer": 98,
-    "logo-branding": 39,
+    "instagram-post": 286,
+    "ad-creative": 286,
+    "unknown": 111,
+    "poster-flyer": 106,
+    "logo-branding": 61,
     "email": 38,
-    "unknown": 31,
-    "carousel": 24,
-    "landing-page": 12,
+    "landing-page": 32,
+    "carousel": 25,
     "story-reel": 2,
     "packaging": 1
   },
   "queries": {
+    "Fintech": 141,
     "meta ads": 54,
     "fintech instagram post design": 40,
     "trading app social media ad": 40,
