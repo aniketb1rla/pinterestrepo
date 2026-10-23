@@ -1,8 +1,8 @@
 {
-  "total_pins": 783,
-  "updated_at": "2026-10-22T17:30:28+00:00",
+  "total_pins": 807,
+  "updated_at": "2026-10-23T06:40:49+00:00",
   "by_industry": {
-    "beauty-cosmetics": 268,
+    "beauty-cosmetics": 292,
     "food-beverage": 90,
     "fintech-finance": 80,
     "uncategorized": 60,
@@ -52,6 +52,7 @@
     "logo-branding": 39,
     "email": 38,
     "unknown": 31,
+    "carousel": 24,
     "landing-page": 12,
     "story-reel": 2,
     "packaging": 1
@@ -77,6 +78,7 @@
     "glossier social media ad design": 33,
     "Meta ads": 29,
     "Product Ads": 27,
+    "Skincare Carousel": 24,
     "streetwear clothing brand poster design": 10
   }
 }
