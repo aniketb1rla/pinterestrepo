@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Pinterest Reference Gallery</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23f0384f%22/><path d=%22M16 7a6 6 0 0 0-6 6c0 4.5 6 12 6 12s6-7.5 6-12a6 6 0 0 0-6-6zm0 8.2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4z%22 fill=%22white%22/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+      Style: true-black flat. Elevation by lightness alone (ground, surface, raised),
+      no borders or shadows on things at rest, colour only on data: the pins' own
+      pixels and palettes, plus one hue on the folder bars and the collect progress.
+      Grid: 1208px column = 240 folders + 32 + 936 wall; wall = 4 x 222 + 3 x 16.
+    */
+    :root {
+      --ground: #000000;
+      --surface: #111111;
+      --raised: #2a2a2a;
+      --hover: #1b1b1b;
+      --border: #1a1a1a;
+      --rule: #2e2e2e;
+      --control: #444444;
+      --text: #ffffff;
+      --muted: #b4b4b4;
+      --faint: #949494;
+      --nav-idle: #bbbbbb;
+      --accent: #f0384f;
+      --track: #2e2e2e;
+      --primary-bg: #ffffff;
+      --primary-ink: #000000;
+      --code-bg: #0a0a0a;
+      --negative: #e5566f;
+      --pill-positive-bg: #172a1d; --pill-positive-ink: #3fc07a;
+      --pill-negative-bg: #2c1a20; --pill-negative-ink: #e5566f;
+      --pill-warning-bg: #2b2414; --pill-warning-ink: #e5a93b;
+      --scrim: rgba(0, 0, 0, 0.82);
+
+      --radius-card: 20px;
+      --radius-media: 14px;
+      --radius-inner: 10px;
+      --radius-control: 999px;
+      --gap: 16px;
+      --pad: 22px;
+      --control-height: 36px;
+      --column: 1208px;
+      --folders: 240px;
+      --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --fs-title: 20px;
+      --fs-section: 16px;
+      --fs-body: 14px;
+      --fs-small: 12px;
+    }
+
+    [data-theme="light"] {
+      --ground: #ffffff;
+      --surface: #f3f3f3;
+      --raised: #e7e7e7;
+      --hover: #ececec;
+      --border: #ebebeb;
+      --rule: #dedede;
+      --control: #c9c9c9;
+      --text: #111111;
+      --muted: #555555;
+      --faint: #636363;
+      --nav-idle: #555555;
+      --accent: #e60023;
+      --track: #dddddd;
+      --primary-bg: #111111;
+      --primary-ink: #ffffff;
+      --code-bg: #f8f8f8;
+      --negative: #c4242a;
+      --pill-positive-bg: #dcfae5; --pill-positive-ink: #04250e;
+      --pill-negative-bg: #ffedea; --pill-negative-ink: #831c1e;
+      --pill-warning-bg: #fffbeb; --pill-warning-ink: #92400e;
+      --scrim: rgba(17, 17, 17, 0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { color-scheme: dark; }
+    [data-theme="light"] { color-scheme: light; }
+    body {
+      background: var(--ground);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: var(--fs-body);
+      line-height: 20px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; background: none; border: 0; }
+    a { color: inherit; }
+    .num { font-variant-numeric: tabular-nums; }
+    .icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    :focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ---------- Buttons and controls ---------- */
+    .btn {
+      height: var(--control-height);
+      padding: 0 16px;
+      border-radius: var(--radius-control);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: var(--fs-body);
+      font-weight: 500;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--primary-bg); color: var(--primary-ink); }
+    .btn-primary:hover { background: var(--muted); }
+    .btn-outline { box-shadow: inset 0 0 0 1px var(--control); color: var(--text); }
+    .btn-outline:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--muted); }
+    .btn-text { height: 28px; padding: 0 8px; border-radius: var(--radius-control); color: var(--text); font-weight: 500; font-size: var(--fs-small); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .btn-text:hover { background: var(--raised); }
+    .btn-text.danger { color: var(--negative); }
+    .btn-icon { width: var(--control-height); height: var(--control-height); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); flex: none; }
+    .btn-icon:hover { background: var(--surface); color: var(--text); }
+    .btn[disabled] { opacity: 0.6; cursor: default; }
+
+    .field {
+      width: 100%;
+      height: 40px;
+      padding: 0 14px;
+      background: var(--ground);
+      border: 1px solid var(--control);
+      border-radius: var(--radius-inner);
+      color: var(--text);
+      font-size: var(--fs-body);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .field:focus { border-color: var(--text); }
+    .field::placeholder { color: var(--faint); }
+    select.field { cursor: pointer; }
+    .label { display: block; font-size: var(--fs-body); font-weight: 500; margin-bottom: 8px; }
+    .help { font-size: var(--fs-small); line-height: 18px; color: var(--muted); margin-top: 6px; }
+
+    .select-pill {
+      height: var(--control-height);
+      padding: 0 34px 0 14px;
+      border-radius: var(--radius-control);
+      background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23949494' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+      border: 0;
+      font-size: var(--fs-body);
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+    .select-pill:hover { background-color: var(--hover); }
+    .select-pill option { background: var(--surface); color: var(--text); }
+
+    .pill { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: var(--radius-control); font-size: var(--fs-small); font-weight: 500; white-space: nowrap; flex: none; }
+    .pill-positive { background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
+    .pill-negative { background: var(--pill-negative-bg); color: var(--pill-negative-ink); }
+    .pill-warning { background: var(--pill-warning-bg); color: var(--pill-warning-ink); }
+    .pill-neutral { background: var(--raised); color: var(--text); }
+
+    /* ---------- Shell: no sidebar, a 48px bar over one centred column ---------- */
+    .column { width: 100%; max-width: calc(var(--column) + 48px); margin: 0 auto; padding: 0 24px; }
+
+    .topbar { position: sticky; top: 0; z-index: 100; background: var(--ground); transition: box-shadow 0.15s ease; }
+    .topbar.scrolled { box-shadow: 0 1px 0 var(--border); }
+    .topbar-inner { height: 48px; display: flex; align-items: center; gap: 24px; }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; flex: none; }
+    .brand-mark { width: 24px; height: 24px; flex: none; }
+
+    .topnav { display: flex; align-items: center; gap: 20px; }
+    .topnav-link { font-size: var(--fs-body); font-weight: 500; color: var(--nav-idle); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; white-space: nowrap; transition: color 0.15s ease; }
+    .topnav-link:hover, .topnav-link[aria-current="page"] { color: var(--text); }
+    .topnav-count { color: var(--faint); font-weight: 400; }
+
+    .search { position: relative; flex: 1; max-width: 360px; margin-left: auto; }
+    .search .icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--faint); pointer-events: none; }
+    .search-input {
+      width: 100%;
+      height: var(--control-height);
+      padding: 0 64px 0 38px;
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      border: 1px solid transparent;
+      font-size: var(--fs-body);
+      outline: none;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .search-input::placeholder { color: var(--faint); }
+    .search-input:focus { border-color: var(--control); background: var(--ground); }
+    .search-kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: var(--fs-small); color: var(--faint); pointer-events: none; }
+    .search-clear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 26px; height: 26px; border-radius: 50%; display: none; align-items: center; justify-content: center; color: var(--muted); }
+    .search-clear:hover { background: var(--raised); color: var(--text); }
+    .search-input:not(:placeholder-shown) ~ .search-kbd { display: none; }
+    .search-clear svg { display: block; margin: auto; }
+
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+    .menu-btn { display: none; }
+
+    .menu-sheet {
+      position: absolute;
+      right: 16px;
+      top: 52px;
+      width: 240px;
+      background: var(--hover);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      display: none;
+      flex-direction: column;
+    }
+    .menu-sheet.open { display: flex; }
+    .menu-sheet button { height: 44px; padding: 0 12px; border-radius: 10px; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 500; }
+    .menu-sheet button:hover { background: var(--raised); }
+    .menu-sheet .menu-meta { color: var(--faint); font-weight: 400; }
+
+    /* ---------- Canvas ---------- */
+    .canvas { padding-top: 28px; padding-bottom: 64px; }
+
+    .title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+    .title-row h1 { font-size: var(--fs-title); line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+    .title-sub { color: var(--muted); margin-top: 4px; max-width: 720px; }
+    .title-sub strong { color: var(--text); font-weight: 500; }
+    .title-tools { display: flex; align-items: center; gap: 8px; flex: none; }
+    .stamp { font-size: var(--fs-small); color: var(--faint); margin-right: 4px; white-space: nowrap; }
+
+    /* Collect job: the one time-sensitive block, above everything it changes */
+    .job {
+      display: none;
+      grid-template-columns: minmax(0, 1fr) 260px auto;
+      align-items: center;
+      gap: 24px;
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 14px 16px 14px 20px;
+      margin-bottom: 20px;
+    }
+    .job.visible { display: grid; }
+    .job-title { font-weight: 500; display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .job-title span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .job-line { font-size: var(--fs-small); line-height: 18px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+    .job-progress-label { display: flex; justify-content: space-between; font-size: var(--fs-small); color: var(--muted); margin-bottom: 6px; }
+    .job-progress-label b { color: var(--text); font-weight: 500; }
+    .job-track { height: 6px; border-radius: 999px; background: var(--track); overflow: hidden; }
+    .job-fill { height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width 0.4s ease; }
+    .job.is-done .job-fill { background: var(--text); }
+    .job.is-error .job-track { display: none; }
+    .job-actions { display: flex; gap: 8px; }
+
+    .layout { display: grid; grid-template-columns: var(--folders) minmax(0, 1fr); gap: 32px; align-items: start; }
+
+    /* Industry folders: the library's own shape, and the filter for the wall */
+    .folders { position: sticky; top: 64px; max-height: calc(100vh - 80px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--raised) transparent; padding-bottom: 8px; }
+    .folders-head { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--fs-small); color: var(--faint); padding: 0 10px 8px; }
+    .folders-head h2 { font-size: var(--fs-small); font-weight: 500; color: var(--muted); }
+    .folder-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .folder {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 12px;
+      row-gap: 5px;
+      align-items: center;
+      padding: 8px 10px 9px;
+      border-radius: 10px;
+      text-align: left;
+      color: var(--nav-idle);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .folder:hover { background: var(--surface); color: var(--text); }
+    .folder.is-active { background: var(--surface); color: var(--text); }
+    .folder-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .folder-count { font-size: var(--fs-small); color: var(--faint); text-align: right; }
+    .folder.is-active .folder-count { color: var(--muted); }
+    .folder-bar { grid-column: 1 / -1; height: 2px; border-radius: 2px; overflow: hidden; }
+    .folder-bar i { display: block; height: 100%; background: var(--faint); border-radius: 2px; }
+    .folder.is-active .folder-bar i { background: var(--accent); }
+    .folder-all .folder-bar { visibility: hidden; }
+
+    /* Format chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+      height: 32px;
+      padding: 0 14px;
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      color: var(--nav-idle);
+      font-weight: 500;
+      white-space: nowrap;
+      flex: none;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .chip:hover { color: var(--text); background: var(--hover); }
+    .chip.is-active { background: var(--primary-bg); color: var(--primary-ink); }
+
+    /* The wall: shortest-column masonry so appended pages never reflow */
+    .wall { display: flex; gap: var(--gap); align-items: flex-start; }
+    .wall-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--gap); }
+
+    .pin { display: block; width: 100%; text-align: left; color: var(--text); border-radius: var(--radius-media); }
+    .pin:focus-visible { outline: none; }
+    .pin:focus-visible .pin-media { outline: 2px solid var(--text); outline-offset: 2px; }
+    .pin-media { display: block; position: relative; border-radius: var(--radius-media); overflow: hidden; background: var(--surface); }
+    .pin-media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease, opacity 0.2s ease; }
+    .pin:hover .pin-media img { transform: scale(1.025); }
+    .pin-text { display: block; padding: 10px 2px 0; }
+    .pin-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-weight: 500; }
+    .pin-meta { display: block; font-size: var(--fs-small); line-height: 18px; color: var(--faint); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pin-swatches { display: flex; gap: 2px; height: 6px; margin-top: 8px; border-radius: 3px; overflow: hidden; }
+    .pin-swatches i { flex: 1; }
+
+    .skeleton { border-radius: var(--radius-media); background: var(--surface); }
+
+    .wall-foot { display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 32px; }
+    .wall-foot p { font-size: var(--fs-small); color: var(--faint); }
+
+    .empty {
+      display: none;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 40px 32px;
+      text-align: left;
+    }
+    .empty h2 { font-size: var(--fs-section); font-weight: 600; margin-bottom: 6px; }
+    .empty p { color: var(--muted); max-width: 520px; }
+    .empty-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+
+    /* ---------- Dialogs ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--scrim);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; animation: overlayIn 0.18s ease; }
+    .modal-overlay.active > .sheet, .modal-overlay.active > .viewer { animation: sheetIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    @keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes sheetIn { from { opacity: 0; transform: translateY(12px) scale(0.99); } to { opacity: 1; transform: none; } }
+
+    .sheet {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+    .sheet-sm { max-width: 520px; }
+    .sheet-md { max-width: 820px; }
+    .sheet-lg { max-width: 1080px; }
+    .sheet-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px 20px 0 24px; }
+    .sheet-head h2 { font-size: 18px; line-height: 26px; font-weight: 600; }
+    .sheet-head p { color: var(--muted); margin-top: 2px; }
+    .sheet-body { padding: 20px 24px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+    .sheet-foot { display: flex; justify-content: flex-end; gap: 8px; padding-top: 8px; }
+    .close-btn { margin: -4px -4px 0 0; }
+
+    /* Pin viewer */
+    .viewer {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 1120px;
+      height: min(860px, calc(100vh - 48px));
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(360px, 1fr);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+    .viewer-media { background: #000; display: flex; align-items: center; justify-content: center; min-height: 0; position: relative; }
+    .viewer-media img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    .viewer-nav { position: absolute; bottom: 16px; left: 16px; display: flex; gap: 8px; }
+    .viewer-nav button { width: 40px; height: 40px; border-radius: 50%; background: rgba(17, 17, 17, 0.88); color: #fff; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.15s ease; }
+    .viewer-nav button:hover { background: #2a2a2a; }
+    .viewer-nav button[disabled] { opacity: 0.35; cursor: default; }
+    .viewer-pos { position: absolute; bottom: 26px; right: 18px; font-size: var(--fs-small); color: #b4b4b4; }
+    .viewer-details { padding: 22px 24px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 22px; }
+    .viewer-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .viewer-head h2 { font-size: 18px; line-height: 26px; font-weight: 600; }
+    .viewer-meta { color: var(--muted); margin-top: 4px; }
+    .section-title { font-size: var(--fs-small); font-weight: 500; color: var(--muted); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+
+    .facts { background: var(--raised); border-radius: var(--radius-inner); padding: 4px 14px; }
+    .facts div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 7px 0; }
+    .facts div + div { box-shadow: 0 -1px 0 var(--rule); }
+    .facts dt { color: var(--muted); }
+    .facts dd { text-align: right; overflow-wrap: anywhere; }
+    .facts .mono { font-family: var(--mono); font-size: var(--fs-small); }
+
+    .palette-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .palette-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 32px;
+      padding: 0 12px 0 6px;
+      border-radius: var(--radius-control);
+      background: var(--raised);
+      font-family: var(--mono);
+      font-size: var(--fs-small);
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .palette-item:hover { background: var(--hover); box-shadow: inset 0 0 0 1px var(--control); }
+    .palette-color-dot { width: 20px; height: 20px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.35); }
+
+    .caption-box { background: var(--raised); border-radius: var(--radius-inner); padding: 12px 14px; line-height: 21px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 168px; overflow-y: auto; }
+    .viewer-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+
+    /* Prompt studio */
+    .studio-head { display: flex; align-items: center; gap: 14px; padding: 18px 20px 18px 24px; box-shadow: 0 1px 0 var(--rule); }
+    .studio-pin-thumb { width: 40px; height: 50px; border-radius: 8px; object-fit: cover; background: #000; flex: none; }
+    .studio-head-text { flex: 1; min-width: 0; }
+    .studio-head-text h2 { font-size: var(--fs-section); line-height: 24px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .studio-meta { font-size: var(--fs-small); color: var(--muted); }
+    .studio-meta span + span::before { content: " · "; color: var(--faint); }
+    .studio-actions { display: flex; gap: 8px; align-items: center; flex: none; }
+    .studio-loader { display: flex; flex-direction: column; gap: 6px; padding: 72px 24px; align-items: center; text-align: center; }
+    .studio-loader p { color: var(--muted); }
+    .spinner { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--track); border-top-color: var(--text); animation: spin 0.8s linear infinite; margin-bottom: 10px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .studio-content { padding: 20px 24px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+
+    .dna { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--raised); border-radius: 14px; }
+    .dna-col { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .dna-col + .dna-col { box-shadow: -1px 0 0 var(--rule); }
+    .dna-col h3 { font-size: var(--fs-body); font-weight: 600; }
+    .dna-field { display: flex; flex-direction: column; gap: 2px; }
+    .dna-label { font-size: var(--fs-small); line-height: 18px; color: var(--muted); }
+    .dna-value { font-size: 13px; line-height: 19px; color: var(--text); }
+    .dna-value-highlight { font-size: 13px; line-height: 19px; color: var(--text); font-weight: 500; }
+    .font-badges-container, .dna-tags-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+    .font-pill, .dna-tag-pill { display: inline-flex; align-items: center; min-height: 22px; padding: 1px 8px; border-radius: 6px; background: var(--surface); font-size: var(--fs-small); line-height: 18px; }
+    .dna-tag-pill { color: var(--muted); }
+    .dna .palette-item { height: 28px; background: var(--surface); }
+    .dna .palette-color-dot { width: 16px; height: 16px; }
+
+    .studio-tab-bar { display: flex; gap: 22px; box-shadow: inset 0 -1px 0 var(--rule); margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; }
+    .studio-tab { height: 40px; color: var(--muted); font-weight: 500; white-space: nowrap; position: relative; transition: color 0.15s ease; }
+    .studio-tab:hover { color: var(--text); }
+    .studio-tab.active { color: var(--text); }
+    .studio-tab.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--text); border-radius: 2px; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: flex; flex-direction: column; gap: 14px; }
+
+    .code-box-wrapper { background: var(--code-bg); border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--rule); }
+    .code-box-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; box-shadow: inset 0 -1px 0 var(--rule); }
+    .code-box-header > span { font-size: var(--fs-small); font-weight: 500; color: var(--muted); }
+    .prompt-code-block { padding: 14px 16px; font-family: var(--mono); font-size: 12.5px; line-height: 20px; color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 340px; overflow-y: auto; }
+
+    .variable-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+
+    /* Template library */
+    .tpl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; align-items: center; padding: 14px 0; }
+    .tpl + .tpl { box-shadow: 0 -1px 0 var(--rule); }
+    .tpl h3 { font-size: var(--fs-body); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tpl-meta { font-size: var(--fs-small); line-height: 18px; color: var(--muted); }
+    .tpl-actions { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
+    .tpl-empty { background: var(--raised); border-radius: var(--radius-inner); padding: 20px; color: var(--muted); }
+    .tpl-empty strong { color: var(--text); font-weight: 500; }
+
+    .status-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--raised); border-radius: var(--radius-inner); padding: 12px 14px; }
+    .check { display: flex; align-items: center; gap: 10px; color: var(--muted); cursor: pointer; }
+    .check input { width: 16px; height: 16px; accent-color: var(--text); cursor: pointer; }
+    .cli-box { background: var(--code-bg); box-shadow: inset 0 0 0 1px var(--rule); border-radius: var(--radius-inner); padding: 12px 14px; font-family: var(--mono); font-size: 13px; line-height: 20px; overflow-wrap: anywhere; }
+    code { font-family: var(--mono); font-size: 0.92em; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      z-index: 2000;
+      transform: translate(-50%, 8px);
+      opacity: 0;
+      pointer-events: none;
+      background: var(--primary-bg);
+      color: var(--primary-ink);
+      padding: 10px 18px;
+      border-radius: var(--radius-control);
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* ---------- Tablet: folders fold into a chip row above the wall ---------- */
+    @media (max-width: 1040px) {
+      .topnav { display: none; }
+      .menu-btn { display: inline-flex; }
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .folders { position: static; max-height: none; overflow: visible; padding: 0; }
+      .folders-head { display: none; }
+      .folder-list, .chips { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 6px; margin: 0 -24px 8px; padding: 0 24px; }
+      .chips { margin-bottom: 18px; }
+      .chips::after, .folder-list::after { content: ""; flex: 0 0 8px; }
+      .folder-list::-webkit-scrollbar { display: none; }
+      .folder { width: auto; height: 32px; padding: 0 14px; display: inline-flex; gap: 8px; border-radius: var(--radius-control); background: var(--surface); white-space: nowrap; }
+      .folder.is-active { background: var(--primary-bg); color: var(--primary-ink); }
+      .folder.is-active .folder-count { color: var(--primary-ink); opacity: 0.7; }
+      .folder-bar { display: none; }
+      .dna { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .dna-col:nth-child(3) { box-shadow: 0 -1px 0 var(--rule); }
+      .dna-col:nth-child(4) { box-shadow: -1px 0 0 var(--rule), 0 -1px 0 var(--rule); }
+      .variable-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .viewer { grid-template-columns: 1fr; grid-template-rows: auto auto; height: auto; max-height: calc(100vh - 32px); overflow-y: auto; }
+      .viewer-media { height: 56vh; }
+      .viewer-details { overflow: visible; }
+      .modal-overlay { padding: 16px; }
+    }
+
+    /* ---------- Phone ---------- */
+    @media (max-width: 640px) {
+      .column { padding: 0 16px; }
+      .folder-list, .chips { margin-left: -16px; margin-right: -16px; padding: 0 16px; }
+      .topbar-inner { gap: 12px; flex-wrap: wrap; height: auto; padding: 6px 0 8px; }
+      .brand { height: 36px; }
+      .topbar-actions { margin-left: auto; }
+      .search { order: 3; max-width: none; flex-basis: 100%; margin-left: 0; }
+      .search-kbd { display: none; }
+      .theme-btn { display: none; }
+      .canvas { padding-top: 16px; }
+      .title-row { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 14px; }
+      .title-tools { justify-content: space-between; }
+      .stamp { margin-right: auto; }
+      .job { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 14px; }
+      .job-progress { grid-column: 1 / -1; grid-row: 2; }
+      .modal-overlay { padding: 0; align-items: flex-end; }
+      .sheet, .viewer { border-radius: 20px 20px 0 0; max-height: 94vh; }
+      .viewer-media { height: 48vh; }
+      .studio-head { flex-wrap: wrap; padding: 16px; }
+      .studio-actions { width: 100%; }
+      .studio-actions .btn { flex: 1; }
+      .studio-content, .sheet-body { padding-left: 16px; padding-right: 16px; }
+      .sheet-head { padding-left: 16px; padding-right: 12px; }
+      .dna { grid-template-columns: 1fr; }
+      .dna-col + .dna-col, .dna-col:nth-child(4) { box-shadow: 0 -1px 0 var(--rule); }
+      .variable-grid { grid-template-columns: 1fr; }
+      .tpl { grid-template-columns: 1fr; }
+      .tpl-actions { justify-content: flex-start; margin-left: -8px; }
+      .facts div { grid-template-columns: 84px minmax(0, 1fr); }
+      .pin-meta { white-space: normal; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20v-4h-4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  </svg>
+
+  <!-- Top bar: product, its destinations, search, the one primary action -->
+  <header class="topbar" id="topbar">
+    <div class="column topbar-inner">
+      <a href="#" class="brand" onclick="resetFilters(); return false;" aria-label="Reference Gallery, show all references">
+        <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <rect width="24" height="24" rx="6" fill="var(--accent)"/>
+          <path d="M12 4.8a4.6 4.6 0 0 0-4.6 4.6c0 3.4 4.6 9.2 4.6 9.2s4.6-5.8 4.6-9.2A4.6 4.6 0 0 0 12 4.8zm0 6.4a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4z" fill="#fff"/>
+        </svg>
+        <span>Reference Gallery</span>
+      </a>
+
+      <nav class="topnav" aria-label="Main">
+        <a href="#" class="topnav-link" aria-current="page" onclick="resetFilters(); return false;">Gallery <span class="topnav-count num" id="pinCountBadge">—</span></a>
+        <button type="button" class="topnav-link" onclick="openTemplatesModal()">Prompt library <span class="topnav-count num" id="templatesCountBadge">0</span></button>
+        <button type="button" class="topnav-link" id="aiSetupBtn" onclick="openAiSettingsModal()">AI vision <span class="topnav-count">checking</span></button>
+      </nav>
+
+      <div class="search" id="searchBox">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <label for="searchInput" class="visually-hidden">Search references</label>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search, or press Enter to collect" autocomplete="off" />
+        <span class="search-kbd" aria-hidden="true">/</span>
+        <button id="searchClear" class="search-clear" onclick="clearSearch()" aria-label="Clear search"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn-icon theme-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Switch to light theme" title="Switch theme">
+          <svg class="icon"><use href="#i-sun"/></svg>
+        </button>
+        <button class="btn btn-outline" id="downloadNavBtn" onclick="openDownloadModal()" title="Download pins by URL, ID, or Board">
+          <svg class="icon"><use href="#i-download"/></svg>Download
+        </button>
+        <button class="btn btn-primary" onclick="openCollectModal()" title="Search Pinterest and save new references">
+          <svg class="icon"><use href="#i-plus"/></svg>Collect
+        </button>
+        <button class="btn-icon menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="menuSheet">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="menu-sheet" id="menuSheet">
+      <button type="button" onclick="toggleMenu(false); openDownloadModal()">Download pins (URL/ID/Board)</button>
+      <button type="button" onclick="toggleMenu(false); exportCurrentGalleryZip()">Export references (ZIP)</button>
+      <button type="button" onclick="toggleMenu(false); openTemplatesModal()">Prompt library <span class="menu-meta num" id="menuTemplatesCount">0</span></button>
+      <button type="button" onclick="toggleMenu(false); openAiSettingsModal()">AI vision <span class="menu-meta" id="menuAiStatus">checking</span></button>
+      <button type="button" onclick="toggleMenu(false); toggleTheme()">Theme <span class="menu-meta" id="menuThemeLabel">Dark</span></button>
+    </div>
+  </header>
+
+  <main class="column canvas">
+    <div class="title-row">
+      <div>
+        <h1 id="pageTitle">All references</h1>
+        <p class="title-sub" id="pageSub">Loading the library…</p>
+      </div>
+      <div class="title-tools">
+        <span class="stamp" id="statLastUpdate"></span>
+        <label for="sortFilter" class="visually-hidden">Sort references</label>
+        <select id="sortFilter" class="select-pill" onchange="handleFilterChange()">
+          <option value="latest">Newest saved</option>
+          <option value="oldest">Oldest saved</option>
+          <option value="created_at_desc">Newest on Pinterest</option>
+          <option value="created_at_asc">Oldest on Pinterest</option>
+          <option value="title_asc">Title A–Z</option>
+          <option value="title_desc">Title Z–A</option>
+        </select>
+        <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;" onclick="exportCurrentGalleryZip()" title="Export visible pins as ZIP">
+          <svg class="icon" style="width: 14px; height: 14px;"><use href="#i-download"/></svg>Export ZIP
+        </button>
+        <button class="btn-icon" onclick="refreshAll()" aria-label="Reload references" title="Reload references">
+          <svg class="icon" id="refreshIcon" style="transition: transform 0.4s ease;"><use href="#i-refresh"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live collect job -->
+    <section id="collectorBanner" class="job" aria-live="polite" aria-label="Collect job">
+      <div style="min-width: 0;">
+        <div class="job-title"><span id="collectorStatusTitle">Collecting</span><span id="collectorStatePill" class="pill pill-neutral">Running</span></div>
+        <div class="job-line" id="collectorStatusSubtitle">Starting the browser session…</div>
+      </div>
+      <div class="job-progress">
+        <div class="job-progress-label"><span>Saved</span><span class="num"><b id="collectorPinCounter">0</b> of <span id="collectorLimit">—</span></span></div>
+        <div class="job-track"><div class="job-fill" id="collectorFill"></div></div>
+      </div>
+      <div class="job-actions">
+        <button id="collectorCancelBtn" class="btn btn-outline" onclick="cancelCollection()">Cancel</button>
+        <button id="collectorDismissBtn" class="btn btn-outline" onclick="updateCollectorBanner(null)" style="display: none;">Dismiss</button>
+      </div>
+    </section>
+
+    <div class="layout">
+      <nav class="folders" aria-label="Industry folders">
+        <div class="folders-head"><h2>Industry folders</h2><span class="num" id="statTotalIndustries">—</span></div>
+        <ul class="folder-list" id="industryFilter"></ul>
+      </nav>
+
+      <section aria-label="References">
+        <div class="chips" id="formatFilter" role="group" aria-label="Format"></div>
+
+        <div id="galleryContainer" class="wall"></div>
+
+        <div id="emptyState" class="empty">
+          <h2 id="emptyStateTitle">No references here</h2>
+          <p id="emptyStateDesc">Nothing matches these filters.</p>
+          <div class="empty-actions">
+            <button id="emptyStateCollectBtn" class="btn btn-primary" onclick="triggerCollectFromSearch()">Collect from Pinterest</button>
+            <button class="btn btn-outline" onclick="resetFilters()">Clear filters</button>
+          </div>
+        </div>
+
+        <div class="wall-foot">
+          <button id="loadMoreBtn" class="btn btn-outline" onclick="loadMore()" style="display: none;">Load more</button>
+          <p id="loadingIndicator" style="display: none;">Loading references…</p>
+          <p id="progressText" class="num"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Collect dialog -->
+  <div id="collectModal" class="modal-overlay" onclick="handleCollectBackdropClick(event)">
+    <div class="sheet sheet-sm" role="dialog" aria-modal="true" aria-labelledby="collectTitle">
+      <div class="sheet-head">
+        <div>
+          <h2 id="collectTitle">Collect references</h2>
+          <p>Searches Pinterest with your saved session, downloads the images, writes captions and files each pin into its industry folder.</p>
+        </div>
+        <button class="btn-icon close-btn" onclick="closeCollectModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="sheet-body">
+        <div>
+          <label class="label" for="collectQueryInput">Search phrase</label>
+          <input type="text" id="collectQueryInput" class="field" placeholder="coffee shop poster design" />
+        </div>
+        <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px;">
+          <div>
+            <label class="label" for="collectLimitInput">Pins</label>
+            <input type="number" id="collectLimitInput" class="field num" value="30" min="5" max="120" />
+          </div>
+          <div>
+            <label class="label" for="collectIndustryInput">Folder</label>
+            <select id="collectIndustryInput" class="field">
+              <option value="all">Sort automatically</option>
+            </select>
+          </div>
+        </div>
+        <p class="help">Between 5 and 120 pins per run keeps the scraping polite.</p>
+        <div class="sheet-foot">
+          <button class="btn btn-outline" onclick="closeCollectModal()">Cancel</button>
+          <button id="startCollectBtn" class="btn btn-primary" onclick="submitCollection()">Start collecting</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download dialog -->
+  <div id="downloadModal" class="modal-overlay" onclick="handleDownloadBackdropClick(event)">
+    <div class="sheet sheet-sm" role="dialog" aria-modal="true" aria-labelledby="downloadTitle">
+      <div class="sheet-head">
+        <div>
+          <h2 id="downloadTitle">Download Pinterest pins</h2>
+          <p>Download pins by Pin URL, pin.it short link, Pin ID, or Board link with your saved session.</p>
+        </div>
+        <button class="btn-icon close-btn" onclick="closeDownloadModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="sheet-body">
+        <div>
+          <label class="label" for="downloadInput">Pin URLs, IDs, or Board links</label>
+          <textarea id="downloadInput" class="field" rows="3" style="resize: vertical; font-family: inherit; font-size: 13px;" placeholder="https://www.pinterest.com/pin/123456789/&#10;https://pin.it/abc123&#10;987654321&#10;https://www.pinterest.com/user/board/"></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <label class="label" for="downloadDestination">Save destination</label>
+            <select id="downloadDestination" class="field" onchange="handleDownloadDestinationChange()">
+              <option value="dataset">Reference Dataset</option>
+              <option value="folder">Local Downloads Folder</option>
+              <option value="both">Both Dataset &amp; Folder</option>
+            </select>
+          </div>
+          <div id="downloadIndustryWrapper">
+            <label class="label" for="downloadIndustryInput">Folder / Industry</label>
+            <select id="downloadIndustryInput" class="field">
+              <option value="all">Sort automatically</option>
+            </select>
+          </div>
+        </div>
+        <div id="downloadFolderRow" style="display: none; margin-top: 12px;">
+          <label class="label" for="downloadOutputDir">Output directory</label>
+          <input type="text" id="downloadOutputDir" class="field" value="downloads" placeholder="downloads" />
+        </div>
+        <p class="help">Supports single or multiple pin URLs, pin.it links, pin IDs, and full boards.</p>
+        <div class="sheet-foot">
+          <button class="btn btn-outline" onclick="closeDownloadModal()">Cancel</button>
+          <button id="startDownloadBtn" class="btn btn-primary" onclick="submitDownload()">Start download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Run-it-yourself dialog, for the static (hosted) copy without the local server -->
+  <div id="cliModal" class="modal-overlay" onclick="handleCliBackdropClick(event)">
+    <div class="sheet sheet-sm" role="dialog" aria-modal="true" aria-labelledby="cliTitle">
+      <div class="sheet-head">
+        <div>
+          <h2 id="cliTitle">Run the collector on your computer</h2>
+          <p>This copy of the gallery has no local server, so collecting runs from your project terminal.</p>
+        </div>
+        <button class="btn-icon close-btn" onclick="closeCliModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="sheet-body">
+        <div class="cli-box" id="cliCommandBox"></div>
+        <p class="help">Start <code>ui.bat</code> to collect straight from the gallery next time.</p>
+        <div class="sheet-foot">
+          <button class="btn btn-primary" onclick="copyCliCommand()"><svg class="icon"><use href="#i-copy"/></svg>Copy command</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pin viewer -->
+  <div id="pinModal" class="modal-overlay" onclick="handleModalBackdropClick(event)">
+    <div class="viewer" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="viewer-media">
+        <img id="modalImage" src="" alt="" />
+        <div class="viewer-nav">
+          <button id="viewerPrev" onclick="prevPin(event)" aria-label="Previous reference"><svg class="icon"><use href="#i-left"/></svg></button>
+          <button id="viewerNext" onclick="nextPin(event)" aria-label="Next reference"><svg class="icon"><use href="#i-right"/></svg></button>
+        </div>
+        <span class="viewer-pos num" id="viewerPos"></span>
+      </div>
+
+      <div class="viewer-details">
+        <div class="viewer-head">
+          <div style="min-width: 0;">
+            <h2 id="modalTitle"></h2>
+            <p class="viewer-meta"><span id="modalIndustryBadge"></span> · <span id="modalFormatBadge"></span></p>
+          </div>
+          <button class="btn-icon close-btn" onclick="closeModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+        </div>
+
+        <dl class="facts">
+          <div><dt>Found by</dt><dd id="modalQuery"></dd></div>
+          <div><dt>Saved size</dt><dd class="num" id="modalDimensionsBadge"></dd></div>
+          <div><dt>Collected</dt><dd class="num" id="modalCollected"></dd></div>
+          <div><dt>File</dt><dd class="mono" id="modalPath"></dd></div>
+        </dl>
+
+        <div>
+          <div class="section-title">Palette <span style="color: var(--faint); font-weight: 400;">Click a colour to copy it</span></div>
+          <div id="modalPaletteList" class="palette-list"></div>
+        </div>
+
+        <div>
+          <div class="section-title">
+            Training caption
+            <button class="btn-text" onclick="copyCaption()"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+          </div>
+          <div id="modalCaptionBox" class="caption-box"></div>
+        </div>
+
+        <div class="viewer-actions">
+          <button id="modalAnalyzeBtn" class="btn btn-primary" onclick="openPromptStudioForCurrentPin()">Turn into prompts</button>
+          <a id="modalPinterestLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Pinterest<svg class="icon" style="width: 14px; height: 14px;"><use href="#i-external"/></svg></a>
+          <a id="modalDownloadBtn" href="#" download class="btn btn-outline"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-download"/></svg>Image</a>
+          <button id="modalDownloadZipBtn" class="btn btn-outline" onclick="downloadCurrentPinPackage()" title="Download image, caption, metadata and AI prompt spec as ZIP">
+            <svg class="icon" style="width: 14px; height: 14px;"><use href="#i-download"/></svg>Package (ZIP)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prompt studio -->
+  <div id="promptStudioModal" class="modal-overlay" onclick="handlePromptStudioBackdropClick(event)">
+    <div class="sheet sheet-lg" role="dialog" aria-modal="true" aria-labelledby="studioTitle">
+      <div class="studio-head">
+        <img id="studioPinThumb" src="" alt="" class="studio-pin-thumb" />
+        <div class="studio-head-text">
+          <h2 id="studioTitle">Design breakdown</h2>
+          <div class="studio-meta"><span id="studioIndustryBadge"></span><span id="studioAspectBadge" class="num"></span><span id="studioEngineBadge"></span></div>
+        </div>
+        <div class="studio-actions">
+          <button id="studioReanalyzeBtn" class="btn btn-outline" onclick="reanalyzeCurrentPin(true)" title="Run Gemini vision on the image">Re-analyze with Gemini</button>
+          <button id="studioSaveBtn" class="btn btn-primary" onclick="saveCurrentTemplate()">Save to library</button>
+        </div>
+        <button class="btn-icon" onclick="closePromptStudio()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div id="studioLoadingIndicator" class="studio-loader" style="display: none;">
+        <div class="spinner"></div>
+        <strong style="font-weight: 500;">Reading the layout, type and colour</strong>
+        <p>Then writing the Nano Banana 2.1 prompts.</p>
+      </div>
+
+      <div id="studioContent" class="studio-content">
+        <div class="dna">
+          <div class="dna-col">
+            <h3>Layout</h3>
+            <div class="dna-field"><span class="dna-label">Structure</span><span id="dnaLayoutType" class="dna-value-highlight">—</span></div>
+            <div class="dna-field"><span class="dna-label">Reading order</span><span id="dnaHierarchy" class="dna-value">—</span></div>
+            <div class="dna-field"><span class="dna-label">Spacing</span><span id="dnaSpacing" class="dna-value">—</span></div>
+          </div>
+          <div class="dna-col">
+            <h3>Typography</h3>
+            <div class="dna-field"><span class="dna-label">Headline style</span><span id="dnaHeadlineStyle" class="dna-value-highlight">—</span></div>
+            <div class="dna-field"><span class="dna-label">Fonts to try</span><div id="dnaFontBadges" class="font-badges-container"></div></div>
+            <div class="dna-field"><span class="dna-label">Treatment</span><span id="dnaTypoTreatment" class="dna-value">—</span></div>
+          </div>
+          <div class="dna-col">
+            <h3>Colour</h3>
+            <div id="dnaPaletteList" class="palette-list"></div>
+            <div class="dna-field"><span class="dna-label">Mood</span><span id="dnaColorMood" class="dna-value">—</span></div>
+            <div class="dna-field"><span class="dna-label">Canvas</span><span id="dnaCanvasMode" class="dna-value">—</span></div>
+          </div>
+          <div class="dna-col">
+            <h3>Style</h3>
+            <div class="dna-field"><span class="dna-label">Movement</span><span id="dnaMovement" class="dna-value-highlight">—</span></div>
+            <div class="dna-field"><span class="dna-label">Key elements</span><div id="dnaElementsList" class="dna-tags-container"></div></div>
+            <div class="dna-field"><span class="dna-label">Lighting</span><span id="dnaLighting" class="dna-value">—</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="studio-tab-bar" role="tablist">
+            <button id="tabBtnNanoBanana" class="studio-tab active" role="tab" onclick="switchPromptTab('nanoBanana')">Nano Banana 2.1</button>
+            <button id="tabBtnCreative" class="studio-tab" role="tab" onclick="switchPromptTab('creative')">Ad creative</button>
+            <button id="tabBtnFigma" class="studio-tab" role="tab" onclick="switchPromptTab('figma')">Figma and CSS tokens</button>
+            <button id="tabBtnMarkdown" class="studio-tab" role="tab" onclick="switchPromptTab('markdown')">Full spec</button>
+          </div>
+
+          <div id="tabPaneNanoBanana" class="tab-pane active">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span>Generation prompt, 4K</span>
+                <button class="btn-text" onclick="copyPrompt('nano_banana')"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+              </div>
+              <pre id="codeBoxNanoBanana" class="prompt-code-block"></pre>
+            </div>
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span>Style-reference edit prompt</span>
+                <button class="btn-text" onclick="copyPrompt('nano_banana_edit')"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+              </div>
+              <pre id="codeBoxNanoBananaEdit" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <div id="tabPaneCreative" class="tab-pane">
+            <div class="variable-grid">
+              <div><label class="label" for="varBrand">Brand</label><input id="varBrand" type="text" class="field" placeholder="Your brand" oninput="updateCreativeTemplate()" /></div>
+              <div><label class="label" for="varProduct">Product or hero subject</label><input id="varProduct" type="text" class="field" placeholder="Vitamin C serum" oninput="updateCreativeTemplate()" /></div>
+              <div><label class="label" for="varHeadline">Headline</label><input id="varHeadline" type="text" class="field" placeholder="Don't settle for average" oninput="updateCreativeTemplate()" /></div>
+              <div><label class="label" for="varCta">Button</label><input id="varCta" type="text" class="field" placeholder="Shop now" oninput="updateCreativeTemplate()" /></div>
+            </div>
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span>Creative brief and prompt, updates as you type</span>
+                <button class="btn-text" onclick="copyPrompt('creative')"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+              </div>
+              <pre id="codeBoxCreative" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <div id="tabPaneFigma" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span>Canvas specs and CSS tokens</span>
+                <button class="btn-text" onclick="copyPrompt('figma')"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+              </div>
+              <pre id="codeBoxFigma" class="prompt-code-block"></pre>
+            </div>
+          </div>
+
+          <div id="tabPaneMarkdown" class="tab-pane">
+            <div class="code-box-wrapper">
+              <div class="code-box-header">
+                <span>Design spec, Markdown</span>
+                <div style="display: flex; gap: 2px;">
+                  <button class="btn-text" onclick="copyPrompt('markdown')"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-copy"/></svg>Copy</button>
+                  <button class="btn-text" onclick="downloadMarkdownSpec()"><svg class="icon" style="width: 14px; height: 14px;"><use href="#i-download"/></svg>Download .md</button>
+                </div>
+              </div>
+              <pre id="codeBoxMarkdown" class="prompt-code-block"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prompt library -->
+  <div id="templatesModal" class="modal-overlay" onclick="handleTemplatesBackdropClick(event)">
+    <div class="sheet sheet-md" role="dialog" aria-modal="true" aria-labelledby="templatesTitle">
+      <div class="sheet-head">
+        <div>
+          <h2 id="templatesTitle">Prompt library</h2>
+          <p>Prompt templates you saved from your references.</p>
+        </div>
+        <button class="btn-icon close-btn" onclick="closeTemplatesModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="sheet-body" style="padding-top: 8px;">
+        <div id="templatesListContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI vision settings -->
+  <div id="aiConfigModal" class="modal-overlay" onclick="handleAiConfigBackdropClick(event)">
+    <div class="sheet sheet-sm" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+      <div class="sheet-head">
+        <div>
+          <h2 id="aiTitle">AI vision</h2>
+          <p>Gemini looks at the image itself to read its copy, type and composition. Without a key, the built-in offline analyzer is used.</p>
+        </div>
+        <button class="btn-icon close-btn" onclick="closeAiConfigModal()" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="sheet-body">
+        <div class="status-row">
+          <span>Analyzer</span>
+          <span id="aiStatusBadge" class="pill pill-neutral">Checking</span>
+        </div>
+        <div>
+          <label class="label" for="aiApiKeyInput">Gemini API key</label>
+          <input id="aiApiKeyInput" type="password" class="field" placeholder="AIza…" autocomplete="off" />
+        </div>
+        <label class="check" for="aiSaveToEnvCheckbox">
+          <input id="aiSaveToEnvCheckbox" type="checkbox" checked />
+          Save the key to the project's <code>.env</code> file
+        </label>
+        <div class="sheet-foot">
+          <button class="btn btn-outline" onclick="closeAiConfigModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="submitAiConfig()">Save key</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const DEFAULT_LABELS = {
+      "fintech-finance": "FinTech & Finance",
+      "tech-saas": "Tech, SaaS & Apps",
+      "marketing-agency": "Marketing & Agencies",
+      "ecommerce-retail": "E-commerce & Retail",
+      "food-beverage": "Food & Beverage",
+      "beauty-cosmetics": "Beauty & Cosmetics",
+      "fashion-apparel": "Fashion & Apparel",
+      "jewelry-luxury": "Jewelry & Luxury",
+      "health-wellness": "Health & Wellness",
+      "healthcare-medical": "Healthcare & Medical",
+      "fitness-sports": "Fitness & Sports",
+      "real-estate": "Real Estate",
+      "home-interiors": "Home & Interiors",
+      "construction-trades": "Construction & Trades",
+      "automotive": "Automotive",
+      "travel-hospitality": "Travel & Hospitality",
+      "education": "Education & Courses",
+      "legal-professional": "Legal & Professional",
+      "events-entertainment": "Events & Entertainment",
+      "gaming-esports": "Gaming & Esports",
+      "nonprofit-cause": "Non-profit & Causes",
+      "pets": "Pets",
+      "uncategorized": "Uncategorized"
+    };
+
+    let state = {
+      mode: "detecting", // 'api' or 'static'
+      allPins: [],
+      pins: [],
+      stats: null,
+      page: 1,
+      limit: 40,
+      total: 0,
+      hasMore: false,
+      isLoading: false,
+      pendingReset: false,
+      currentModalIndex: -1,
+      activeQuery: "",
+      activeIndustry: "all",
+      activeFormat: "all",
+      activeSort: "latest",
+      searchDebounceTimer: null,
+      collectorPollTimer: null,
+      bannerHideTimer: null,
+      activeCollectorJob: null,
+      localApiEndpoint: "",
+      currentAnalysis: null,
+      savedTemplates: [],
+      geminiConfigured: false,
+      activePromptTab: "nanoBanana"
+    };
+
+    const galleryContainer = document.getElementById("galleryContainer");
+    const emptyState = document.getElementById("emptyState");
+    const emptyStateTitle = document.getElementById("emptyStateTitle");
+    const emptyStateDesc = document.getElementById("emptyStateDesc");
+    const emptyStateCollectBtn = document.getElementById("emptyStateCollectBtn");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const progressText = document.getElementById("progressText");
+    const searchInput = document.getElementById("searchInput");
+    const searchClear = document.getElementById("searchClear");
+    const industryFilter = document.getElementById("industryFilter");
+    const formatFilter = document.getElementById("formatFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const pinCountBadge = document.getElementById("pinCountBadge");
+    const toast = document.getElementById("toast");
+
+    // Collect job panel
+    const collectorBanner = document.getElementById("collectorBanner");
+    const collectorStatusTitle = document.getElementById("collectorStatusTitle");
+    const collectorStatusSubtitle = document.getElementById("collectorStatusSubtitle");
+    const collectorPinCounter = document.getElementById("collectorPinCounter");
+    const collectorCancelBtn = document.getElementById("collectorCancelBtn");
+
+    async function init() {
+      setupTheme();
+      setupKeyboardShortcuts();
+      setupChrome();
+      setupWall();
+      showSkeleton();
+      await detectModeAndFetch();
+      await fetchPins(true);
+      setupInfiniteScroll();
+      checkActiveCollectorStatus();
+      checkAiConfig();
+      fetchSavedTemplatesCount();
+    }
+
+    function getLabels() {
+      return Object.assign({}, DEFAULT_LABELS, (state.stats && state.stats.industry_labels) || {});
+    }
+
+    function formatNumber(n) {
+      return Number(n || 0).toLocaleString("en-US");
+    }
+
+    function safeColor(c) {
+      return /^#[0-9a-f]{3,8}$/i.test(String(c || "")) ? c : "";
+    }
+
+    function sortedIndustries() {
+      const by = (state.stats && state.stats.by_industry) || {};
+      return Object.entries(by).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+    }
+
+    function applyStats(stats) {
+      state.stats = stats;
+      const labels = getLabels();
+      const industries = sortedIndustries();
+
+      pinCountBadge.textContent = formatNumber(stats.total_pins);
+      document.getElementById("statTotalIndustries").textContent = industries.length;
+      document.getElementById("statLastUpdate").textContent = stats.updated_at
+        ? `Library updated ${formatTimeAgo(stats.updated_at)}`
+        : "";
+
+      if (state.activeIndustry !== "all" && !(stats.by_industry || {})[state.activeIndustry]) {
+        state.activeIndustry = "all";
+      }
+      renderFolders();
+      renderFormatChips();
+
+      // Every folder in config/categories.yaml can be a collect target, even an empty one
+      const collectIndSelect = document.getElementById("collectIndustryInput");
+      const currentTarget = collectIndSelect.value;
+      collectIndSelect.innerHTML = `<option value="all">Sort automatically</option>`;
+      const downloadIndSelect = document.getElementById("downloadIndustryInput");
+      const currentDlTarget = downloadIndSelect ? downloadIndSelect.value : "all";
+      if (downloadIndSelect) {
+        downloadIndSelect.innerHTML = `<option value="all">Sort automatically</option>`;
+      }
+
+      Object.keys(labels)
+        .filter(slug => slug !== "uncategorized")
+        .sort((a, b) => labels[a].localeCompare(labels[b]))
+        .forEach(slug => {
+          const opt = document.createElement("option");
+          opt.value = slug;
+          const n = (stats.by_industry || {})[slug] || 0;
+          opt.textContent = n ? `${labels[slug]} (${formatNumber(n)})` : labels[slug];
+          if (slug === currentTarget) opt.selected = true;
+          collectIndSelect.appendChild(opt);
+
+          if (downloadIndSelect) {
+            const dlOpt = opt.cloneNode(true);
+            if (slug === currentDlTarget) dlOpt.selected = true;
+            downloadIndSelect.appendChild(dlOpt);
+          }
+        });
+
+      updateHeading();
+    }
+
+    function renderFolders() {
+      const labels = getLabels();
+      const industries = sortedIndustries();
+      const max = industries.length ? industries[0][1] : 1;
+      const total = (state.stats && state.stats.total_pins) || 0;
+
+      const row = (slug, label, count, share) => `
+        <li>
+          <button type="button" class="folder${slug === "all" ? " folder-all" : ""}${state.activeIndustry === slug ? " is-active" : ""}"
+            data-slug="${escapeHtml(slug)}" aria-pressed="${state.activeIndustry === slug}" onclick="setIndustry(this.dataset.slug)">
+            <span class="folder-name">${escapeHtml(label)}</span>
+            <span class="folder-count num">${formatNumber(count)}</span>
+            <span class="folder-bar"><i style="width: max(2px, ${(share * 100).toFixed(2)}%)"></i></span>
+          </button>
+        </li>`;
+
+      industryFilter.innerHTML = row("all", "All industries", total, 0) +
+        industries.map(([slug, n]) => row(slug, labels[slug] || slug, n, n / max)).join("");
+    }
+
+    function renderFormatChips() {
+      const formats = Object.entries((state.stats && state.stats.by_format) || {})
+        .filter(([fmt, n]) => n > 0 && fmt !== "unknown")
+        .sort((a, b) => b[1] - a[1])
+        .map(([fmt]) => fmt);
+      if (state.activeFormat !== "all" && !formats.includes(state.activeFormat)) state.activeFormat = "all";
+
+      const chip = (fmt, label) =>
+        `<button type="button" class="chip${state.activeFormat === fmt ? " is-active" : ""}" aria-pressed="${state.activeFormat === fmt}"
+          data-format="${escapeHtml(fmt)}" onclick="setFormat(this.dataset.format)">${escapeHtml(label)}</button>`;
+
+      formatFilter.innerHTML = chip("all", "All formats") + formats.map(f => chip(f, f.replace(/-/g, " "))).join("");
+    }
+
+    function setIndustry(slug) {
+      if (slug === state.activeIndustry) return;
+      state.activeIndustry = slug;
+      renderFolders();
+      scrollToWallTop();
+      fetchPins(true);
+    }
+
+    function setFormat(fmt) {
+      if (fmt === state.activeFormat) return;
+      state.activeFormat = fmt;
+      renderFormatChips();
+      scrollToWallTop();
+      fetchPins(true);
+    }
+
+    function scrollToWallTop() {
+      if (window.scrollY > 200) window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // The title names the scope; the line under it states what the data says about it
+    function updateHeading() {
+      const labels = getLabels();
+      const stats = state.stats || {};
+      const totalPins = stats.total_pins || 0;
+      const ind = state.activeIndustry;
+      const fmt = state.activeFormat;
+      const q = state.activeQuery;
+      const title = document.getElementById("pageTitle");
+      const sub = document.getElementById("pageSub");
+
+      title.textContent = ind === "all" ? "All references" : (labels[ind] || ind);
+
+      if (q || fmt !== "all") {
+        const noun = [
+          fmt !== "all" ? escapeHtml(fmt.replace(/-/g, " ")) : "",
+          state.total === 1 ? "reference" : "references",
+          q ? `for “${escapeHtml(q)}”` : "",
+          ind !== "all" ? `in ${escapeHtml(labels[ind] || ind)}` : ""
+        ].filter(Boolean).join(" ");
+        sub.innerHTML = `<strong class="num">${formatNumber(state.total)}</strong> ${noun}.`;
+        return;
+      }
+
+      if (ind === "all") {
+        const industries = sortedIndustries();
+        if (!totalPins) {
+          sub.textContent = "No references yet. Collect a search phrase to start the library.";
+          return;
+        }
+        let line = `<strong class="num">${formatNumber(totalPins)}</strong> references in ${industries.length} industry folders.`;
+        if (industries.length >= 2) {
+          const [a, b] = industries;
+          const share = Math.round(((a[1] + b[1]) / totalPins) * 100);
+          line += ` ${escapeHtml(labels[a[0]] || a[0])} and ${escapeHtml(labels[b[0]] || b[0])} hold <span class="num">${formatNumber(a[1] + b[1])}</span> of them (${share}%).`;
+        }
+        sub.innerHTML = line;
+        return;
+      }
+
+      const n = (stats.by_industry || {})[ind] || 0;
+      const pct = totalPins ? ((n / totalPins) * 100).toFixed(1) : "0.0";
+      let line = `<strong class="num">${formatNumber(n)}</strong> ${n === 1 ? "reference" : "references"}, ${pct}% of the library.`;
+      if (n < 20 && ind !== "uncategorized") line += " Thin folder: collect a few more search phrases for it.";
+      if (ind === "uncategorized") line += " Run <code>python -m src.reclassify</code> to sort them.";
+      sub.innerHTML = line;
+    }
+
+    async function fetchPins(reset = false) {
+      if (state.isLoading) {
+        if (reset) state.pendingReset = true;
+        return;
+      }
+      state.isLoading = true;
+
+      const refreshIcon = document.getElementById("refreshIcon");
+      if (refreshIcon) refreshIcon.style.transform = "rotate(360deg)";
+
+      if (reset) {
+        state.page = 1;
+        state.pins = [];
+        emptyState.style.display = "none";
+        loadMoreBtn.style.display = "none";
+        setupWall();
+        showSkeleton();
+      } else {
+        loadingIndicator.style.display = "block";
+      }
+
+      try {
+        let result = null;
+
+        if (state.mode === "api") {
+          const params = new URLSearchParams({
+            page: state.page,
+            limit: state.limit,
+            sort: state.activeSort,
+          });
+          if (state.activeIndustry !== "all") params.append("industry", state.activeIndustry);
+          if (state.activeFormat !== "all") params.append("format", state.activeFormat);
+          if (state.activeQuery) params.append("q", state.activeQuery);
+
+          const res = await fetch(`/api/pins?${params.toString()}`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          result = await res.json();
+        } else {
+          result = filterPinsClientSide();
+        }
+
+        state.total = result.total;
+        state.hasMore = result.has_more;
+        const startIndex = reset ? 0 : state.pins.length;
+
+        if (reset) {
+          setupWall();
+          state.pins = result.pins;
+        } else {
+          state.pins = state.pins.concat(result.pins);
+        }
+
+        renderPins(result.pins, startIndex);
+
+        if (state.pins.length === 0) {
+          emptyState.style.display = "block";
+          emptyStateCollectBtn.onclick = triggerCollectFromSearch;
+          emptyStateCollectBtn.style.display = "inline-flex";
+          if (state.activeQuery) {
+            emptyStateTitle.textContent = `Nothing for “${state.activeQuery}” yet`;
+            emptyStateDesc.textContent = "Collect it from Pinterest and the new references land here, sorted into their folders.";
+            emptyStateCollectBtn.textContent = `Collect “${state.activeQuery}”`;
+          } else {
+            emptyStateTitle.textContent = "No references here";
+            emptyStateDesc.textContent = "Nothing in the library matches these filters. Clear them, or collect a new search phrase.";
+            emptyStateCollectBtn.textContent = "Collect from Pinterest";
+          }
+        } else {
+          emptyState.style.display = "none";
+        }
+
+        loadMoreBtn.style.display = state.hasMore ? "inline-flex" : "none";
+        progressText.textContent = state.total > 0
+          ? `${formatNumber(state.pins.length)} of ${formatNumber(state.total)} shown`
+          : "";
+        updateHeading();
+
+      } catch (err) {
+        console.error("Failed to load pins:", err);
+        if (reset) {
+          setupWall();
+          emptyState.style.display = "block";
+          emptyStateTitle.textContent = "Couldn't load references";
+          emptyStateDesc.textContent = "The gallery server didn't answer. Check that ui.bat is still running, then try again.";
+          emptyStateCollectBtn.textContent = "Try again";
+          emptyStateCollectBtn.onclick = () => fetchPins(true);
+        } else {
+          showToast("Couldn't load more references");
+        }
+      } finally {
+        state.isLoading = false;
+        loadingIndicator.style.display = "none";
+        if (refreshIcon) {
+          setTimeout(() => { refreshIcon.style.transform = "none"; }, 400);
+        }
+        if (state.pendingReset) {
+          state.pendingReset = false;
+          fetchPins(true);
+        }
+      }
+    }
+
+    // Shortest-column masonry: each card goes to the column that ends highest, so
+    // the reading order runs left to right and loading more never reshuffles the wall.
+    const wall = { cols: [], heights: [], count: 0 };
+
+    function wallColumnCount() {
+      const w = galleryContainer.clientWidth || window.innerWidth;
+      if (w >= 880) return 4;
+      if (w >= 540) return 3;
+      return 2;
+    }
+
+    function setupWall() {
+      wall.count = wallColumnCount();
+      wall.cols = [];
+      wall.heights = [];
+      galleryContainer.innerHTML = "";
+      for (let i = 0; i < wall.count; i++) {
+        const col = document.createElement("div");
+        col.className = "wall-col";
+        galleryContainer.appendChild(col);
+        wall.cols.push(col);
+        wall.heights.push(0);
+      }
+    }
+
+    function placeOnWall(el, estHeight) {
+      let target = 0;
+      for (let i = 1; i < wall.heights.length; i++) {
+        if (wall.heights[i] < wall.heights[target]) target = i;
+      }
+      wall.cols[target].appendChild(el);
+      wall.heights[target] += estHeight + 16;
+    }
+
+    function showSkeleton() {
+      const shapes = [1.25, 0.8, 1.5, 1, 1.25, 1.78, 0.9, 1.25];
+      shapes.forEach(r => {
+        const block = document.createElement("div");
+        block.className = "skeleton";
+        block.style.aspectRatio = `1 / ${r}`;
+        placeOnWall(block, 220 * r);
+      });
+    }
+
+    function renderPins(newPins, startIndex) {
+      const labels = getLabels();
+      const colWidth = (wall.cols[0] && wall.cols[0].clientWidth) || 220;
+
+      newPins.forEach((pin, offset) => {
+        const index = startIndex + offset;
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "pin";
+        card.onclick = () => openModal(index);
+
+        const industry = pin.industry || "uncategorized";
+        const format = pin.format && pin.format !== "unknown" ? pin.format.replace(/-/g, " ") : "";
+        const title = pin.title || pin.query || "Design reference";
+        const w = pin.saved_width || pin.width || 4;
+        const h = Math.min(pin.saved_height || pin.height || 5, w * 2.2); // very tall pins are cropped
+        const meta = state.activeIndustry === "all"
+          ? [labels[industry] || industry, format].filter(Boolean).join(" · ")
+          : [format, pin.query].filter(Boolean).join(" · ");
+
+        const localImgSrc = pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`;
+        const fallbackImgSrc = escapeHtml(pin.image_url || "");
+        const palette = (pin.palette || []).map(safeColor).filter(Boolean);
+
+        card.innerHTML = `
+          <span class="pin-media" style="aspect-ratio: ${w} / ${h}; background-color: ${safeColor(pin.dominant_color) || "var(--surface)"};">
+            <img src="${escapeHtml(localImgSrc)}" loading="lazy" alt="${escapeHtml(title)}"
+              onerror="if (this.src !== '${fallbackImgSrc}') { this.onerror=null; this.src='${fallbackImgSrc}'; }" />
+          </span>
+          <span class="pin-text">
+            <span class="pin-title">${escapeHtml(title)}</span>
+            <span class="pin-meta">${escapeHtml(meta)}</span>
+            ${palette.length ? `<span class="pin-swatches" aria-hidden="true">${palette.map(c => `<i style="background-color: ${c}"></i>`).join("")}</span>` : ""}
+          </span>
+        `;
+
+        placeOnWall(card, colWidth * (h / w) + 70);
+      });
+    }
+
+    // Pin viewer
+    function openModal(index) {
+      if (index < 0 || index >= state.pins.length) return;
+      state.currentModalIndex = index;
+      const pin = state.pins[index];
+      const labels = getLabels();
+
+      const modal = document.getElementById("pinModal");
+      const img = document.getElementById("modalImage");
+      const localImgSrc = pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`;
+      const title = pin.title || pin.query || "Reference pin";
+
+      img.onerror = () => { img.onerror = null; img.src = pin.image_url; };
+      img.src = localImgSrc;
+      img.alt = title;
+
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalIndustryBadge").textContent = labels[pin.industry] || pin.industry || "Uncategorized";
+      document.getElementById("modalFormatBadge").textContent = pin.format && pin.format !== "unknown" ? pin.format.replace(/-/g, " ") : "format not detected";
+      document.getElementById("modalQuery").textContent = pin.query ? `“${pin.query}”` : "Direct collection";
+      document.getElementById("modalDimensionsBadge").textContent =
+        `${formatNumber(pin.saved_width || pin.width)} × ${formatNumber(pin.saved_height || pin.height)} px`;
+      document.getElementById("modalCollected").textContent = pin.collected_at
+        ? `${pin.collected_at.slice(0, 10)}, ${formatTimeAgo(pin.collected_at)}`
+        : "—";
+      document.getElementById("modalPath").textContent = `pinterestrepo/${pin.image_path}`;
+      document.getElementById("modalCaptionBox").textContent = pin.caption || pin.alt_text || "No caption for this pin.";
+
+      const link = document.getElementById("modalPinterestLink");
+      link.href = pin.pin_url || `https://www.pinterest.com/pin/${pin.pin_id}/`;
+      const dlBtn = document.getElementById("modalDownloadBtn");
+      dlBtn.href = localImgSrc;
+      dlBtn.download = `${pin.pin_id}.jpg`;
+
+      document.getElementById("viewerPos").textContent = `${formatNumber(index + 1)} of ${formatNumber(state.total || state.pins.length)}`;
+      document.getElementById("viewerPrev").disabled = index === 0;
+      document.getElementById("viewerNext").disabled = index >= state.pins.length - 1 && !state.hasMore;
+
+      const paletteList = document.getElementById("modalPaletteList");
+      paletteList.innerHTML = "";
+      const palette = (pin.palette || []).map(safeColor).filter(Boolean);
+      if (!palette.length) {
+        paletteList.innerHTML = `<span style="color: var(--faint);">No palette extracted.</span>`;
+      }
+      palette.forEach(hex => {
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = "palette-item";
+        item.title = `Copy ${hex}`;
+        item.onclick = () => copyText(hex, `Copied ${hex}`);
+        item.innerHTML = `<span class="palette-color-dot" style="background-color: ${hex}"></span><span>${hex}</span>`;
+        paletteList.appendChild(item);
+      });
+
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function updateCollectorBanner(job) {
+      clearTimeout(state.bannerHideTimer);
+      if (!job || job.status === "cancelled") {
+        collectorBanner.classList.remove("visible", "is-done", "is-error");
+        return;
+      }
+
+      const limit = job.limit || parseInt(document.getElementById("collectLimitInput").value, 10) || 0;
+      const saved = job.saved_count || 0;
+      const pill = document.getElementById("collectorStatePill");
+      const dismissBtn = document.getElementById("collectorDismissBtn");
+
+      collectorBanner.style.display = "";
+      collectorBanner.classList.add("visible");
+      collectorBanner.classList.toggle("is-done", job.status === "done");
+      collectorBanner.classList.toggle("is-error", job.status === "error");
+      collectorPinCounter.textContent = formatNumber(saved);
+      document.getElementById("collectorLimit").textContent = limit ? formatNumber(limit) : "—";
+      document.getElementById("collectorFill").style.width = limit ? `${Math.min(100, (saved / limit) * 100)}%` : "0%";
+
+      if (job.status === "running") {
+        collectorStatusTitle.textContent = `Collecting “${job.query}”`;
+        collectorStatusSubtitle.textContent = job.last_line || "Working…";
+        pill.className = "pill pill-neutral";
+        pill.textContent = "Running";
+        collectorCancelBtn.style.display = "inline-flex";
+        dismissBtn.style.display = "none";
+      } else if (job.status === "done") {
+        collectorStatusTitle.textContent = `Collected “${job.query}”`;
+        collectorStatusSubtitle.textContent = `${formatNumber(saved)} new ${saved === 1 ? "reference" : "references"} saved to the dataset and added to the wall.`;
+        pill.className = "pill pill-positive";
+        pill.textContent = "Done";
+        collectorCancelBtn.style.display = "none";
+        dismissBtn.style.display = "inline-flex";
+        state.bannerHideTimer = setTimeout(() => updateCollectorBanner(null), 12000);
+      } else if (job.status === "error") {
+        collectorStatusTitle.textContent = `Couldn't collect “${job.query}”`;
+        collectorStatusSubtitle.textContent = job.error || "The collector stopped. If it says Not logged in, run python -m src.login.";
+        pill.className = "pill pill-negative";
+        pill.textContent = "Failed";
+        collectorCancelBtn.style.display = "none";
+        dismissBtn.style.display = "inline-flex";
+      }
+    }
+
+    function setupTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem("ref_gallery_theme"); } catch (e) {}
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(saved || (prefersDark ? "dark" : "light"));
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      try { localStorage.setItem("ref_gallery_theme", theme); } catch (e) {}
+      const btn = document.getElementById("themeToggleBtn");
+      if (btn) {
+        btn.innerHTML = `<svg class="icon"><use href="#i-${theme === "dark" ? "sun" : "moon"}"/></svg>`;
+        btn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      }
+      const label = document.getElementById("menuThemeLabel");
+      if (label) label.textContent = theme === "dark" ? "Dark" : "Light";
+    }
+
+    function setupChrome() {
+      const topbar = document.getElementById("topbar");
+      window.addEventListener("scroll", () => {
+        topbar.classList.toggle("scrolled", window.scrollY > 4);
+      }, { passive: true });
+
+      let resizeTimer = null;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (wallColumnCount() !== wall.count && state.pins.length) {
+            setupWall();
+            renderPins(state.pins, 0);
+          }
+        }, 150);
+      });
+
+      document.addEventListener("click", (e) => {
+        const sheet = document.getElementById("menuSheet");
+        if (sheet.classList.contains("open") && !sheet.contains(e.target) && !document.getElementById("menuBtn").contains(e.target)) {
+          toggleMenu(false);
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") toggleMenu(false);
+      });
+
+      // Keep the phone menu's count in step with the top bar's
+      const tplCount = document.getElementById("templatesCountBadge");
+      new MutationObserver(() => {
+        document.getElementById("menuTemplatesCount").textContent = tplCount.textContent;
+      }).observe(tplCount, { childList: true, characterData: true, subtree: true });
+    }
+
+    function toggleMenu(force) {
+      const sheet = document.getElementById("menuSheet");
+      const open = typeof force === "boolean" ? force : !sheet.classList.contains("open");
+      sheet.classList.toggle("open", open);
+      document.getElementById("menuBtn").setAttribute("aria-expanded", String(open));
+    }
+
+    async function refreshAll() {
+      await detectModeAndFetch();
+      fetchPins(true);
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      sortFilter.value = "latest";
+      state.activeQuery = "";
+      state.activeIndustry = "all";
+      state.activeFormat = "all";
+      state.activeSort = "latest";
+      renderFolders();
+      renderFormatChips();
+      fetchPins(true);
+    }
+
+    function handleFilterChange() {
+      state.activeSort = sortFilter.value;
+      fetchPins(true);
+    }
+
+    function updateAiBadge() {
+      const btn = document.getElementById("aiSetupBtn");
+      const badge = document.getElementById("aiStatusBadge");
+      const status = state.geminiConfigured ? "Gemini on" : "offline";
+      if (btn) btn.innerHTML = `AI vision <span class="topnav-count">${status}</span>`;
+      const menuStatus = document.getElementById("menuAiStatus");
+      if (menuStatus) menuStatus.textContent = status;
+      if (badge) {
+        badge.className = state.geminiConfigured ? "pill pill-positive" : "pill pill-warning";
+        badge.textContent = state.geminiConfigured ? "Gemini vision connected" : "Offline analyzer, no key";
+      }
+    }
+
+    function renderTemplatesList() {
+      const listEl = document.getElementById("templatesListContainer");
+      listEl.innerHTML = "";
+      const templates = state.savedTemplates || [];
+      const badge = document.getElementById("templatesCountBadge");
+      if (badge) badge.textContent = templates.length;
+
+      if (!templates.length) {
+        listEl.innerHTML = `
+          <div class="tpl-empty">
+            <strong>No saved prompts yet.</strong>
+            Open a reference, choose <strong>Turn into prompts</strong>, then <strong>Save to library</strong>.
+          </div>
+        `;
+        return;
+      }
+
+      templates.forEach(t => {
+        const row = document.createElement("div");
+        row.className = "tpl";
+        const indLabel = getLabels()[t.industry] || t.industry || "General";
+        const meta = [indLabel, t.aspect_ratio || "4:5", t.saved_at ? t.saved_at.slice(0, 10) : "", t.movement || ""]
+          .filter(Boolean).map(escapeHtml).join(" · ");
+        const id = escapeHtml(t.id);
+
+        row.innerHTML = `
+          <div style="min-width: 0;">
+            <h3>${escapeHtml(t.title || "Design template")}</h3>
+            <div class="tpl-meta">${meta}</div>
+          </div>
+          <div class="tpl-actions">
+            <button class="btn-text" onclick="copyTemplatePrompt('${id}', 'nano_banana')">Copy 4K prompt</button>
+            <button class="btn-text" onclick="copyTemplatePrompt('${id}', 'nano_banana_edit')">Copy edit prompt</button>
+            <button class="btn-text" onclick="copyTemplatePrompt('${id}', 'creative')">Copy ad creative</button>
+            <button class="btn-text danger" onclick="deleteTemplate('${id}')">Delete</button>
+          </div>
+        `;
+        listEl.appendChild(row);
+      });
+    }
+
+    async function detectModeAndFetch() {
+      // 1. Try relative /api/stats (when hosted locally via src.server)
+      try {
+        const res = await fetch("/api/stats");
+        if (res.ok) {
+          const stats = await res.json();
+          state.mode = "api";
+          state.localApiEndpoint = "";
+          applyStats(stats);
+          return;
+        }
+      } catch (err) {}
+
+      // 2. Try localhost fallback ports if on Vercel
+      for (const port of [8001, 8000]) {
+        try {
+          const testRes = await fetch(`http://127.0.0.1:${port}/api/collect/status`, { method: "GET" });
+          if (testRes.ok) {
+            state.localApiEndpoint = `http://127.0.0.1:${port}`;
+            break;
+          }
+        } catch (e) {}
+      }
+
+      state.mode = "static";
+      await loadStaticData();
+    }
+
+    async function loadStaticData() {
+      try {
+        try {
+          const sRes = await fetch("/index/stats.json");
+          if (sRes.ok) {
+            const stats = await sRes.json();
+            applyStats(stats);
+          }
+        } catch (e) {}
+
+        const pRes = await fetch("/index/pins.jsonl");
+        if (pRes.ok) {
+          const text = await pRes.text();
+          const lines = text.trim().split("\n");
+          const parsed = [];
+          for (const line of lines) {
+            if (line.trim()) {
+              try { parsed.push(JSON.parse(line)); } catch (e) {}
+            }
+          }
+          state.allPins = parsed;
+          if (!state.stats) {
+            synthesizeStats(parsed);
+          }
+        }
+      } catch (err) {
+        console.error("Static data load error:", err);
+      }
+    }
+
+    function synthesizeStats(all) {
+      const byInd = {};
+      const byFmt = {};
+      for (const p of all) {
+        const ind = p.industry || "uncategorized";
+        const fmt = p.format || "unknown";
+        byInd[ind] = (byInd[ind] || 0) + 1;
+        byFmt[fmt] = (byFmt[fmt] || 0) + 1;
+      }
+      applyStats({
+        total_pins: all.length,
+        by_industry: byInd,
+        by_format: byFmt,
+        industry_labels: DEFAULT_LABELS
+      });
+    }
+
+    function filterPinsClientSide() {
+      let filtered = state.allPins;
+
+      if (state.activeIndustry !== "all") {
+        filtered = filtered.filter(p => p.industry === state.activeIndustry);
+      }
+      if (state.activeFormat !== "all") {
+        filtered = filtered.filter(p => p.format === state.activeFormat);
+      }
+      if (state.activeQuery) {
+        const tokens = state.activeQuery.toLowerCase().split(/\s+/).filter(Boolean);
+        filtered = filtered.filter(p => {
+          const s = [
+            p.title || "",
+            p.caption || "",
+            p.description || "",
+            p.alt_text || "",
+            p.query || "",
+            p.pinner || "",
+            p.board || "",
+            p.industry || "",
+            p.format || "",
+            (p.style_tags || []).join(" ")
+          ].join(" ").toLowerCase();
+          return tokens.every(t => s.includes(t));
+        });
+      }
+
+      function getPinCreatedTimestamp(p) {
+        if (!p || !p.created_at) return 0;
+        const ts = Date.parse(p.created_at);
+        return isNaN(ts) ? 0 : ts;
+      }
+
+      function getPinCollectedTimestamp(p) {
+        if (!p || !p.collected_at) return 0;
+        const ts = Date.parse(p.collected_at);
+        return isNaN(ts) ? 0 : ts;
+      }
+
+      function getPinDisplayTitle(p) {
+        if (!p) return "";
+        const t = (p.title || p.query || p.alt_text || "").trim();
+        return t.toLowerCase();
+      }
+
+      if (state.activeSort === "latest") {
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(b) - getPinCollectedTimestamp(a));
+      } else if (state.activeSort === "oldest") {
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(a) - getPinCollectedTimestamp(b));
+      } else if (state.activeSort === "created_at_desc" || state.activeSort === "created_at") {
+        filtered = [...filtered].sort((a, b) => getPinCreatedTimestamp(b) - getPinCreatedTimestamp(a));
+      } else if (state.activeSort === "created_at_asc") {
+        filtered = [...filtered].sort((a, b) => getPinCreatedTimestamp(a) - getPinCreatedTimestamp(b));
+      } else if (state.activeSort === "title_asc" || state.activeSort === "title") {
+        filtered = [...filtered].sort((a, b) => getPinDisplayTitle(a).localeCompare(getPinDisplayTitle(b)));
+      } else if (state.activeSort === "title_desc") {
+        filtered = [...filtered].sort((a, b) => getPinDisplayTitle(b).localeCompare(getPinDisplayTitle(a)));
+      } else {
+        filtered = [...filtered].sort((a, b) => getPinCollectedTimestamp(b) - getPinCollectedTimestamp(a));
+      }
+
+      const total = filtered.length;
+      const start = (state.page - 1) * state.limit;
+      const end = start + state.limit;
+      const paged = filtered.slice(start, end);
+
+      return {
+        pins: paged,
+        total: total,
+        has_more: end < total
+      };
+    }
+
+    function loadMore() {
+      if (state.hasMore && !state.isLoading) {
+        state.page += 1;
+        fetchPins(false);
+      }
+    }
+
+    function setupInfiniteScroll() {
+      window.addEventListener("scroll", () => {
+        if (state.isLoading || !state.hasMore) return;
+        const scrollPos = window.innerHeight + window.scrollY;
+        const triggerPos = document.documentElement.scrollHeight - 600;
+        if (scrollPos >= triggerPos) {
+          loadMore();
+        }
+      });
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("pinModal");
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+      state.currentModalIndex = -1;
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target.id === "pinModal") closeModal();
+    }
+
+    function prevPin(e) {
+      if (e) e.stopPropagation();
+      if (state.currentModalIndex > 0) {
+        openModal(state.currentModalIndex - 1);
+      }
+    }
+
+    function nextPin(e) {
+      if (e) e.stopPropagation();
+      if (state.currentModalIndex < state.pins.length - 1) {
+        openModal(state.currentModalIndex + 1);
+      } else if (state.hasMore) {
+        loadMore();
+      }
+    }
+
+    function copyCaption() {
+      if (state.currentModalIndex >= 0) {
+        const pin = state.pins[state.currentModalIndex];
+        const text = pin.caption || pin.alt_text || "";
+        copyText(text, "Training caption copied to clipboard!");
+      }
+    }
+
+    function triggerCollectFromSearch() {
+      const q = state.activeQuery || searchInput.value.trim();
+      openCollectModal(q);
+    }
+
+    function openCollectModal(initialQuery = "") {
+      const modal = document.getElementById("collectModal");
+      const input = document.getElementById("collectQueryInput");
+      input.value = initialQuery || state.activeQuery || searchInput.value.trim();
+      modal.classList.add("active");
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeCollectModal() {
+      document.getElementById("collectModal").classList.remove("active");
+    }
+
+    function handleCollectBackdropClick(e) {
+      if (e.target.id === "collectModal") closeCollectModal();
+    }
+
+    async function submitCollection() {
+      const query = document.getElementById("collectQueryInput").value.trim();
+      if (!query) {
+        showToast("Please enter a search keyword");
+        return;
+      }
+      const limit = parseInt(document.getElementById("collectLimitInput").value, 10) || 30;
+      const industry = document.getElementById("collectIndustryInput").value;
+
+      closeCollectModal();
+      await startCollectionJob(query, limit, industry);
+    }
+
+    async function startCollectionJob(query, limit, industry) {
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+
+      if (baseUrl === null) {
+        showCliModal(query, limit, industry);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${baseUrl}/api/collect`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, limit, industry: industry !== "all" ? industry : null })
+        });
+
+        const data = await res.json();
+        if (res.status === 202) {
+          showToast(`Started scraping for "${query}"!`);
+          updateCollectorBanner({
+            status: "running",
+            query: query,
+            saved_count: 0,
+            last_line: `Searching Pinterest for "${query}"...`
+          });
+          startCollectorPolling();
+        } else if (res.status === 409) {
+          showToast(data.error || "A collection job is already running.");
+          startCollectorPolling();
+        } else {
+          showToast(data.error || "Failed to start collection");
+        }
+      } catch (err) {
+        showCliModal(query, limit, industry);
+      }
+    }
+
+    function startCollectorPolling() {
+      clearInterval(state.collectorPollTimer);
+      state.collectorPollTimer = setInterval(checkActiveCollectorStatus, 1500);
+    }
+
+    async function checkActiveCollectorStatus() {
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+      if (baseUrl === null) return;
+
+      try {
+        const res = await fetch(`${baseUrl}/api/collect/status`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const job = data.job;
+
+        if (job) {
+          updateCollectorBanner(job);
+          if (job.status === "done") {
+            clearInterval(state.collectorPollTimer);
+            showToast(`Completed collection: ${job.saved_count} new pins added!`);
+            await detectModeAndFetch();
+            await fetchPins(true);
+          } else if (job.status === "error" || job.status === "cancelled") {
+            clearInterval(state.collectorPollTimer);
+          }
+        } else {
+          collectorBanner.style.display = "none";
+          clearInterval(state.collectorPollTimer);
+        }
+      } catch (e) {
+        clearInterval(state.collectorPollTimer);
+      }
+    }
+
+    async function cancelCollection() {
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+      if (baseUrl === null) return;
+
+      try {
+        await fetch(`${baseUrl}/api/collect/cancel`, { method: "POST" });
+        showToast("Collection cancelled");
+        updateCollectorBanner(null);
+        clearInterval(state.collectorPollTimer);
+      } catch (e) {}
+    }
+
+    function showCliModal(query, limit, industry) {
+      let cmd = `python -m src.collect "${query}" --limit ${limit}`;
+      if (industry && industry !== "all") {
+        cmd += ` --industry ${industry}`;
+      }
+      document.getElementById("cliCommandBox").textContent = cmd;
+      document.getElementById("cliModal").classList.add("active");
+    }
+
+    function closeCliModal() {
+      document.getElementById("cliModal").classList.remove("active");
+    }
+
+    function handleCliBackdropClick(e) {
+      if (e.target.id === "cliModal") closeCliModal();
+    }
+
+    function openDownloadModal(initialTarget = "") {
+      const modal = document.getElementById("downloadModal");
+      const input = document.getElementById("downloadInput");
+      if (initialTarget) {
+        input.value = initialTarget;
+      }
+      modal.classList.add("active");
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeDownloadModal() {
+      const modal = document.getElementById("downloadModal");
+      if (modal) modal.classList.remove("active");
+    }
+
+    function handleDownloadBackdropClick(e) {
+      if (e.target.id === "downloadModal") closeDownloadModal();
+    }
+
+    function handleDownloadDestinationChange() {
+      const dest = document.getElementById("downloadDestination").value;
+      const folderRow = document.getElementById("downloadFolderRow");
+      if (folderRow) {
+        folderRow.style.display = (dest === "folder" || dest === "both") ? "block" : "none";
+      }
+    }
+
+    async function submitDownload() {
+      const rawText = document.getElementById("downloadInput").value.trim();
+      if (!rawText) {
+        showToast("Please enter at least one Pin URL, ID, or Board link");
+        return;
+      }
+      const targets = rawText.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      const destination = document.getElementById("downloadDestination").value;
+      const outputDir = (document.getElementById("downloadOutputDir")?.value || "downloads").trim();
+      const industry = document.getElementById("downloadIndustryInput")?.value || "all";
+
+      closeDownloadModal();
+
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : null);
+      if (baseUrl === null) {
+        showDownloadCliModal(targets, destination, outputDir, industry);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${baseUrl}/api/download`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            targets,
+            destination,
+            output_dir: outputDir,
+            industry: industry !== "all" ? industry : null,
+          })
+        });
+
+        const data = await res.json();
+        if (res.status === 202) {
+          showToast(`Started downloading ${targets.length} target(s)...`);
+          updateCollectorBanner({
+            status: "running",
+            query: targets[0],
+            saved_count: 0,
+            last_line: `Downloading ${targets.length} target(s)...`
+          });
+          startCollectorPolling();
+        } else if (res.status === 409) {
+          showToast(data.error || "A job is already running.");
+          startCollectorPolling();
+        } else {
+          showToast(data.error || "Failed to start download");
+        }
+      } catch (err) {
+        showDownloadCliModal(targets, destination, outputDir, industry);
+      }
+    }
+
+    function showDownloadCliModal(targets, destination, outputDir, industry) {
+      let cmd = `python -m src.download ${targets.map(t => `"${t}"`).join(" ")}`;
+      if (destination === "folder" || destination === "both") {
+        cmd += ` -o ${outputDir}`;
+      }
+      if (destination === "both") {
+        cmd += ` --also-dataset`;
+      }
+      if (industry && industry !== "all") {
+        cmd += ` --industry ${industry}`;
+      }
+      document.getElementById("cliCommandBox").textContent = cmd;
+      document.getElementById("cliModal").classList.add("active");
+    }
+
+    function downloadCurrentPinPackage() {
+      if (state.currentModalIndex >= 0) {
+        const pin = state.pins[state.currentModalIndex];
+        const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : "");
+        const url = `${baseUrl}/api/export-pin?pin_id=${encodeURIComponent(pin.pin_id)}&format=zip`;
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `pin_${pin.pin_id}_package.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("Exporting pin package ZIP...");
+      }
+    }
+
+    async function exportCurrentGalleryZip() {
+      const visibleIds = (state.pins || []).map(p => p.pin_id);
+      if (!visibleIds.length) {
+        showToast("No pins available to export");
+        return;
+      }
+      const baseUrl = state.localApiEndpoint || (state.mode === "api" ? "" : "");
+      showToast(`Generating ZIP export for ${visibleIds.length} pin(s)...`);
+
+      try {
+        const res = await fetch(`${baseUrl}/api/export-batch`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pin_ids: visibleIds })
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          showToast(err.error || "Export failed");
+          return;
+        }
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = "pinterest_references_batch.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+        showToast("Export downloaded successfully!");
+      } catch (e) {
+        showToast("Export failed: " + e.message);
+      }
+    }
+
+    function copyCliCommand() {
+      const cmd = document.getElementById("cliCommandBox").textContent;
+      copyText(cmd, "Command copied! Paste in terminal to run.");
+    }
+
+    function copyText(str, msg) {
+      navigator.clipboard.writeText(str).then(() => {
+        showToast(msg);
+      });
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 2400);
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        } else if (e.key === "Escape") {
+          closeModal();
+          closeCollectModal();
+          closeDownloadModal();
+          closeCliModal();
+          closePromptStudio();
+          closeTemplatesModal();
+          closeAiConfigModal();
+        } else if (document.getElementById("pinModal").classList.contains("active")) {
+          if (e.key === "ArrowLeft") prevPin(e);
+          if (e.key === "ArrowRight") nextPin(e);
+        }
+      });
+
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const val = searchInput.value.trim();
+          if (val) {
+            openCollectModal(val);
+          }
+        }
+      });
+
+      searchInput.addEventListener("input", (e) => {
+        searchClear.style.display = e.target.value ? "block" : "none";
+        clearTimeout(state.searchDebounceTimer);
+        state.searchDebounceTimer = setTimeout(() => {
+          state.activeQuery = e.target.value.trim();
+          fetchPins(true);
+        }, 300);
+      });
+    }
+
+    function clearSearch() {
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      state.activeQuery = "";
+      fetchPins(true);
+      searchInput.focus();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatTimeAgo(isoString) {
+      try {
+        const d = new Date(isoString);
+        const diffSecs = Math.floor((Date.now() - d.getTime()) / 1000);
+        if (diffSecs < 60) return "just now";
+        const diffMins = Math.floor(diffSecs / 60);
+        if (diffMins < 60) return `${diffMins}m ago`;
+        const diffHours = Math.floor(diffMins / 60);
+        if (diffHours < 24) return `${diffHours}h ago`;
+        return `${Math.floor(diffHours / 24)}d ago`;
+      } catch (e) {
+        return "";
+      }
+    }
+
+    async function checkAiConfig() {
+      try {
+        const res = await fetch("/api/config");
+        if (res.ok) {
+          const data = await res.json();
+          state.geminiConfigured = !!data.gemini_configured;
+          updateAiBadge();
+        }
+      } catch (e) {}
+    }
+
+    async function fetchSavedTemplatesCount() {
+      try {
+        const res = await fetch("/api/templates");
+        if (res.ok) {
+          const data = await res.json();
+          state.savedTemplates = data.templates || [];
+          const b = document.getElementById("templatesCountBadge");
+          if (b) b.textContent = state.savedTemplates.length;
+        }
+      } catch (e) {}
+    }
+
+    async function openPromptStudioForCurrentPin(forceGemini = false) {
+      if (state.currentModalIndex < 0 || !state.pins[state.currentModalIndex]) return;
+      const pin = state.pins[state.currentModalIndex];
+
+      const modal = document.getElementById("promptStudioModal");
+      const thumb = document.getElementById("studioPinThumb");
+      const title = document.getElementById("studioTitle");
+      const indBadge = document.getElementById("studioIndustryBadge");
+      const aspectBadge = document.getElementById("studioAspectBadge");
+      const engineBadge = document.getElementById("studioEngineBadge");
+      const loader = document.getElementById("studioLoadingIndicator");
+      const content = document.getElementById("studioContent");
+
+      const localImgSrc = pin.image_path ? (pin.image_path.startsWith("/") ? pin.image_path : `/${pin.image_path}`) : pin.image_url;
+      thumb.src = localImgSrc;
+      thumb.onerror = () => { thumb.onerror = null; thumb.src = pin.image_url; };
+
+      title.textContent = pin.title || pin.query || `Pin #${pin.pin_id}`;
+      indBadge.textContent = getLabels()[pin.industry] || pin.industry || "General";
+      aspectBadge.textContent = `${pin.saved_width || pin.width || 1080}×${pin.saved_height || pin.height || 1350} (${pin.aspect_ratio || '4:5'})`;
+      engineBadge.textContent = forceGemini ? "Gemini Multimodal Vision" : "Design Engine";
+
+      loader.style.display = "flex";
+      content.style.display = "none";
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      try {
+        let analysis = null;
+        if (state.mode === "api") {
+          const resp = await fetch("/api/analyze-pin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pin_id: pin.pin_id, force_gemini: forceGemini })
+          });
+          if (resp.ok) {
+            const resData = await resp.json();
+            analysis = resData.analysis;
+          }
+        }
+
+        if (!analysis) {
+          analysis = clientSideHeuristicAnalyze(pin);
+        }
+
+        state.currentAnalysis = analysis;
+        renderStudioAnalysis(analysis);
+      } catch (err) {
+        console.error("Analysis failed:", err);
+        const fallback = clientSideHeuristicAnalyze(pin);
+        state.currentAnalysis = fallback;
+        renderStudioAnalysis(fallback);
+      } finally {
+        loader.style.display = "none";
+        content.style.display = "flex";
+      }
+    }
+
+    function clientSideHeuristicAnalyze(pin) {
+      const ind = pin.industry || "general";
+      const palette = pin.palette && pin.palette.length ? pin.palette : ["#0d1117", "#161b22", "#3b82f6", "#f0f6fc"];
+      const bg = palette[0];
+      const primary = palette.length > 1 ? palette[1] : "#e60023";
+      const secondary = palette.length > 2 ? palette[2] : "#58a6ff";
+      const ratio = pin.aspect_ratio ? (pin.aspect_ratio <= 0.65 ? "9:16" : pin.aspect_ratio <= 0.88 ? "4:5" : pin.aspect_ratio <= 1.15 ? "1:1" : "16:9") : "4:5";
+
+      const alt = pin.alt_text || "";
+      const title = pin.title || "";
+      const desc = pin.description || "";
+      const query = pin.query || "";
+
+      let headline = "";
+      let subhead = "";
+
+      const m = alt.match(/with the (?:caption|words),?\s*(?:the\s+)?['"]?([^.\n]+)/i) ||
+                alt.match(/the cover of\s+['"]?([^.\n]+?)\s+is shown/i);
+      if (m) {
+        const raw = m[1].replace(/['"]/g, "").trim();
+        if (raw.toLowerCase().includes(" unless ")) {
+          const parts = raw.split(/\s+unless\s+/i);
+          headline = parts[0].trim();
+          subhead = "Unless " + parts[1].trim();
+        } else {
+          headline = raw;
+        }
+      }
+
+      if (!headline || headline.length < 4) {
+        if (title) headline = title.split(" - ")[0].split(" | ")[0].split(" by ")[0].strip ? title.split(" - ")[0].split(" | ")[0].split(" by ")[0].trim() : title.trim();
+        else if (desc) headline = desc.split("\n")[0].split(".")[0].trim();
+      }
+      if (!headline) headline = query ? query.charAt(0).toUpperCase() + query.slice(1) : "New Arrival";
+
+      if (!subhead && desc) {
+        const sents = desc.split(".").map(s => s.trim()).filter(s => s.length > 8 && s.toLowerCase() !== headline.toLowerCase());
+        for (const s of sents) {
+          if (!s.toLowerCase().includes("visuals") && !s.toLowerCase().includes("flyer")) {
+            subhead = s;
+            break;
+          }
+        }
+      }
+
+      let subject = "";
+      const mShown = alt.match(/is shown with\s+(.+?)(?:\s+in front of it|\s+on it)?$/i);
+      if (mShown) {
+        subject = `${mShown[1].trim()} in front of ${headline}`;
+      } else {
+        let clean = alt.replace(/^(?:an? (?:advertisement|ad|image|photo|cover) (?:for|of) |the cover of )/i, "");
+        clean = clean.replace(/with the (?:caption|words).*$/i, "").trim();
+        if (clean.toLowerCase().includes("some kind of skin care product")) clean = "a luxury skincare serum bottle with minimalist branding";
+        else if (clean.toLowerCase().includes("cheeseburger") || clean.toLowerCase().includes("burger")) clean = "a hand holding a juicy triple cheeseburger with melted cheddar and toasted sesame seed bun";
+        else if (clean.toLowerCase().includes("cell phone") || clean.toLowerCase().includes("smart phone")) clean = "a hand holding a sleek modern smartphone displaying a clean mobile app interface";
+        subject = clean || title || query || "hero product";
+      }
+
+      let cta = "Shop Now";
+      if (ind === "food-beverage") cta = "Order Now";
+      else if (ind.includes("fintech") || ind.includes("tech")) cta = "Get Started";
+
+      let typoDesc = "bold contemporary display typography";
+      let lighting = "clean studio lighting with soft balanced fill";
+      let movement = "Modern Commercial Advertising Design";
+      let recFonts = ["Satoshi", "Plus Jakarta Sans", "Inter"];
+
+      if (["beauty-cosmetics", "jewelry-luxury", "fashion-apparel"].includes(ind)) {
+        typoDesc = "elegant high-contrast editorial serif typography in bold dark lettering";
+        lighting = "soft diffused natural morning sunlight casting gentle organic shadows";
+        movement = "Minimalist Luxury Editorial Art Direction";
+        recFonts = ["Playfair Display", "Cormorant Garamond", "Canela"];
+      } else if (["food-beverage", "fitness-sports"].includes(ind)) {
+        typoDesc = "bold punchy condensed display typography with high impact";
+        lighting = "vibrant commercial studio lighting with mouthwatering rich contrast";
+        movement = "Bold Commercial Poster Art Direction";
+        recFonts = ["Cabinet Grotesk", "Clash Display", "Recoleta"];
+      } else if (["fintech-finance", "tech-saas"].includes(ind)) {
+        typoDesc = "modern bold geometric sans-serif typography with high contrast";
+        lighting = "sleek studio illumination with subtle colored edge rim lighting";
+        movement = "Contemporary High-Tech Commercial Graphic Design";
+        recFonts = ["Satoshi", "Plus Jakarta Sans", "PP Neue Montreal"];
+      }
+
+      const bgDesc = `a solid background (${bg})`;
+      const subheadClause = subhead ? ` Below it, subtle supporting text reads "${subhead}".` : "";
+
+      const nanoBananaPrompt = `A master-quality commercial advertising poster designed for ${DEFAULT_LABELS[ind] || ind}, in ${ratio} portrait aspect ratio (${ratio === "9:16" ? "Story 9:16" : ratio === "1:1" ? "Square 1:1" : "Portrait Feed 4:5"}). Rendered in crystal-clear 4K resolution, studio retoucher finish, shot on Hasselblad H6D-100c with an 80mm f/2.8 lens for corner-to-corner tack-sharp clarity. Canvas & Environment: ${bgDesc}. The composition is built on a rigorous 3-tier vertical hierarchy with generous commercial negative space: Top 25% header zone, center 55% dedicated hero visual container, and bottom 20% call-to-action anchor zone. Hero Visual: Centered horizontally and vertically is ${subject}. Rendered with hyper-realistic material textures, natural surface highlights, authentic depth of field, and grounded by a gentle, soft contact shadow resting onto the surface. Typography System: At the top center, bold high-impact headline lettering in ${typoDesc} (recommended typefaces: ${recFonts.join(", ")}) reads verbatim: "${headline.toUpperCase()}".${subhead ? ` Directly beneath the headline, clean legible supporting text reads: "${subhead}".` : ''} Call-To-Action: Anchored at the bottom center of the frame is a sleek, modern pill-shaped button with a primary accent fill (${primary}) featuring crisp, high-contrast typography reading: "${cta.toUpperCase()}". Palette & Lighting: Cohesive color grading anchored in ${bg} with accents of ${primary}. ${lighting}, with subtle rim highlights defining the subject's edges against the background. Pristine commercial advertising aesthetic, ${movement}, award-winning graphic design layout, 4K resolution.`;
+
+      const nanoBananaEditPrompt = `Edit and style transfer using the provided design reference image: 1. CANVAS & RATIO: Lock and preserve the exact ${ratio} aspect ratio, centered 3-tier vertical grid, and solid background canvas tone (${bg}) with its original negative space margins. 2. TYPOGRAPHY: Preserve the exact top header placement, scale, and font styling: render the bold display text "${headline.toUpperCase()}" in ${typoDesc} across the top.${subhead ? ` Preserve the supporting subtext layout reading: "${subhead}".` : ''} 3. HERO ASSET REPLACEMENT: Replace the central hero subject (currently ${subject}) with [INSERT_YOUR_PRODUCT_OR_HERO_ASSET_HERE]. Seamlessly composite the replacement asset into the exact center, matching the original 45-degree angle, scale, soft contact shadow, and ambient reflections on the surface. 4. CALL TO ACTION: Preserve the bottom pill-shaped button container (${primary}) with crisp text reading: "${cta.toUpperCase()}". 5. ATMOSPHERE & QUALITY: Maintain the ${lighting}, cohesive color grading, and pristine commercial advertising finish, 4K resolution.`;
+
+      const creativeAd = `# AI Ad Creative Design Template: ${DEFAULT_LABELS[ind] || ind}\n\n## 1. Creative Architecture & Flow\n- Target Ratio: ${ratio}\n- Visual Hierarchy: Top Hook (30%) -> Hero Centerpiece (50%) -> Action CTA & Trust (20%)\n- Design Movement: ${movement}\n\n## 2. Dynamic Slots & Copy\n- [Brand Identifier]: {{BRAND_NAME}}\n- [Hero Product / Focus]: {{PRODUCT_NAME}} (Reference: ${subject})\n- [Primary Hook Headline]: "${headline}"\n  - Font Category: ${typoDesc}\n  - Recommended Web Fonts: ${recFonts.join(", ")}\n- [Supporting Subtext]: "${subhead}"\n- [Call to Action Button]: "${cta}"\n\n## 3. Chromatic Palette & Styling Tokens\n- Canvas Background: \`${bg}\`\n- Primary Accent: \`${primary}\`\n- Lighting: ${lighting}\n\n## 4. Execution Prompt for Image Generator\n"A commercial advertising poster for {{BRAND_NAME}} presenting {{PRODUCT_NAME}}.\nAt the top, bold headline text reads '{{HEADLINE_HOOK}}' in ${typoDesc}.\nIn the center, {{PRODUCT_NAME}} is positioned against ${bgDesc}.\nAt the bottom, a clean call-to-action button reads '{{CTA_BUTTON}}'.\n${lighting}, high-end commercial finish, 4K resolution."`;
+
+      const figmaSpecs = `/* === Design System Tokens for ${DEFAULT_LABELS[ind] || ind} === */\n:root {\n  --canvas-bg: ${bg};\n  --brand-primary: ${primary};\n  --brand-secondary: ${secondary};\n  --aspect-ratio: ${ratio.replace(":", "/")};\n  --font-headline: '${recFonts[0]}', -apple-system, sans-serif;\n  --font-body: 'Inter', -apple-system, sans-serif;\n  --font-headline-weight: 700;\n  --grid-padding: 32px;\n}`;
+
+      return {
+        pin_id: pin.pin_id,
+        industry_slug: ind,
+        industry_label: DEFAULT_LABELS[ind] || ind,
+        analyzer_engine: "ground-truth-heuristic",
+        layout: {
+          layout_type: `Centered Hero with Top-Weighted Headline (${ratio})`,
+          composition: `Top bold headline reading '${headline}', central hero visual of ${subject} against ${bgDesc}, bottom call to action '${cta}'.`,
+          hierarchy: `1. Hook Headline ('${headline}') -> 2. Hero Asset (${subject}) -> 3. Action CTA ('${cta}')`,
+          aspect_ratio_code: ratio,
+          aspect_ratio_name: ratio === "9:16" ? "Story (9:16)" : (ratio === "1:1" ? "Square (1:1)" : "Portrait Feed (4:5)"),
+          spacing_density: "Balanced commercial negative space with centered visual anchor",
+        },
+        typography: {
+          headline_font_style: typoDesc,
+          body_font_style: "Clean Geometric Sans-Serif",
+          recommended_headline_fonts: recFonts,
+          recommended_body_fonts: ["Inter", "DM Sans"],
+          treatment_effects: "High-contrast bold display styling with balanced tracking",
+        },
+        colors: {
+          palette: palette,
+          background_color: bg,
+          primary_accent: primary,
+          secondary_accent: secondary,
+          mood: `High-contrast commercial palette anchored in ${bg}`,
+          luminance_mode: "dark",
+        },
+        design_aesthetic: {
+          movement: movement,
+          graphic_elements: [subject, "Framed product container", `Solid canvas`, `'${cta}' pill button`],
+          lighting: lighting,
+        },
+        content: {
+          detected_headline: headline,
+          detected_subtext: subhead,
+          detected_cta: cta,
+        },
+        prompt_templates: {
+          nano_banana: nanoBananaPrompt,
+          nano_banana_edit: nanoBananaEditPrompt,
+          creative_ad: creativeAd,
+          figma_specs: figmaSpecs,
+        }
+      };
+    }
+
+    function renderStudioAnalysis(a) {
+      document.getElementById("studioEngineBadge").textContent = a.analyzer_engine || "Design Engine";
+
+      // 1. Layout
+      document.getElementById("dnaLayoutType").textContent = a.layout.layout_type || "-";
+      document.getElementById("dnaHierarchy").textContent = a.layout.hierarchy || "-";
+      document.getElementById("dnaSpacing").textContent = a.layout.spacing_density || "-";
+
+      // 2. Typography
+      document.getElementById("dnaHeadlineStyle").textContent = a.typography.headline_font_style || "-";
+      document.getElementById("dnaTypoTreatment").textContent = a.typography.treatment_effects || "-";
+      const fontBox = document.getElementById("dnaFontBadges");
+      fontBox.innerHTML = "";
+      (a.typography.recommended_headline_fonts || ["Inter"]).forEach(f => {
+        const pill = document.createElement("span");
+        pill.className = "font-pill";
+        pill.textContent = f;
+        fontBox.appendChild(pill);
+      });
+
+      // 3. Colors
+      const palBox = document.getElementById("dnaPaletteList");
+      palBox.innerHTML = "";
+      (a.colors.palette || []).forEach(hex => {
+        const item = document.createElement("div");
+        item.className = "palette-item";
+        item.title = `Click to copy ${hex}`;
+        item.onclick = () => copyText(hex, `Copied color ${hex}`);
+        item.innerHTML = `<span class="palette-color-dot" style="background-color: ${hex}"></span><span>${hex}</span>`;
+        palBox.appendChild(item);
+      });
+      document.getElementById("dnaColorMood").textContent = a.colors.mood || "-";
+      document.getElementById("dnaCanvasMode").textContent = `${a.colors.background_color || '-'} (${a.colors.luminance_mode || 'dark'} mode)`;
+
+      // 4. Aesthetic
+      document.getElementById("dnaMovement").textContent = a.design_aesthetic.movement || "-";
+      document.getElementById("dnaLighting").textContent = a.design_aesthetic.lighting || "-";
+      const elemBox = document.getElementById("dnaElementsList");
+      elemBox.innerHTML = "";
+      (a.design_aesthetic.graphic_elements || []).forEach(el => {
+        const tag = document.createElement("span");
+        tag.className = "dna-tag-pill";
+        tag.textContent = el;
+        elemBox.appendChild(tag);
+      });
+
+      // Pre-fill variables
+      const c = a.content || {};
+      document.getElementById("varBrand").value = "";
+      document.getElementById("varProduct").value = "";
+      document.getElementById("varHeadline").value = c.detected_headline || "";
+      document.getElementById("varCta").value = c.detected_cta || "Shop Now";
+
+      // Render code boxes
+      document.getElementById("codeBoxNanoBanana").textContent = (a.prompt_templates && a.prompt_templates.nano_banana) || "";
+      document.getElementById("codeBoxNanoBananaEdit").textContent = (a.prompt_templates && a.prompt_templates.nano_banana_edit) || "";
+      document.getElementById("codeBoxFigma").textContent = (a.prompt_templates && a.prompt_templates.figma_specs) || "";
+
+      // Markdown spec
+      const mdSpec = `# Design Reference & Prompt Spec: ${a.industry_label || 'Creative Reference'}
+Source Pin ID: ${a.pin_id}
+Generated: ${a.analyzed_at || new Date().toISOString()}
+Engine: ${a.analyzer_engine}
+
+## Layout & Architecture
+- Type: ${a.layout.layout_type}
+- Aspect Ratio: ${a.layout.aspect_ratio_name || a.layout.aspect_ratio_code}
+- Hierarchy: ${a.layout.hierarchy}
+- Spacing: ${a.layout.spacing_density}
+
+## Typography & Web Fonts
+- Headline Style: ${a.typography.headline_font_style}
+- Recommended Fonts: ${(a.typography.recommended_headline_fonts || []).join(", ")}
+- Body Style: ${a.typography.body_font_style}
+- Typographic Treatment: ${a.typography.treatment_effects}
+
+## Chromatic Palette
+- Canvas Tone: ${a.colors.background_color}
+- Primary Accent: ${a.colors.primary_accent}
+- Color Mood: ${a.colors.mood}
+- Palette: ${(a.colors.palette || []).join(", ")}
+
+## Visual Aesthetic & Styling
+- Movement: ${a.design_aesthetic.movement}
+- Key Elements: ${(a.design_aesthetic.graphic_elements || []).join(", ")}
+- Lighting & Render: ${a.design_aesthetic.lighting}
+
+## Nano Banana 2.1 Generation Prompt (4K)
+\`\`\`text
+${(a.prompt_templates && a.prompt_templates.nano_banana) || ''}
+\`\`\`
+
+## Nano Banana 2.1 Style-Reference Edit Prompt
+\`\`\`text
+${(a.prompt_templates && a.prompt_templates.nano_banana_edit) || ''}
+\`\`\`
+`;
+      document.getElementById("codeBoxMarkdown").textContent = mdSpec;
+
+      updateCreativeTemplate();
+    }
+
+    function switchPromptTab(tabName) {
+      state.activePromptTab = tabName;
+      const tabs = ["nanoBanana", "creative", "figma", "markdown"];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const pane = document.getElementById(`tabPane${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (btn) btn.classList.toggle("active", t === tabName);
+        if (pane) pane.classList.toggle("active", t === tabName);
+      });
+    }
+
+    function updateCreativeTemplate() {
+      if (!state.currentAnalysis) return;
+      const base = state.currentAnalysis.prompt_templates.creative_ad || "";
+      const brand = document.getElementById("varBrand").value.trim() || "{{BRAND_NAME}}";
+      const product = document.getElementById("varProduct").value.trim() || "{{PRODUCT_NAME}}";
+      const headline = document.getElementById("varHeadline").value.trim() || (state.currentAnalysis.content ? state.currentAnalysis.content.detected_headline : "") || "{{HEADLINE_HOOK}}";
+      const cta = document.getElementById("varCta").value.trim() || (state.currentAnalysis.content ? state.currentAnalysis.content.detected_cta : "") || "{{CTA_BUTTON}}";
+
+      let customized = base
+        .replace(/\{\{BRAND_NAME\}\}/g, brand)
+        .replace(/\{\{PRODUCT_NAME\}\}/g, product)
+        .replace(/\{\{HEADLINE_HOOK\}\}/g, headline)
+        .replace(/\{\{CTA_BUTTON\}\}/g, cta);
+
+      document.getElementById("codeBoxCreative").textContent = customized;
+    }
+
+    function copyPrompt(fmt) {
+      let text = "";
+      if (fmt === "nano_banana") text = document.getElementById("codeBoxNanoBanana").textContent;
+      else if (fmt === "nano_banana_edit") text = document.getElementById("codeBoxNanoBananaEdit").textContent;
+      else if (fmt === "creative") text = document.getElementById("codeBoxCreative").textContent;
+      else if (fmt === "figma") text = document.getElementById("codeBoxFigma").textContent;
+      else if (fmt === "markdown") text = document.getElementById("codeBoxMarkdown").textContent;
+
+      if (text) {
+        copyText(text, "Prompt copied to clipboard!");
+      }
+    }
+
+    function downloadMarkdownSpec() {
+      const text = document.getElementById("codeBoxMarkdown").textContent;
+      if (!text) return;
+      const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `design-prompt-${state.currentAnalysis ? state.currentAnalysis.pin_id : 'spec'}.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Downloaded markdown spec report!");
+    }
+
+    async function saveCurrentTemplate() {
+      if (!state.currentAnalysis) return;
+      const title = document.getElementById("studioTitle").textContent;
+      const creativePrompt = document.getElementById("codeBoxCreative").textContent;
+      const tpls = { ...state.currentAnalysis.prompt_templates, creative_ad: creativePrompt };
+
+      const payload = {
+        title: title || `${state.currentAnalysis.industry_label} Design Template`,
+        pin_id: state.currentAnalysis.pin_id,
+        industry: state.currentAnalysis.industry_slug,
+        movement: state.currentAnalysis.design_aesthetic.movement,
+        aspect_ratio: state.currentAnalysis.layout.aspect_ratio_code,
+        prompt_templates: tpls,
+        colors: state.currentAnalysis.colors,
+        typography: state.currentAnalysis.typography,
+        layout: state.currentAnalysis.layout
+      };
+
+      try {
+        const resp = await fetch("/api/templates", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          showToast("Saved template to library!");
+          await fetchSavedTemplatesCount();
+        } else {
+          showToast("Saved locally in session");
+        }
+      } catch (err) {
+        showToast("Saved template to session!");
+      }
+    }
+
+    function closePromptStudio() {
+      document.getElementById("promptStudioModal").classList.remove("active");
+      if (state.currentModalIndex < 0) {
+        document.body.style.overflow = "auto";
+      }
+    }
+
+    function handlePromptStudioBackdropClick(e) {
+      if (e.target.id === "promptStudioModal") closePromptStudio();
+    }
+
+    function reanalyzeCurrentPin(forceGemini) {
+      if (forceGemini && !state.geminiConfigured) {
+        openAiSettingsModal();
+        return;
+      }
+      openPromptStudioForCurrentPin(forceGemini);
+    }
+
+    async function openTemplatesModal() {
+      const modal = document.getElementById("templatesModal");
+      const listEl = document.getElementById("templatesListContainer");
+      listEl.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--muted);">Loading templates...</div>`;
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      try {
+        const res = await fetch("/api/templates");
+        if (res.ok) {
+          const data = await res.json();
+          state.savedTemplates = data.templates || [];
+        }
+      } catch (e) {}
+
+      renderTemplatesList();
+    }
+
+    function copyTemplatePrompt(id, format) {
+      const t = (state.savedTemplates || []).find(x => x.id === id);
+      if (!t || !t.prompt_templates) return;
+      const text = t.prompt_templates[format === "creative" ? "creative_ad" : format] || "";
+      if (text) copyText(text, `Prompt copied`);
+    }
+
+    async function deleteTemplate(id) {
+      if (!confirm("Are you sure you want to delete this prompt template?")) return;
+      try {
+        await fetch(`/api/templates/${id}`, { method: "DELETE" });
+      } catch (e) {}
+      state.savedTemplates = (state.savedTemplates || []).filter(x => x.id !== id);
+      renderTemplatesList();
+      showToast("Template deleted");
+    }
+
+    function closeTemplatesModal() {
+      document.getElementById("templatesModal").classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function handleTemplatesBackdropClick(e) {
+      if (e.target.id === "templatesModal") closeTemplatesModal();
+    }
+
+    // ==========================================
+    // AI Configuration Modal
+    // ==========================================
+
+    function openAiSettingsModal() {
+      const modal = document.getElementById("aiConfigModal");
+      updateAiBadge();
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeAiConfigModal() {
+      document.getElementById("aiConfigModal").classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    function handleAiConfigBackdropClick(e) {
+      if (e.target.id === "aiConfigModal") closeAiConfigModal();
+    }
+
+    async function submitAiConfig() {
+      const input = document.getElementById("aiApiKeyInput");
+      const key = input.value.trim();
+      const saveEnv = document.getElementById("aiSaveToEnvCheckbox").checked;
+
+      if (!key) {
+        showToast("Please enter a valid Gemini API key");
+        return;
+      }
+
+      try {
+        const resp = await fetch("/api/config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gemini_api_key: key, save_to_env: saveEnv })
+        });
+        if (resp.ok) {
+          state.geminiConfigured = true;
+          updateAiBadge();
+          closeAiConfigModal();
+          showToast("Gemini API key configured successfully!");
+          input.value = "";
+        } else {
+          showToast("Failed to update config");
+        }
+      } catch (e) {
+        showToast("Failed to connect to server API");
+      }
+    }
+
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>

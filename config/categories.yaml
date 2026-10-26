@@ -1,0 +1,88 @@
+# Industry folders in the dataset. Edit freely: add a slug, a label and
+# keywords. The keyword classifier matches these against the search query,
+# pin title, description, alt text, board name and source domain.
+# The Gemini classifier is given the list of slugs + labels to choose from.
+
+industries:
+  fintech-finance:
+    label: FinTech & Finance
+    keywords: [fintech, finance, financial, bank, banking, trading, trader, forex, crypto, bitcoin, invest, investing, investment, stock, loan, credit card, payment, wallet, insurance, prop firm, accounting, tax, trading app, finance app, banking app, crypto app, money transfer, remittance]
+  tech-saas:
+    label: Tech, SaaS & Apps
+    keywords: [saas, software, web app, mobile app design, b2b saas, tech startup, cloud platform, cybersecurity, developer tool, product launch, dashboard ui, ai platform, ai software, ai tool, artificial intelligence platform]
+  marketing-agency:
+    label: Marketing & Agencies
+    keywords: [marketing agency, digital marketing, seo, social media marketing, branding agency, advertising agency, growth marketing, lead generation, ad agency, marketing campaign]
+  ecommerce-retail:
+    label: E-commerce & Retail
+    keywords: [ecommerce, e-commerce, online store, online shopping, retail store, retail brand, d2c, dtc, shopify, amazon store, product sale, discount code, black friday, flash sale, promotional discount, cyber monday]
+  food-beverage:
+    label: Food & Beverage
+    keywords: [food, restaurant, cafe, café, coffee, coffee shop, burger, pizza, menu, drink, beverage, juice, beer, brewery, cocktail, bakery, dessert, snack, chocolate, tea, food truck, fast food]
+  beauty-cosmetics:
+    label: Beauty & Cosmetics
+    keywords: [beauty, cosmetic, cosmetics, skincare, skin care, makeup, serum, lipstick, haircare, salon, spa, nail, fragrance, perfume, moisturizer, cleanser, toner, lotion, sunscreen, spf, balm, lip gloss, gloss, face wash, rhode, glossier, aesop, drunk elephant, the ordinary]
+  fashion-apparel:
+    label: Fashion & Apparel
+    keywords: [fashion, apparel, clothing, streetwear, outfit, sneaker, shoes, dress, t-shirt, hoodie, lookbook, menswear, womenswear, clothing brand, fashion ad]
+  jewelry-luxury:
+    label: Jewelry & Luxury
+    keywords: [jewelry, jewellery, diamond, ring, necklace, gold, watch, luxury, earrings, bracelet, gemstones, luxury jewelry]
+  health-wellness:
+    label: Health & Wellness
+    keywords: [wellness, health, supplement, dietary supplement, vitamin, vitamins, nutrition, mental health, yoga, meditation, organic, ayurveda, protein, protein powder]
+  healthcare-medical:
+    label: Healthcare & Medical
+    keywords: [healthcare, medical, clinic, hospital, doctor, dental, dentist, physiotherapy, physio, pharmacy, therapy, chiropractor, health clinic, medical practice]
+  fitness-sports:
+    label: Fitness & Sports
+    keywords: [fitness, gym, workout, sports, sport, football, cricket, running, athlete, training, crossfit, bodybuilding, personal trainer, gym membership]
+  real-estate:
+    label: Real Estate
+    keywords: [real estate, property, realtor, home for sale, apartment, house, mortgage, estate agent, listing, open house, villa, property listing, real estate ad]
+  home-interiors:
+    label: Home, Interiors & Furniture
+    keywords: [interior, interiors, furniture, home decor, decor, sofa, kitchen, garden, outdoor furniture, architecture, interior design]
+  construction-trades:
+    label: Construction & Home Services
+    keywords: [construction, roofing, roofer, plumbing, plumber, electrician, contractor, renovation, cleaning service, hvac, builder, landscaping, solar]
+  automotive:
+    label: Automotive
+    keywords: [car, cars, automotive, auto, vehicle, ev, electric vehicle, bike, motorcycle, dealership, car wash, tyre, tire, auto repair, car dealership]
+  travel-hospitality:
+    label: Travel & Hospitality
+    keywords: [travel, tourism, hotel, resort, airline, flight, vacation, holiday, trip, booking, airbnb, destination, tour agency]
+  education:
+    label: Education & Courses
+    keywords: [education, school, university, college, course, online course, edtech, learning, tutor, coaching, webinar, workshop]
+  legal-professional:
+    label: Legal & Professional Services
+    keywords: [law, lawyer, legal, attorney, solicitor, conveyancing, consulting, consultant, recruitment, hr, credit control, bookkeeping]
+  events-entertainment:
+    label: Events, Music & Entertainment
+    keywords: [event, concert, festival, party, music, dj, nightclub, movie, film, podcast, conference, wedding, birthday]
+  gaming-esports:
+    label: Gaming & Esports
+    keywords: [gaming, game, esports, gamer, twitch, stream, playstation, xbox, valorant, bgmi]
+  nonprofit-cause:
+    label: Non-profit & Causes
+    keywords: [nonprofit, non-profit, charity, ngo, donate, donation, fundraiser, awareness, cic, volunteer]
+  pets:
+    label: Pets
+    keywords: [pet, pets, dog, cat, puppy, dog training, vet, veterinary, pet food, grooming]
+
+# Fallback folder when nothing matches.
+fallback: uncategorized
+
+# Creative format tags (stored in metadata, not used for folders).
+formats:
+  ad-creative: [ad, ads, ad design, ad creative, advertisement, commercial, sponsored ad, promo ad, paid ad, meta ads, facebook ad, instagram ad]
+  instagram-post: [instagram post, ig post, feed post, social media post, square post, "1080x1080", post design]
+  story-reel: [story, stories, reel, reels, "9:16", tiktok]
+  carousel: [carousel, swipe, slides]
+  display-banner: [banner, display ad, web banner, google ads, leaderboard, header]
+  poster-flyer: [poster, flyer, flier, print]
+  email: [email, newsletter, mailer, edm]
+  landing-page: [landing page, website, web design, ui]
+  packaging: [packaging, label design, box design, mockup]
+  logo-branding: [logo, branding, brand identity, visual identity]

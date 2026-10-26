@@ -1,0 +1,16 @@
+# One search per line. Run:  python -m src.collect --file keywords.txt --limit 40
+fintech social media ad design
+trading app banner ad creative
+saas product ad creative design
+coffee shop promotional ad design
+burger restaurant ad poster design
+skincare brand instagram ad creative
+luxury jewelry social media ad design
+real estate property listing ad creative
+roofing company local service ad design
+physiotherapy clinic social media ad design
+gym fitness promotional ad poster design
+ecommerce product sale ad creative
+streetwear clothing brand ad poster
+travel agency vacation tour ad design
+home interior decor furniture ad design

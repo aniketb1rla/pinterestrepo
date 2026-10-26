@@ -1,0 +1,8 @@
+.env
+.auth/
+pinterestrepo/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.taste-skill/

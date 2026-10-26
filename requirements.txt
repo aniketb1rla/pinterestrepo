@@ -1,0 +1,5 @@
+playwright>=1.45
+pillow>=10.0
+pyyaml>=6.0
+python-dotenv>=1.0
+google-genai>=1.0   # only needed for CLASSIFIER=gemini
