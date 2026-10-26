@@ -1,12 +1,12 @@
 {
-  "total_pins": 976,
-  "updated_at": "2026-10-26T13:00:01+00:00",
+  "total_pins": 977,
+  "updated_at": "2026-10-26T13:11:09+00:00",
   "by_industry": {
     "beauty-cosmetics": 303,
     "fintech-finance": 221,
     "food-beverage": 93,
     "uncategorized": 69,
-    "jewelry-luxury": 41,
+    "jewelry-luxury": 42,
     "real-estate": 41,
     "healthcare-medical": 41,
     "tech-saas": 40,
@@ -48,7 +48,7 @@
   "by_format": {
     "ad-creative": 313,
     "instagram-post": 286,
-    "unknown": 111,
+    "unknown": 112,
     "poster-flyer": 106,
     "logo-branding": 62,
     "email": 38,
@@ -80,6 +80,7 @@
     "glossier social media ad design": 33,
     "Meta ads": 29,
     "Skincare Carousel": 24,
-    "streetwear clothing brand poster design": 10
+    "streetwear clothing brand poster design": 10,
+    "": 1
   }
 }

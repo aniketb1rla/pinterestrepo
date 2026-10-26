@@ -167,7 +167,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 
 ## Current Dataset Statistics
 
-**976 pins** · last updated 2026-10-26
+**977 pins** · last updated 2026-10-26
 
 ### By industry
 | Folder | Industry | Pins |
@@ -176,7 +176,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 | `fintech-finance` | FinTech & Finance | 221 |
 | `food-beverage` | Food & Beverage | 93 |
 | `uncategorized` | uncategorized | 69 |
-| `jewelry-luxury` | Jewelry & Luxury | 41 |
+| `jewelry-luxury` | Jewelry & Luxury | 42 |
 | `real-estate` | Real Estate | 41 |
 | `healthcare-medical` | Healthcare & Medical | 41 |
 | `tech-saas` | Tech, SaaS & Apps | 40 |
@@ -196,7 +196,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 |---|---|
 | ad-creative | 313 |
 | instagram-post | 286 |
-| unknown | 111 |
+| unknown | 112 |
 | poster-flyer | 106 |
 | logo-branding | 62 |
 | email | 38 |
@@ -204,12 +204,3 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 | carousel | 25 |
 | story-reel | 2 |
 | packaging | 1 |
-
-## Notes
-- Keep the repo **private** — the images belong to their creators. Fine for
-  reference/inspiration; check licensing before commercial model training.
-- GitHub repos get slow past ~1–2 GB. Set `USE_GIT_LFS=true` early if you'll
-  collect thousands of images.
-- The scraper scrolls at a human pace. Don't hammer it with huge limits —
-  Pinterest can rate-limit or flag the account.
-- Tests (offline, Pinterest mocked): `python -m unittest discover tests`
