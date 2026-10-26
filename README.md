@@ -165,6 +165,46 @@ pinterestrepo/
 construction/roofing, healthcare, legal, non-profit, pets…). Edit
 `config/categories.yaml` to add or tweak, then `python -m src.reclassify`.
 
+## Current Dataset Statistics
+
+**976 pins** · last updated 2026-10-26
+
+### By industry
+| Folder | Industry | Pins |
+|---|---|---|
+| `beauty-cosmetics` | Beauty & Cosmetics | 303 |
+| `fintech-finance` | FinTech & Finance | 221 |
+| `food-beverage` | Food & Beverage | 93 |
+| `uncategorized` | uncategorized | 69 |
+| `jewelry-luxury` | Jewelry & Luxury | 41 |
+| `real-estate` | Real Estate | 41 |
+| `healthcare-medical` | Healthcare & Medical | 41 |
+| `tech-saas` | Tech, SaaS & Apps | 40 |
+| `fitness-sports` | Fitness & Sports | 40 |
+| `construction-trades` | Construction & Home Services | 38 |
+| `health-wellness` | Health & Wellness | 21 |
+| `fashion-apparel` | Fashion & Apparel | 14 |
+| `marketing-agency` | Marketing & Agencies | 5 |
+| `ecommerce-retail` | E-commerce & Retail | 5 |
+| `travel-hospitality` | Travel & Hospitality | 1 |
+| `home-interiors` | Home, Interiors & Furniture | 1 |
+| `nonprofit-cause` | Non-profit & Causes | 1 |
+| `pets` | Pets | 1 |
+
+### By format
+| Format | Pins |
+|---|---|
+| ad-creative | 313 |
+| instagram-post | 286 |
+| unknown | 111 |
+| poster-flyer | 106 |
+| logo-branding | 62 |
+| email | 38 |
+| landing-page | 32 |
+| carousel | 25 |
+| story-reel | 2 |
+| packaging | 1 |
+
 ## Notes
 - Keep the repo **private** — the images belong to their creators. Fine for
   reference/inspiration; check licensing before commercial model training.

@@ -129,7 +129,7 @@ class Dataset:
 
         rows = "\n".join(f"| `{k}` | {labels.get(k, k)} | {v} |" for k, v in by_ind.most_common())
         fmt_rows = "\n".join(f"| {k} | {v} |" for k, v in by_fmt.most_common())
-        (self.root / "README.md").write_text(f"""# Design Reference Dataset
+        dataset_doc = f"""# Design Reference Dataset
 
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
@@ -168,4 +168,15 @@ board, dhash, collected_at.
 
 > Images belong to their original creators. Kept as private reference
 > material; check licensing before any commercial model training.
-""", encoding="utf-8")
+"""
+        (self.root / "DATASET.md").write_text(dataset_doc, encoding="utf-8")
+        readme_path = self.root / "README.md"
+        if readme_path.exists():
+            existing = readme_path.read_text(encoding="utf-8")
+            if "## Current Dataset Statistics" in existing:
+                top = existing.split("## Current Dataset Statistics")[0]
+                readme_path.write_text(f"{top}## Current Dataset Statistics\n\n**{len(self.records)} pins** · last updated {stats['updated_at'][:10]}\n\n### By industry\n| Folder | Industry | Pins |\n|---|---|---|\n{rows}\n\n### By format\n| Format | Pins |\n|---|---|\n{fmt_rows}\n", encoding="utf-8")
+            elif "Pinterest Reference Collector" not in existing:
+                readme_path.write_text(dataset_doc, encoding="utf-8")
+        else:
+            readme_path.write_text(dataset_doc, encoding="utf-8")
