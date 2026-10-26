@@ -3,25 +3,25 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**948 pins** · last updated 2026-10-23
+**976 pins** · last updated 2026-10-26
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 292 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 303 |
 | `fintech-finance` | FinTech & Finance | 221 |
-| `food-beverage` | Food & Beverage | 90 |
-| `uncategorized` | uncategorized | 60 |
+| `food-beverage` | Food & Beverage | 93 |
+| `uncategorized` | uncategorized | 69 |
 | `jewelry-luxury` | Jewelry & Luxury | 41 |
 | `real-estate` | Real Estate | 41 |
 | `healthcare-medical` | Healthcare & Medical | 41 |
 | `tech-saas` | Tech, SaaS & Apps | 40 |
 | `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
-| `health-wellness` | Health & Wellness | 17 |
+| `health-wellness` | Health & Wellness | 21 |
 | `fashion-apparel` | Fashion & Apparel | 14 |
 | `marketing-agency` | Marketing & Agencies | 5 |
-| `ecommerce-retail` | E-commerce & Retail | 4 |
+| `ecommerce-retail` | E-commerce & Retail | 5 |
 | `travel-hospitality` | Travel & Hospitality | 1 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 | `nonprofit-cause` | Non-profit & Causes | 1 |
@@ -30,11 +30,11 @@ sorted by industry, for training / prompting AI design models.
 ## By format
 | Format | Pins |
 |---|---|
+| ad-creative | 313 |
 | instagram-post | 286 |
-| ad-creative | 286 |
 | unknown | 111 |
 | poster-flyer | 106 |
-| logo-branding | 61 |
+| logo-branding | 62 |
 | email | 38 |
 | landing-page | 32 |
 | carousel | 25 |

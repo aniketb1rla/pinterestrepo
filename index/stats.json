@@ -1,21 +1,21 @@
 {
-  "total_pins": 948,
-  "updated_at": "2026-10-23T10:19:36+00:00",
+  "total_pins": 976,
+  "updated_at": "2026-10-26T13:00:01+00:00",
   "by_industry": {
-    "beauty-cosmetics": 292,
+    "beauty-cosmetics": 303,
     "fintech-finance": 221,
-    "food-beverage": 90,
-    "uncategorized": 60,
+    "food-beverage": 93,
+    "uncategorized": 69,
     "jewelry-luxury": 41,
     "real-estate": 41,
     "healthcare-medical": 41,
     "tech-saas": 40,
     "fitness-sports": 40,
     "construction-trades": 38,
-    "health-wellness": 17,
+    "health-wellness": 21,
     "fashion-apparel": 14,
     "marketing-agency": 5,
-    "ecommerce-retail": 4,
+    "ecommerce-retail": 5,
     "travel-hospitality": 1,
     "home-interiors": 1,
     "nonprofit-cause": 1,
@@ -46,11 +46,11 @@
     "pets": "Pets"
   },
   "by_format": {
+    "ad-creative": 313,
     "instagram-post": 286,
-    "ad-creative": 286,
     "unknown": 111,
     "poster-flyer": 106,
-    "logo-branding": 61,
+    "logo-branding": 62,
     "email": 38,
     "landing-page": 32,
     "carousel": 25,
@@ -59,6 +59,7 @@
   },
   "queries": {
     "Fintech": 141,
+    "Product Ads": 55,
     "meta ads": 54,
     "fintech instagram post design": 40,
     "trading app social media ad": 40,
@@ -78,7 +79,6 @@
     "the ordinary skincare branding post": 36,
     "glossier social media ad design": 33,
     "Meta ads": 29,
-    "Product Ads": 27,
     "Skincare Carousel": 24,
     "streetwear clothing brand poster design": 10
   }
