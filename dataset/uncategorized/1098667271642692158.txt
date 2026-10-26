@@ -1,0 +1,13 @@
+a man wearing a knitted mask with the words how to guide meta ads and clave. Set Up Meta Ads MCP with Claude in Under 60 Seconds — Here's Exactly How:
+
+No coding. No developer tokens. No complicated API setup.
+
+Follow these 4 simple steps:
+1️⃣ Open the Claude app on desktop
+2️⃣ Go to Settings → Customize → Connectors
+3️⃣ Click "Add Custom Connector"
+4️⃣ Paste this URL: https://mcp.facebook.com/ads → Hit Add
+
+That's it. Your AI agent is now connected to your Meta ad account in real time — authenticated directly through Meta's official MCP server.
+
+🛡️ Safe, official, an

@@ -21,7 +21,8 @@ PINTEREST_HOME = os.getenv("PINTEREST_HOME", "https://www.pinterest.com")
 
 # Dataset repo ------------------------------------------------------------
 REPO_URL = os.getenv("DATASET_REPO_URL", "https://github.com/aniketb1rla/pinterestrepo.git")
-REPO_DIR = Path(os.getenv("DATASET_REPO_DIR", str(ROOT / "pinterestrepo"))).expanduser().resolve()
+DEFAULT_REPO = ROOT if (ROOT / "dataset").exists() else (ROOT / "pinterestrepo")
+REPO_DIR = Path(os.getenv("DATASET_REPO_DIR", str(DEFAULT_REPO))).expanduser().resolve()
 GIT_BRANCH = os.getenv("GIT_BRANCH", "main")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "").strip()  # optional; otherwise your normal git login is used
 USE_GIT_LFS = _bool("USE_GIT_LFS", "false")

@@ -1,0 +1,5 @@
+an advertisement for some kind of cosmetic product on the side of a blue background with images of different products. A claude skill that generates high performing static ads. It pulls the brand’s actual colors, fonts, and product photos straight from the store. Then it writes the ad copy and sends the whole thing to image generation. 
+
+It generates across multiple ad formats: stat-driven, minimal, lifestyle, matched to what the brand actually needs. I built it around fourteen proven ad structures pulled from real high-performing Meta campaigns.
+
+Comment “STATIC” and i will send this skill in
