@@ -3,13 +3,14 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**1053 pins** · last updated 2026-10-27
+**1153 pins** · last updated 2026-10-27
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
 | `beauty-cosmetics` | Beauty & Cosmetics | 303 |
 | `fintech-finance` | FinTech & Finance | 221 |
+| `travel-hospitality` | Travel & Hospitality | 101 |
 | `food-beverage` | Food & Beverage | 93 |
 | `uncategorized` | uncategorized | 69 |
 | `marketing-agency` | Marketing & Agencies | 54 |
@@ -22,7 +23,6 @@ sorted by industry, for training / prompting AI design models.
 | `ecommerce-retail` | E-commerce & Retail | 32 |
 | `health-wellness` | Health & Wellness | 21 |
 | `fashion-apparel` | Fashion & Apparel | 14 |
-| `travel-hospitality` | Travel & Hospitality | 1 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 | `nonprofit-cause` | Non-profit & Causes | 1 |
 | `pets` | Pets | 1 |
@@ -30,11 +30,11 @@ sorted by industry, for training / prompting AI design models.
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 369 |
-| instagram-post | 286 |
+| ad-creative | 467 |
+| instagram-post | 287 |
 | unknown | 123 |
 | poster-flyer | 106 |
-| logo-branding | 63 |
+| logo-branding | 64 |
 | landing-page | 40 |
 | email | 38 |
 | carousel | 25 |
