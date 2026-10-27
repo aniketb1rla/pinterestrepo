@@ -1,11 +1,12 @@
 {
-  "total_pins": 1004,
-  "updated_at": "2026-10-27T06:07:35+00:00",
+  "total_pins": 1053,
+  "updated_at": "2026-10-27T06:13:08+00:00",
   "by_industry": {
     "beauty-cosmetics": 303,
     "fintech-finance": 221,
     "food-beverage": 93,
     "uncategorized": 69,
+    "marketing-agency": 54,
     "jewelry-luxury": 42,
     "real-estate": 41,
     "healthcare-medical": 41,
@@ -15,7 +16,6 @@
     "ecommerce-retail": 32,
     "health-wellness": 21,
     "fashion-apparel": 14,
-    "marketing-agency": 5,
     "travel-hospitality": 1,
     "home-interiors": 1,
     "nonprofit-cause": 1,
@@ -46,7 +46,7 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 320,
+    "ad-creative": 369,
     "instagram-post": 286,
     "unknown": 123,
     "poster-flyer": 106,
@@ -61,6 +61,7 @@
     "Fintech": 141,
     "Product Ads": 55,
     "meta ads": 54,
+    "marketing agency ad": 49,
     "fintech instagram post design": 40,
     "trading app social media ad": 40,
     "saas product launch post": 40,
