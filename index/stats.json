@@ -1,6 +1,6 @@
 {
-  "total_pins": 977,
-  "updated_at": "2026-10-26T13:11:09+00:00",
+  "total_pins": 1004,
+  "updated_at": "2026-10-27T06:07:35+00:00",
   "by_industry": {
     "beauty-cosmetics": 303,
     "fintech-finance": 221,
@@ -12,10 +12,10 @@
     "tech-saas": 40,
     "fitness-sports": 40,
     "construction-trades": 38,
+    "ecommerce-retail": 32,
     "health-wellness": 21,
     "fashion-apparel": 14,
     "marketing-agency": 5,
-    "ecommerce-retail": 5,
     "travel-hospitality": 1,
     "home-interiors": 1,
     "nonprofit-cause": 1,
@@ -46,13 +46,13 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 313,
+    "ad-creative": 320,
     "instagram-post": 286,
-    "unknown": 112,
+    "unknown": 123,
     "poster-flyer": 106,
-    "logo-branding": 62,
+    "logo-branding": 63,
+    "landing-page": 40,
     "email": 38,
-    "landing-page": 32,
     "carousel": 25,
     "story-reel": 2,
     "packaging": 1
@@ -79,6 +79,7 @@
     "the ordinary skincare branding post": 36,
     "glossier social media ad design": 33,
     "Meta ads": 29,
+    "ecommerce": 27,
     "Skincare Carousel": 24,
     "streetwear clothing brand poster design": 10,
     "": 1
