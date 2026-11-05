@@ -1,8 +1,8 @@
 {
-  "total_pins": 1203,
-  "updated_at": "2026-10-28T04:35:05+00:00",
+  "total_pins": 1302,
+  "updated_at": "2026-11-05T07:35:25+00:00",
   "by_industry": {
-    "beauty-cosmetics": 322,
+    "beauty-cosmetics": 420,
     "fintech-finance": 221,
     "travel-hospitality": 102,
     "food-beverage": 94,
@@ -15,7 +15,7 @@
     "fitness-sports": 40,
     "construction-trades": 38,
     "ecommerce-retail": 33,
-    "health-wellness": 23,
+    "health-wellness": 24,
     "fashion-apparel": 14,
     "home-interiors": 1,
     "nonprofit-cause": 1,
@@ -46,20 +46,21 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 467,
-    "instagram-post": 287,
-    "unknown": 169,
+    "ad-creative": 474,
+    "instagram-post": 288,
+    "unknown": 252,
     "poster-flyer": 106,
     "logo-branding": 66,
     "landing-page": 41,
     "email": 38,
-    "carousel": 26,
-    "story-reel": 2,
-    "packaging": 1
+    "carousel": 28,
+    "story-reel": 7,
+    "packaging": 2
   },
   "queries": {
     "Fintech": 141,
     "Travel ads": 100,
+    "diwali skincare": 99,
     "Product Ads": 55,
     "meta ads": 54,
     "armpit roll on campaign shoot": 50,

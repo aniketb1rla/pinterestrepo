@@ -3,12 +3,12 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**1203 pins** · last updated 2026-10-28
+**1302 pins** · last updated 2026-11-05
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 322 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 420 |
 | `fintech-finance` | FinTech & Finance | 221 |
 | `travel-hospitality` | Travel & Hospitality | 102 |
 | `food-beverage` | Food & Beverage | 94 |
@@ -21,7 +21,7 @@ sorted by industry, for training / prompting AI design models.
 | `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
 | `ecommerce-retail` | E-commerce & Retail | 33 |
-| `health-wellness` | Health & Wellness | 23 |
+| `health-wellness` | Health & Wellness | 24 |
 | `fashion-apparel` | Fashion & Apparel | 14 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 | `nonprofit-cause` | Non-profit & Causes | 1 |
@@ -30,16 +30,16 @@ sorted by industry, for training / prompting AI design models.
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 467 |
-| instagram-post | 287 |
-| unknown | 169 |
+| ad-creative | 474 |
+| instagram-post | 288 |
+| unknown | 252 |
 | poster-flyer | 106 |
 | logo-branding | 66 |
 | landing-page | 41 |
 | email | 38 |
-| carousel | 26 |
-| story-reel | 2 |
-| packaging | 1 |
+| carousel | 28 |
+| story-reel | 7 |
+| packaging | 2 |
 
 ## Layout
 ```
