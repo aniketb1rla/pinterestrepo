@@ -1,8 +1,8 @@
 {
-  "total_pins": 1302,
-  "updated_at": "2026-11-05T07:35:25+00:00",
+  "total_pins": 1351,
+  "updated_at": "2026-11-06T12:08:39+00:00",
   "by_industry": {
-    "beauty-cosmetics": 420,
+    "beauty-cosmetics": 469,
     "fintech-finance": 221,
     "travel-hospitality": 102,
     "food-beverage": 94,
@@ -46,7 +46,7 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 474,
+    "ad-creative": 523,
     "instagram-post": 288,
     "unknown": 252,
     "poster-flyer": 106,
@@ -65,6 +65,7 @@
     "meta ads": 54,
     "armpit roll on campaign shoot": 50,
     "marketing agency ad": 49,
+    "dhanteras skincare ads": 49,
     "fintech instagram post design": 40,
     "trading app social media ad": 40,
     "saas product launch post": 40,
