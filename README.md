@@ -167,40 +167,42 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 
 ## Current Dataset Statistics
 
-**1351 pins** · last updated 2026-11-06
+**1451 pins** · last updated 2026-11-10
 
 ### By industry
 | Folder | Industry | Pins |
 |---|---|---|
 | `beauty-cosmetics` | Beauty & Cosmetics | 469 |
-| `fintech-finance` | FinTech & Finance | 221 |
+| `fintech-finance` | FinTech & Finance | 222 |
+| `uncategorized` | uncategorized | 142 |
 | `travel-hospitality` | Travel & Hospitality | 102 |
 | `food-beverage` | Food & Beverage | 94 |
-| `uncategorized` | uncategorized | 94 |
+| `fashion-apparel` | Fashion & Apparel | 60 |
 | `marketing-agency` | Marketing & Agencies | 54 |
 | `jewelry-luxury` | Jewelry & Luxury | 43 |
+| `healthcare-medical` | Healthcare & Medical | 42 |
 | `real-estate` | Real Estate | 41 |
-| `healthcare-medical` | Healthcare & Medical | 41 |
+| `fitness-sports` | Fitness & Sports | 41 |
 | `tech-saas` | Tech, SaaS & Apps | 40 |
-| `fitness-sports` | Fitness & Sports | 40 |
 | `construction-trades` | Construction & Home Services | 38 |
 | `ecommerce-retail` | E-commerce & Retail | 33 |
 | `health-wellness` | Health & Wellness | 24 |
-| `fashion-apparel` | Fashion & Apparel | 14 |
+| `events-entertainment` | Events, Music & Entertainment | 2 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 | `nonprofit-cause` | Non-profit & Causes | 1 |
 | `pets` | Pets | 1 |
+| `education` | Education & Courses | 1 |
 
 ### By format
 | Format | Pins |
 |---|---|
-| ad-creative | 523 |
+| ad-creative | 528 |
+| unknown | 339 |
 | instagram-post | 288 |
-| unknown | 252 |
 | poster-flyer | 106 |
-| logo-branding | 66 |
-| landing-page | 41 |
+| logo-branding | 67 |
+| landing-page | 43 |
 | email | 38 |
 | carousel | 28 |
-| story-reel | 7 |
+| story-reel | 12 |
 | packaging | 2 |
