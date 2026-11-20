@@ -167,7 +167,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 
 ## Current Dataset Statistics
 
-**1490 pins** · last updated 2026-11-20
+**1509 pins** · last updated 2026-11-20
 
 ### By industry
 | Folder | Industry | Pins |
@@ -189,6 +189,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 | `health-wellness` | Health & Wellness | 24 |
 | `gaming-esports` | Gaming & Esports | 20 |
 | `automotive` | Automotive | 19 |
+| `legal-professional` | Legal & Professional Services | 19 |
 | `events-entertainment` | Events, Music & Entertainment | 2 |
 | `home-interiors` | Home, Interiors & Furniture | 1 |
 | `nonprofit-cause` | Non-profit & Causes | 1 |
@@ -198,7 +199,7 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 ### By format
 | Format | Pins |
 |---|---|
-| ad-creative | 567 |
+| ad-creative | 586 |
 | unknown | 339 |
 | instagram-post | 288 |
 | poster-flyer | 106 |
