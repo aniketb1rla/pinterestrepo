@@ -1,6 +1,6 @@
 {
-  "total_pins": 1608,
-  "updated_at": "2026-11-23T10:32:21+00:00",
+  "total_pins": 1628,
+  "updated_at": "2026-11-23T12:32:19+00:00",
   "by_industry": {
     "beauty-cosmetics": 469,
     "fintech-finance": 222,
@@ -14,6 +14,7 @@
     "real-estate": 41,
     "fitness-sports": 41,
     "tech-saas": 40,
+    "automotive": 39,
     "construction-trades": 38,
     "ecommerce-retail": 33,
     "health-wellness": 24,
@@ -23,7 +24,6 @@
     "education": 21,
     "home-interiors": 20,
     "gaming-esports": 20,
-    "automotive": 19,
     "legal-professional": 19
   },
   "industry_labels": {
@@ -51,7 +51,7 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 685,
+    "ad-creative": 705,
     "unknown": 339,
     "instagram-post": 288,
     "poster-flyer": 106,
@@ -97,6 +97,7 @@
     "education social media ad creative design": 20,
     "nonprofit social media ad creative design": 20,
     "event social media ad creative design": 20,
+    "automotive banner ad poster": 20,
     "automotive social media ad creative design": 19,
     "legal services social media ad creative design": 19,
     "home interior social media ad creative design": 19,

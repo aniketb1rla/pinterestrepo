@@ -3,7 +3,7 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**1608 pins** · last updated 2026-11-23
+**1628 pins** · last updated 2026-11-23
 
 ## By industry
 | Folder | Industry | Pins |
@@ -20,6 +20,7 @@ sorted by industry, for training / prompting AI design models.
 | `real-estate` | Real Estate | 41 |
 | `fitness-sports` | Fitness & Sports | 41 |
 | `tech-saas` | Tech, SaaS & Apps | 40 |
+| `automotive` | Automotive | 39 |
 | `construction-trades` | Construction & Home Services | 38 |
 | `ecommerce-retail` | E-commerce & Retail | 33 |
 | `health-wellness` | Health & Wellness | 24 |
@@ -29,13 +30,12 @@ sorted by industry, for training / prompting AI design models.
 | `education` | Education & Courses | 21 |
 | `home-interiors` | Home, Interiors & Furniture | 20 |
 | `gaming-esports` | Gaming & Esports | 20 |
-| `automotive` | Automotive | 19 |
 | `legal-professional` | Legal & Professional Services | 19 |
 
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 685 |
+| ad-creative | 705 |
 | unknown | 339 |
 | instagram-post | 288 |
 | poster-flyer | 106 |
