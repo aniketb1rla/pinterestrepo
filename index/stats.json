@@ -1,6 +1,6 @@
 {
-  "total_pins": 1667,
-  "updated_at": "2026-11-24T12:32:27+00:00",
+  "total_pins": 1687,
+  "updated_at": "2026-11-25T04:31:42+00:00",
   "by_industry": {
     "beauty-cosmetics": 469,
     "fintech-finance": 222,
@@ -15,6 +15,7 @@
     "fitness-sports": 41,
     "tech-saas": 40,
     "home-interiors": 40,
+    "gaming-esports": 40,
     "automotive": 39,
     "construction-trades": 38,
     "legal-professional": 38,
@@ -23,8 +24,7 @@
     "events-entertainment": 22,
     "nonprofit-cause": 21,
     "pets": 21,
-    "education": 21,
-    "gaming-esports": 20
+    "education": 21
   },
   "industry_labels": {
     "fintech-finance": "FinTech & Finance",
@@ -51,16 +51,17 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 738,
+    "ad-creative": 751,
     "unknown": 339,
     "instagram-post": 288,
-    "poster-flyer": 112,
+    "poster-flyer": 118,
     "logo-branding": 67,
     "landing-page": 43,
     "email": 38,
     "carousel": 28,
     "story-reel": 12,
-    "packaging": 2
+    "packaging": 2,
+    "display-banner": 1
   },
   "queries": {
     "Fintech": 141,
@@ -99,6 +100,7 @@
     "event social media ad creative design": 20,
     "automotive banner ad poster": 20,
     "home interior banner ad poster": 20,
+    "gaming banner ad poster": 20,
     "automotive social media ad creative design": 19,
     "legal services social media ad creative design": 19,
     "home interior social media ad creative design": 19,
