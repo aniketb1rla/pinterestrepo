@@ -8,29 +8,28 @@ sorted by industry, for training / prompting AI design models.
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 489 |
-| `fintech-finance` | FinTech & Finance | 233 |
-| `uncategorized` | uncategorized | 142 |
-| `travel-hospitality` | Travel & Hospitality | 112 |
-| `food-beverage` | Food & Beverage | 106 |
-| `fashion-apparel` | Fashion & Apparel | 70 |
-| `marketing-agency` | Marketing & Agencies | 63 |
-| `jewelry-luxury` | Jewelry & Luxury | 53 |
-| `fitness-sports` | Fitness & Sports | 52 |
-| `home-interiors` | Home, Interiors & Furniture | 52 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 542 |
+| `fintech-finance` | FinTech & Finance | 234 |
+| `fashion-apparel` | Fashion & Apparel | 120 |
+| `food-beverage` | Food & Beverage | 115 |
+| `travel-hospitality` | Travel & Hospitality | 109 |
+| `marketing-agency` | Marketing & Agencies | 82 |
+| `jewelry-luxury` | Jewelry & Luxury | 56 |
+| `home-interiors` | Home, Interiors & Furniture | 54 |
+| `fitness-sports` | Fitness & Sports | 53 |
+| `healthcare-medical` | Healthcare & Medical | 52 |
 | `education` | Education & Courses | 52 |
-| `healthcare-medical` | Healthcare & Medical | 51 |
 | `pets` | Pets | 51 |
-| `real-estate` | Real Estate | 50 |
+| `automotive` | Automotive | 51 |
+| `tech-saas` | Tech, SaaS & Apps | 49 |
 | `nonprofit-cause` | Non-profit & Causes | 49 |
-| `automotive` | Automotive | 49 |
-| `gaming-esports` | Gaming & Esports | 48 |
+| `real-estate` | Real Estate | 47 |
 | `construction-trades` | Construction & Home Services | 47 |
-| `legal-professional` | Legal & Professional Services | 47 |
-| `tech-saas` | Tech, SaaS & Apps | 45 |
-| `ecommerce-retail` | E-commerce & Retail | 40 |
-| `events-entertainment` | Events, Music & Entertainment | 33 |
-| `health-wellness` | Health & Wellness | 30 |
+| `legal-professional` | Legal & Professional Services | 46 |
+| `gaming-esports` | Gaming & Esports | 45 |
+| `health-wellness` | Health & Wellness | 41 |
+| `ecommerce-retail` | E-commerce & Retail | 37 |
+| `events-entertainment` | Events, Music & Entertainment | 32 |
 
 ## By format
 | Format | Pins |

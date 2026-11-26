@@ -21,10 +21,10 @@ industries:
     keywords: [food, restaurant, cafe, café, coffee, coffee shop, burger, pizza, menu, drink, beverage, juice, beer, brewery, cocktail, bakery, dessert, snack, chocolate, tea, food truck, fast food]
   beauty-cosmetics:
     label: Beauty & Cosmetics
-    keywords: [beauty, cosmetic, cosmetics, skincare, skin care, makeup, serum, lipstick, haircare, salon, spa, nail, fragrance, perfume, moisturizer, cleanser, toner, lotion, sunscreen, spf, balm, lip gloss, gloss, face wash, rhode, glossier, aesop, drunk elephant, the ordinary]
+    keywords: [beauty, cosmetic, cosmetics, skincare, skin care, makeup, serum, lipstick, haircare, salon, spa, nail, fragrance, perfume, moisturizer, cleanser, toner, lotion, sunscreen, spf, balm, lip gloss, gloss, face wash, deodorant, roll-on, rhode, glossier, aesop, drunk elephant, the ordinary]
   fashion-apparel:
     label: Fashion & Apparel
-    keywords: [fashion, apparel, clothing, streetwear, outfit, sneaker, shoes, dress, t-shirt, hoodie, lookbook, menswear, womenswear, clothing brand, fashion ad]
+    keywords: [fashion, apparel, clothing, garment, garments, textile, fabric, sewing, streetwear, outfit, sneaker, shoes, dress, t-shirt, hoodie, lookbook, menswear, womenswear, clothing brand, fashion ad]
   jewelry-luxury:
     label: Jewelry & Luxury
     keywords: [jewelry, jewellery, diamond, ring, necklace, gold, watch, luxury, earrings, bracelet, gemstones, luxury jewelry]
