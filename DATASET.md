@@ -3,7 +3,7 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**2648 pins** · last updated 2026-11-26
+**3351 pins** · last updated 2026-11-26
 
 ## By industry
 | Folder | Industry | Pins |
@@ -12,38 +12,38 @@ sorted by industry, for training / prompting AI design models.
 | `fintech-finance` | FinTech & Finance | 291 |
 | `fashion-apparel` | Fashion & Apparel | 181 |
 | `food-beverage` | Food & Beverage | 180 |
+| `travel-hospitality` | Travel & Hospitality | 173 |
 | `marketing-agency` | Marketing & Agencies | 146 |
+| `home-interiors` | Home, Interiors & Furniture | 119 |
 | `jewelry-luxury` | Jewelry & Luxury | 118 |
 | `healthcare-medical` | Healthcare & Medical | 117 |
 | `fitness-sports` | Fitness & Sports | 117 |
+| `pets` | Pets | 116 |
+| `automotive` | Automotive | 116 |
+| `education` | Education & Courses | 115 |
 | `tech-saas` | Tech, SaaS & Apps | 112 |
-| `travel-hospitality` | Travel & Hospitality | 109 |
+| `construction-trades` | Construction & Home Services | 112 |
+| `real-estate` | Real Estate | 111 |
+| `gaming-esports` | Gaming & Esports | 110 |
+| `legal-professional` | Legal & Professional Services | 109 |
+| `nonprofit-cause` | Non-profit & Causes | 108 |
 | `health-wellness` | Health & Wellness | 104 |
+| `events-entertainment` | Events, Music & Entertainment | 97 |
 | `ecommerce-retail` | E-commerce & Retail | 94 |
-| `home-interiors` | Home, Interiors & Furniture | 54 |
-| `education` | Education & Courses | 52 |
-| `pets` | Pets | 51 |
-| `automotive` | Automotive | 51 |
-| `nonprofit-cause` | Non-profit & Causes | 49 |
-| `real-estate` | Real Estate | 47 |
-| `construction-trades` | Construction & Home Services | 47 |
-| `legal-professional` | Legal & Professional Services | 46 |
-| `gaming-esports` | Gaming & Esports | 45 |
-| `events-entertainment` | Events, Music & Entertainment | 32 |
 
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 1187 |
-| instagram-post | 442 |
+| ad-creative | 1573 |
+| poster-flyer | 632 |
+| instagram-post | 443 |
 | unknown | 407 |
-| poster-flyer | 378 |
 | logo-branding | 74 |
-| landing-page | 68 |
+| landing-page | 69 |
+| display-banner | 66 |
 | email | 39 |
 | carousel | 28 |
 | story-reel | 18 |
-| display-banner | 5 |
 | packaging | 2 |
 
 ## Layout
