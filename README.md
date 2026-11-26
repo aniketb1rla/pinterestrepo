@@ -167,46 +167,46 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 
 ## Current Dataset Statistics
 
-**1746 pins** · last updated 2026-11-26
+**1964 pins** · last updated 2026-11-26
 
 ### By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 469 |
-| `fintech-finance` | FinTech & Finance | 222 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 479 |
+| `fintech-finance` | FinTech & Finance | 232 |
 | `uncategorized` | uncategorized | 142 |
-| `travel-hospitality` | Travel & Hospitality | 102 |
-| `food-beverage` | Food & Beverage | 94 |
-| `fashion-apparel` | Fashion & Apparel | 60 |
-| `marketing-agency` | Marketing & Agencies | 54 |
-| `jewelry-luxury` | Jewelry & Luxury | 43 |
-| `healthcare-medical` | Healthcare & Medical | 42 |
-| `real-estate` | Real Estate | 41 |
-| `fitness-sports` | Fitness & Sports | 41 |
-| `pets` | Pets | 41 |
-| `education` | Education & Courses | 41 |
-| `tech-saas` | Tech, SaaS & Apps | 40 |
-| `home-interiors` | Home, Interiors & Furniture | 40 |
-| `nonprofit-cause` | Non-profit & Causes | 40 |
-| `gaming-esports` | Gaming & Esports | 40 |
-| `automotive` | Automotive | 39 |
-| `construction-trades` | Construction & Home Services | 38 |
-| `legal-professional` | Legal & Professional Services | 38 |
-| `ecommerce-retail` | E-commerce & Retail | 33 |
-| `health-wellness` | Health & Wellness | 24 |
-| `events-entertainment` | Events, Music & Entertainment | 22 |
+| `travel-hospitality` | Travel & Hospitality | 112 |
+| `food-beverage` | Food & Beverage | 104 |
+| `fashion-apparel` | Fashion & Apparel | 70 |
+| `marketing-agency` | Marketing & Agencies | 64 |
+| `jewelry-luxury` | Jewelry & Luxury | 53 |
+| `healthcare-medical` | Healthcare & Medical | 52 |
+| `real-estate` | Real Estate | 51 |
+| `fitness-sports` | Fitness & Sports | 51 |
+| `pets` | Pets | 51 |
+| `education` | Education & Courses | 51 |
+| `tech-saas` | Tech, SaaS & Apps | 50 |
+| `home-interiors` | Home, Interiors & Furniture | 50 |
+| `nonprofit-cause` | Non-profit & Causes | 50 |
+| `gaming-esports` | Gaming & Esports | 50 |
+| `automotive` | Automotive | 49 |
+| `construction-trades` | Construction & Home Services | 48 |
+| `legal-professional` | Legal & Professional Services | 47 |
+| `ecommerce-retail` | E-commerce & Retail | 42 |
+| `health-wellness` | Health & Wellness | 34 |
+| `events-entertainment` | Events, Music & Entertainment | 32 |
 
 ### By format
 | Format | Pins |
 |---|---|
-| ad-creative | 799 |
-| unknown | 339 |
-| instagram-post | 288 |
-| poster-flyer | 129 |
-| logo-branding | 67 |
-| landing-page | 43 |
+| ad-creative | 860 |
+| unknown | 370 |
+| instagram-post | 348 |
+| poster-flyer | 189 |
+| logo-branding | 68 |
+| landing-page | 46 |
 | email | 38 |
 | carousel | 28 |
 | story-reel | 12 |
+| display-banner | 3 |
 | packaging | 2 |
-| display-banner | 1 |
