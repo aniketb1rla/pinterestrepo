@@ -1,0 +1,9 @@
+the cover of five tools one system, with icons and symbols surrounding it on a dark background. 5 SaaS subscriptions. $340 a month.
+
+That is what a Beirut wholesaler was paying to glue together a CRM that still did not match how the team actually sold.
+
+HubSpot for contacts. MailChimp for newsletters. Cal.com for meetings. Tawk for chat. A shared Google Sheet for everything the other four could not do.
+
+The team copy-pasted between them every day. Leads went missing in the gaps.
+
+We built them one custom CRM. Their actual pipeline stages. Their actual fields. Pulls Cal.com bookings onto

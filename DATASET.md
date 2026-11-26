@@ -3,47 +3,47 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**1964 pins** · last updated 2026-11-26
+**2648 pins** · last updated 2026-11-26
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 542 |
-| `fintech-finance` | FinTech & Finance | 234 |
-| `fashion-apparel` | Fashion & Apparel | 120 |
-| `food-beverage` | Food & Beverage | 115 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 605 |
+| `fintech-finance` | FinTech & Finance | 291 |
+| `fashion-apparel` | Fashion & Apparel | 181 |
+| `food-beverage` | Food & Beverage | 180 |
+| `marketing-agency` | Marketing & Agencies | 146 |
+| `jewelry-luxury` | Jewelry & Luxury | 118 |
+| `healthcare-medical` | Healthcare & Medical | 117 |
+| `fitness-sports` | Fitness & Sports | 117 |
+| `tech-saas` | Tech, SaaS & Apps | 112 |
 | `travel-hospitality` | Travel & Hospitality | 109 |
-| `marketing-agency` | Marketing & Agencies | 82 |
-| `jewelry-luxury` | Jewelry & Luxury | 56 |
+| `health-wellness` | Health & Wellness | 104 |
+| `ecommerce-retail` | E-commerce & Retail | 94 |
 | `home-interiors` | Home, Interiors & Furniture | 54 |
-| `fitness-sports` | Fitness & Sports | 53 |
-| `healthcare-medical` | Healthcare & Medical | 52 |
 | `education` | Education & Courses | 52 |
 | `pets` | Pets | 51 |
 | `automotive` | Automotive | 51 |
-| `tech-saas` | Tech, SaaS & Apps | 49 |
 | `nonprofit-cause` | Non-profit & Causes | 49 |
 | `real-estate` | Real Estate | 47 |
 | `construction-trades` | Construction & Home Services | 47 |
 | `legal-professional` | Legal & Professional Services | 46 |
 | `gaming-esports` | Gaming & Esports | 45 |
-| `health-wellness` | Health & Wellness | 41 |
-| `ecommerce-retail` | E-commerce & Retail | 37 |
 | `events-entertainment` | Events, Music & Entertainment | 32 |
 
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 860 |
-| unknown | 370 |
-| instagram-post | 348 |
-| poster-flyer | 189 |
-| logo-branding | 68 |
-| landing-page | 46 |
-| email | 38 |
+| ad-creative | 1187 |
+| instagram-post | 442 |
+| unknown | 407 |
+| poster-flyer | 378 |
+| logo-branding | 74 |
+| landing-page | 68 |
+| email | 39 |
 | carousel | 28 |
-| story-reel | 12 |
-| display-banner | 3 |
+| story-reel | 18 |
+| display-banner | 5 |
 | packaging | 2 |
 
 ## Layout
