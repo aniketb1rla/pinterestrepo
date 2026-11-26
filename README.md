@@ -172,28 +172,28 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 ### By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 605 |
-| `fintech-finance` | FinTech & Finance | 291 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 607 |
+| `fintech-finance` | FinTech & Finance | 292 |
 | `fashion-apparel` | Fashion & Apparel | 181 |
 | `food-beverage` | Food & Beverage | 180 |
 | `travel-hospitality` | Travel & Hospitality | 173 |
-| `marketing-agency` | Marketing & Agencies | 146 |
+| `marketing-agency` | Marketing & Agencies | 147 |
 | `home-interiors` | Home, Interiors & Furniture | 119 |
 | `jewelry-luxury` | Jewelry & Luxury | 118 |
 | `healthcare-medical` | Healthcare & Medical | 117 |
 | `fitness-sports` | Fitness & Sports | 117 |
 | `pets` | Pets | 116 |
 | `automotive` | Automotive | 116 |
-| `education` | Education & Courses | 115 |
+| `education` | Education & Courses | 114 |
 | `tech-saas` | Tech, SaaS & Apps | 112 |
 | `construction-trades` | Construction & Home Services | 112 |
 | `real-estate` | Real Estate | 111 |
 | `gaming-esports` | Gaming & Esports | 110 |
 | `legal-professional` | Legal & Professional Services | 109 |
 | `nonprofit-cause` | Non-profit & Causes | 108 |
-| `health-wellness` | Health & Wellness | 104 |
+| `health-wellness` | Health & Wellness | 102 |
 | `events-entertainment` | Events, Music & Entertainment | 97 |
-| `ecommerce-retail` | E-commerce & Retail | 94 |
+| `ecommerce-retail` | E-commerce & Retail | 93 |
 
 ### By format
 | Format | Pins |
