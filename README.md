@@ -172,29 +172,29 @@ construction/roofing, healthcare, legal, non-profit, pets…). Edit
 ### By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 479 |
-| `fintech-finance` | FinTech & Finance | 232 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 489 |
+| `fintech-finance` | FinTech & Finance | 233 |
 | `uncategorized` | uncategorized | 142 |
 | `travel-hospitality` | Travel & Hospitality | 112 |
-| `food-beverage` | Food & Beverage | 104 |
+| `food-beverage` | Food & Beverage | 106 |
 | `fashion-apparel` | Fashion & Apparel | 70 |
-| `marketing-agency` | Marketing & Agencies | 64 |
+| `marketing-agency` | Marketing & Agencies | 63 |
 | `jewelry-luxury` | Jewelry & Luxury | 53 |
-| `healthcare-medical` | Healthcare & Medical | 52 |
-| `real-estate` | Real Estate | 51 |
-| `fitness-sports` | Fitness & Sports | 51 |
+| `fitness-sports` | Fitness & Sports | 52 |
+| `home-interiors` | Home, Interiors & Furniture | 52 |
+| `education` | Education & Courses | 52 |
+| `healthcare-medical` | Healthcare & Medical | 51 |
 | `pets` | Pets | 51 |
-| `education` | Education & Courses | 51 |
-| `tech-saas` | Tech, SaaS & Apps | 50 |
-| `home-interiors` | Home, Interiors & Furniture | 50 |
-| `nonprofit-cause` | Non-profit & Causes | 50 |
-| `gaming-esports` | Gaming & Esports | 50 |
+| `real-estate` | Real Estate | 50 |
+| `nonprofit-cause` | Non-profit & Causes | 49 |
 | `automotive` | Automotive | 49 |
-| `construction-trades` | Construction & Home Services | 48 |
+| `gaming-esports` | Gaming & Esports | 48 |
+| `construction-trades` | Construction & Home Services | 47 |
 | `legal-professional` | Legal & Professional Services | 47 |
-| `ecommerce-retail` | E-commerce & Retail | 42 |
-| `health-wellness` | Health & Wellness | 34 |
-| `events-entertainment` | Events, Music & Entertainment | 32 |
+| `tech-saas` | Tech, SaaS & Apps | 45 |
+| `ecommerce-retail` | E-commerce & Retail | 40 |
+| `events-entertainment` | Events, Music & Entertainment | 33 |
+| `health-wellness` | Health & Wellness | 30 |
 
 ### By format
 | Format | Pins |
