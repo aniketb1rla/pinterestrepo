@@ -1,6 +1,6 @@
 {
-  "total_pins": 3351,
-  "updated_at": "2026-11-26T09:20:27+00:00",
+  "total_pins": 3370,
+  "updated_at": "2026-11-26T10:31:37+00:00",
   "by_industry": {
     "beauty-cosmetics": 607,
     "fintech-finance": 292,
@@ -14,6 +14,7 @@
     "fitness-sports": 117,
     "pets": 116,
     "automotive": 116,
+    "events-entertainment": 116,
     "education": 114,
     "tech-saas": 112,
     "construction-trades": 112,
@@ -22,7 +23,6 @@
     "legal-professional": 109,
     "nonprofit-cause": 108,
     "health-wellness": 102,
-    "events-entertainment": 97,
     "ecommerce-retail": 93
   },
   "industry_labels": {
@@ -50,8 +50,8 @@
     "pets": "Pets"
   },
   "by_format": {
-    "ad-creative": 1573,
-    "poster-flyer": 632,
+    "ad-creative": 1588,
+    "poster-flyer": 636,
     "instagram-post": 443,
     "unknown": 407,
     "logo-branding": 74,
@@ -129,6 +129,7 @@
     "home interior social media ad creative design": 19,
     "legal services banner ad poster": 19,
     "nonprofit banner ad poster": 19,
+    "event banner ad poster": 19,
     "streetwear clothing brand poster design": 10,
     "christmas fintech finance social media ad design": 10,
     "christmas saas tech app promo graphic design": 10,
