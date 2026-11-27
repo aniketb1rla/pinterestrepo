@@ -1,0 +1,1 @@
+A sleek fintech mobile UI showcase featuring two screens set against a light gray backdrop. The left screen shows a clean white financial dashboard with balance tracking, while the right screen displays a deep green frosted-glass modal for transaction splitting. The design utilizes soft shadows, translucent glassmorphism cards, and modern sans-serif typography.

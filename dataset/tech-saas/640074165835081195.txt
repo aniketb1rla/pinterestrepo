@@ -1,7 +1,1 @@
-two dices with the text how to self - host plane community editor on coolify. Stop paying per seat for project management software you barely use.
-
-Plane provides a clean, modern interface for tracking your work. By self-hosting it on Coolify, you own the data and eliminate those recurring monthly bills.
-
-We wrote a complete tutorial on how to set this up from scratch. It covers everything from the Docker configuration to the domain routing and SSL setup. It is designed to work even if you are not a server expert.
-
-Visit the link in our bio to view the full guide and s
+A sleek B2B tech tutorial post set against a soft, warm pastel gradient backdrop. Bold black sans-serif typography leads the hierarchy at the top, supported by a peach highlight banner over the main keyword. Below, two rounded 3D clay-style tiles showcase tech platform logos, linked by a sketched arrow to convey a seamless workflow.

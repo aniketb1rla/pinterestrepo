@@ -3,48 +3,49 @@
 Graphic-design references (ads & social posts) collected from Pinterest and
 sorted by industry, for training / prompting AI design models.
 
-**3370 pins** · last updated 2026-11-26
+**3388 pins** · last updated 2026-11-27
 
 ## By industry
 | Folder | Industry | Pins |
 |---|---|---|
-| `beauty-cosmetics` | Beauty & Cosmetics | 607 |
-| `fintech-finance` | FinTech & Finance | 292 |
-| `fashion-apparel` | Fashion & Apparel | 181 |
-| `food-beverage` | Food & Beverage | 180 |
-| `travel-hospitality` | Travel & Hospitality | 173 |
-| `marketing-agency` | Marketing & Agencies | 147 |
-| `home-interiors` | Home, Interiors & Furniture | 119 |
-| `jewelry-luxury` | Jewelry & Luxury | 118 |
-| `healthcare-medical` | Healthcare & Medical | 117 |
-| `fitness-sports` | Fitness & Sports | 117 |
-| `pets` | Pets | 116 |
-| `automotive` | Automotive | 116 |
+| `beauty-cosmetics` | Beauty & Cosmetics | 654 |
+| `fintech-finance` | FinTech & Finance | 300 |
+| `fashion-apparel` | Fashion & Apparel | 207 |
+| `food-beverage` | Food & Beverage | 199 |
+| `marketing-agency` | Marketing & Agencies | 155 |
+| `travel-hospitality` | Travel & Hospitality | 152 |
+| `tech-saas` | Tech, SaaS & Apps | 128 |
+| `home-interiors` | Home, Interiors & Furniture | 128 |
+| `jewelry-luxury` | Jewelry & Luxury | 123 |
+| `health-wellness` | Health & Wellness | 123 |
+| `real-estate` | Real Estate | 117 |
 | `events-entertainment` | Events, Music & Entertainment | 116 |
-| `education` | Education & Courses | 114 |
-| `tech-saas` | Tech, SaaS & Apps | 112 |
-| `construction-trades` | Construction & Home Services | 112 |
-| `real-estate` | Real Estate | 111 |
-| `gaming-esports` | Gaming & Esports | 110 |
-| `legal-professional` | Legal & Professional Services | 109 |
-| `nonprofit-cause` | Non-profit & Causes | 108 |
-| `health-wellness` | Health & Wellness | 102 |
-| `ecommerce-retail` | E-commerce & Retail | 93 |
+| `construction-trades` | Construction & Home Services | 113 |
+| `healthcare-medical` | Healthcare & Medical | 113 |
+| `pets` | Pets | 112 |
+| `automotive` | Automotive | 112 |
+| `gaming-esports` | Gaming & Esports | 109 |
+| `fitness-sports` | Fitness & Sports | 103 |
+| `nonprofit-cause` | Non-profit & Causes | 103 |
+| `legal-professional` | Legal & Professional Services | 101 |
+| `education` | Education & Courses | 78 |
+| `ecommerce-retail` | E-commerce & Retail | 41 |
+| `uncategorized` | uncategorized | 1 |
 
 ## By format
 | Format | Pins |
 |---|---|
-| ad-creative | 1588 |
-| poster-flyer | 636 |
-| instagram-post | 443 |
-| unknown | 407 |
-| logo-branding | 74 |
-| landing-page | 69 |
-| display-banner | 66 |
-| email | 39 |
-| carousel | 28 |
-| story-reel | 18 |
-| packaging | 2 |
+| ad-creative | 1522 |
+| instagram-post | 676 |
+| poster-flyer | 481 |
+| story-reel | 257 |
+| carousel | 151 |
+| other | 124 |
+| display-banner | 44 |
+| email | 40 |
+| landing-page | 36 |
+| packaging | 31 |
+| logo-branding | 26 |
 
 ## Layout
 ```
